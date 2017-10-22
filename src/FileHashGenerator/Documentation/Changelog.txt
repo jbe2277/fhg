@@ -1,0 +1,25 @@
+Changelog
+---------
+
+Version 3.1.1.450 (Release)
+- Bugfix: Verification of a Base64 value has to be case sensitive.
+
+
+Version 3.1.0.450 (Release)
+- Support Sha512 and Sha256 from the Sha2 family.
+- Two hash formatter: Hexadecimal and Base64.
+- Use the new Cryptography Next Generation (CNG) implementation of Windows.
+
+
+Version 3.0.0.450 (Release)
+- Upgrade projects to target .NET 4.5.
+- Upgrade to the new WPF Application Framework (WAF) 3.0.
+- Simplify the asynchronous code by using async/await and the IProgress<T> interface.
+
+
+Version 2.5.0.400 (Release)
+- Initial version
+- Hash computation is done asynchronously with support for cancellation and progress notifications.
+- Supports drag and drop of files.
+- Shows the overall progress via the Windows 7 Taskbar.
+- ClickOnce deployment.
