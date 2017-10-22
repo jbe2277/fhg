@@ -71,7 +71,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <ApplicationManifest>Properties\App.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>8879657D41FC9175A1B74C4C6FF9066E31C169FB</ManifestCertificateThumbprint>
@@ -216,7 +216,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="Properties\app.manifest">
+    <None Include="Properties\App.manifest">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

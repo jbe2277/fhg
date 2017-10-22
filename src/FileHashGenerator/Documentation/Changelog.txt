@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 4.0.0.1
+- TODO
+
+
 Version 3.1.1.450 (Release)
 - Bugfix: Verification of a Base64 value has to be case sensitive.
 
