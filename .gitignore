@@ -9,26 +9,11 @@
 # Build results
 [Dd]ebug/
 [Rr]elease/
-[Ss]trong[Nn]ame/
 [Bb]in/
 [Oo]bj/
-[Aa]pp[Pp]ackages/
-
-# Unit test results
-[Tt]est[Rr]esults
 
 # NuGet Packages Directory
 packages/
 
-# NuGet package restore lockfiles
-project.lock.json
-
-# Visual Studio Upgrade Log
-UpgradeLog*.htm
-
-# Store Packages
-*StoreKey.pfx
-Package.StoreAssociation.xml
-*.appx
-_pkginfo.txt
-[Bb]undle[Aa]rtifacts/
+# ClickOnce setup file
+/clickonce/setup.exe
