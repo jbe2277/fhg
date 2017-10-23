@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Waf.FileHashGenerator.Applications.ViewModels;
+﻿using Waf.FileHashGenerator.Applications.ViewModels;
 using Waf.FileHashGenerator.Applications.Views;
 
 namespace Waf.FileHashGenerator.Presentation.DesignData
@@ -14,9 +10,9 @@ namespace Waf.FileHashGenerator.Presentation.DesignData
         }
 
 
-        public new string ProductName { get { return "DesignTime File Hash Generator"; } }
+        public new string ProductName => "DesignTime File Hash Generator";
 
-        public new string Version { get { return "1.0.0.0"; } }
+        public new string Version => "1.0.0.0";
 
 
         private class MockAboutView : MockView, IAboutView

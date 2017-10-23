@@ -11,11 +11,11 @@ namespace Waf.FileHashGenerator.Domain
 
         public FileHashRoot()
         {
-            this.fileHashItems = new ObservableCollection<FileHashItem>();
+            fileHashItems = new ObservableCollection<FileHashItem>();
         }
 
 
-        public IEnumerable<FileHashItem> FileHashItems { get { return fileHashItems; } }
+        public IReadOnlyList<FileHashItem> FileHashItems => fileHashItems;
 
 
         public FileHashItem AddNewFileHashItem(string fileName)

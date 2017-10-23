@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Waf.FileHashGenerator.Applications.Services
+﻿namespace Waf.FileHashGenerator.Applications.Services
 {
     /// <summary>
     /// Service for initializing the presentation layer. These services are called before any ModuleController is initialized.

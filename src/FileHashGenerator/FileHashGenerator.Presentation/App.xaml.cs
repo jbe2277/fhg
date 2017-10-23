@@ -49,7 +49,7 @@ namespace Waf.FileHashGenerator.Presentation
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(App).Assembly));
 
             container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-            CompositionBatch batch = new CompositionBatch();
+            var batch = new CompositionBatch();
             batch.AddExportedValue(container);
             container.Compose(batch);
 
@@ -90,8 +90,7 @@ namespace Waf.FileHashGenerator.Presentation
 
             if (!isTerminating)
             {
-                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, 
-                        Waf.FileHashGenerator.Presentation.Properties.Resources.UnknownError, e.ToString()),
+                MessageBox.Show(string.Format(CultureInfo.CurrentCulture, Presentation.Properties.Resources.UnknownError, e.ToString()),
                     ApplicationInfo.ProductName, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

@@ -11,14 +11,14 @@ namespace Test.FileHashGenerator.Applications.Services
         [ImportingConstructor]
         public MockShellService(MockShellView shellView)
         {
-            this.ShellView = shellView;
-            this.ProgressReports = new Dictionary<object, double>();
+            ShellView = shellView;
+            ProgressReports = new Dictionary<object, double>();
         }
         
 
-        public object ShellView { get; private set; }
+        public object ShellView { get; }
 
-        public Dictionary<object, double> ProgressReports { get; private set; }
+        public Dictionary<object, double> ProgressReports { get; }
 
 
         public void UpdateProgress(object source, double progress)

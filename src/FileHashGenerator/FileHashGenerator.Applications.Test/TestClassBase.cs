@@ -14,7 +14,7 @@ namespace Test.FileHashGenerator.Applications
         private CompositionContainer container;
 
 
-        protected CompositionContainer Container { get { return container; } }
+        protected CompositionContainer Container => container;
 
 
         [TestInitialize]

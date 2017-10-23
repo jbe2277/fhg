@@ -19,11 +19,11 @@ namespace Waf.FileHashGenerator.Presentation.Services
         public ShellService(Lazy<ShellWindow> shellView)
         {
             this.shellView = shellView;
-            this.progressReports = new Dictionary<object, double>();
+            progressReports = new Dictionary<object, double>();
         }
         
 
-        public object ShellView { get { return shellView.Value; } }
+        public object ShellView => shellView.Value;
 
 
         public void UpdateProgress(object source, double progress)

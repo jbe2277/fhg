@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Waf.FileHashGenerator.Applications.ViewModels;
+﻿using Waf.FileHashGenerator.Applications.ViewModels;
 using Waf.FileHashGenerator.Applications.Views;
 using Waf.FileHashGenerator.Domain;
 

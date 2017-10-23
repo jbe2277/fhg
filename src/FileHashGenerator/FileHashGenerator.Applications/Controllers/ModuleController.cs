@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -47,8 +46,8 @@ namespace Waf.FileHashGenerator.Applications.Controllers
             this.messageService = messageService;
             this.fileDialogService = fileDialogService;
             this.environmentService = environmentService;
-            this.hexadecimalFormatter = new HexadecimalFormatter();
-            this.base64Formatter = new Base64Formatter();
+            hexadecimalFormatter = new HexadecimalFormatter();
+            base64Formatter = new Base64Formatter();
             this.sha512HashControllerFactory = sha512HashControllerFactory;
             this.sha256HashControllerFactory = sha256HashControllerFactory;
             this.sha1HashControllerFactory = sha1HashControllerFactory;
@@ -57,21 +56,21 @@ namespace Waf.FileHashGenerator.Applications.Controllers
             this.fileHashListViewModel = fileHashListViewModel;
             this.aboutViewModelFactory = aboutViewModelFactory;
 
-            this.openCommand = new DelegateCommand(OpenFile);
-            this.closeCommand = new DelegateCommand(CloseFile);
-            this.aboutCommand = new DelegateCommand(ShowAboutView);
+            openCommand = new DelegateCommand(OpenFile);
+            closeCommand = new DelegateCommand(CloseFile);
+            aboutCommand = new DelegateCommand(ShowAboutView);
 
-            this.root = new FileHashRoot();
+            root = new FileHashRoot();
         }
 
 
-        private ShellViewModel ShellViewModel { get { return shellViewModel.Value; } }
+        private ShellViewModel ShellViewModel => shellViewModel.Value;
 
-        private FileHashListViewModel FileHashListViewModel { get { return fileHashListViewModel.Value; } }
+        private FileHashListViewModel FileHashListViewModel => fileHashListViewModel.Value;
 
         private IHashFormatter HashFormatter
         {
-            get { return hashFormatter; }
+            get => hashFormatter;
             set
             {
                 if (hashFormatter != value)
@@ -138,7 +137,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
 
         private void OpenCore(IEnumerable<string> fileNames)
         {
-            List<string> filesNotFound = new List<string>();
+            var filesNotFound = new List<string>();
 
             foreach (string fileName in fileNames)
             {
@@ -196,17 +195,17 @@ namespace Waf.FileHashGenerator.Applications.Controllers
 
         private void CancelActiveController()
         {
-            if (hashController != null) { hashController.Shutdown(); }
+            hashController?.Shutdown();
             hashController = null;
         }
 
         private void ShellViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "HashMode")
+            if (e.PropertyName == nameof(ShellViewModel.HashMode))
             {
                 UpdateHashMode();
             }
-            else if (e.PropertyName == "IsHexadecimalFormatting" || e.PropertyName == "IsBase64Formatting")
+            else if (e.PropertyName == nameof(ShellViewModel.IsHexadecimalFormatting) || e.PropertyName == nameof(ShellViewModel.IsBase64Formatting))
             {
                 UpdateFormatter();
             }
@@ -214,14 +213,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
 
         private void UpdateFormatter()
         {
-            if (ShellViewModel.IsHexadecimalFormatting)
-            {
-                HashFormatter = hexadecimalFormatter;
-            }
-            else
-            {
-                HashFormatter = base64Formatter;
-            }
+            HashFormatter = ShellViewModel.IsHexadecimalFormatting ? (IHashFormatter)hexadecimalFormatter : base64Formatter;
         }
 
         private void ShowAboutView()

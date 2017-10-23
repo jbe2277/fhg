@@ -49,7 +49,7 @@ namespace Test.FileHashGenerator.Applications.Views
 
         protected virtual void OnClosed(EventArgs e)
         {
-            if (Closed != null) { Closed(this, e); }
+            Closed?.Invoke(this, e);
         }
     }
 }

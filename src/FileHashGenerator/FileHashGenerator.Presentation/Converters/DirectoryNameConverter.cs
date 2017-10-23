@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Data;
 using System.Globalization;
 using System.IO;
@@ -12,7 +9,8 @@ namespace Waf.FileHashGenerator.Presentation.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Path.GetDirectoryName((string)value);
+            var path = value as string;
+            return !string.IsNullOrEmpty(path) ? Path.GetDirectoryName(path) : null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

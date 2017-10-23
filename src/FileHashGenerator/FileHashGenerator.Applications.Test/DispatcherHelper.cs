@@ -10,7 +10,7 @@ namespace Test.FileHashGenerator.Applications
     {
         internal static void WaitUntil(Func<bool> conditionToProceed, TimeSpan timeout)
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
+            var stopwatch = Stopwatch.StartNew();
             while (!conditionToProceed()) 
             {
                 if (stopwatch.Elapsed > timeout)
@@ -22,14 +22,11 @@ namespace Test.FileHashGenerator.Applications
                 DoEvents();
             }
         }
-        
-        /// <summary>
-        /// Execute the event queue of the dispatcher.
-        /// </summary>
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+
+        [SecurityPermission(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         internal static void DoEvents()
         {
-            DispatcherFrame frame = new DispatcherFrame();
+            var frame = new DispatcherFrame();
             Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background,
                 new DispatcherOperationCallback(ExitFrame), frame);
             Dispatcher.PushFrame(frame);

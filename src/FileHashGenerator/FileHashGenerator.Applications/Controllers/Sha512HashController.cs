@@ -21,7 +21,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
 
         protected override Task<byte[]> ComputeHashCoreAsync(string fileName, CancellationToken cancellationToken, IProgress<double> progress)
         {
-            return Task<byte[]>.Factory.StartNew(() =>
+            return Task.Run(() =>
             {
                 using (var stream = new ProgressStream(File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.Read),
                     cancellationToken, progress))
@@ -31,7 +31,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
                         return sha.ComputeHash(stream);
                     }
                 }
-            }, TaskCreationOptions.LongRunning);
+            });
         }
     }
 }

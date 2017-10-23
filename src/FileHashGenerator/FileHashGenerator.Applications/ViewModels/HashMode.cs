@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Waf.FileHashGenerator.Applications.ViewModels
+﻿namespace Waf.FileHashGenerator.Applications.ViewModels
 {
     public enum HashMode
     {

@@ -14,9 +14,9 @@ namespace Waf.FileHashGenerator.Presentation.DesignData
 
         private class MockShellView : MockView, IShellView
         {
-            public double VirtualScreenWidth { get { return 0; } }
+            public double VirtualScreenWidth => 0;
             
-            public double VirtualScreenHeight { get { return 0; } }
+            public double VirtualScreenHeight => 0;
             
             public double Left { get; set; }
             
@@ -40,7 +40,7 @@ namespace Waf.FileHashGenerator.Presentation.DesignData
 
             protected virtual void OnClosed(EventArgs e)
             {
-                if (Closed != null) { Closed(this, e); }
+                Closed?.Invoke(this, e);
             }
         }
     }

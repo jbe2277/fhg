@@ -24,7 +24,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
         {
             this.messageService = messageService;
             this.shellService = shellService;
-            this.cancellationTokenSources = new Dictionary<FileHashItem, CancellationTokenSource>();
+            cancellationTokenSources = new Dictionary<FileHashItem, CancellationTokenSource>();
         }
 
 
@@ -32,7 +32,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
 
         internal IHashFormatter HashFormatter 
         {
-            get { return hashFormatter; }
+            get => hashFormatter;
             set 
             { 
                 if (hashFormatter != value)

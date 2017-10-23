@@ -10,10 +10,6 @@ namespace Waf.FileHashGenerator.Applications.ViewModels
     [Export]
     public class ShellViewModel : ViewModel<IShellView>
     {
-        private readonly DelegateCommand selectSha512Command;
-        private readonly DelegateCommand selectSha256Command;
-        private readonly DelegateCommand selectSha1Command;
-        private readonly DelegateCommand selectMD5Command;
         private ICommand openCommand;
         private ICommand aboutCommand;
         private object contentView;
@@ -25,11 +21,11 @@ namespace Waf.FileHashGenerator.Applications.ViewModels
         [ImportingConstructor]
         public ShellViewModel(IShellView view) : base(view)
         {
-            this.selectSha512Command = new DelegateCommand(() => HashMode = HashMode.Sha512);
-            this.selectSha256Command = new DelegateCommand(() => HashMode = HashMode.Sha256);
-            this.selectSha1Command = new DelegateCommand(() => HashMode = HashMode.Sha1);
-            this.selectMD5Command = new DelegateCommand(() => HashMode = HashMode.MD5);
-            this.isHexadecimalFormatting = true;
+            SelectSha512Command = new DelegateCommand(() => HashMode = HashMode.Sha512);
+            SelectSha256Command = new DelegateCommand(() => HashMode = HashMode.Sha256);
+            SelectSha1Command = new DelegateCommand(() => HashMode = HashMode.Sha1);
+            SelectMD5Command = new DelegateCommand(() => HashMode = HashMode.MD5);
+            isHexadecimalFormatting = true;
 
             view.Closed += ViewClosed;
 
@@ -47,43 +43,43 @@ namespace Waf.FileHashGenerator.Applications.ViewModels
         }
 
 
-        public string Title { get { return ApplicationInfo.ProductName; } }
+        public string Title => ApplicationInfo.ProductName;
 
-        public ICommand SelectSha512Command { get { return selectSha512Command; } }
+        public ICommand SelectSha512Command { get; }
 
-        public ICommand SelectSha256Command { get { return selectSha256Command; } }
+        public ICommand SelectSha256Command { get; }
 
-        public ICommand SelectSha1Command { get { return selectSha1Command; } }
+        public ICommand SelectSha1Command { get; }
 
-        public ICommand SelectMD5Command { get { return selectMD5Command; } }
+        public ICommand SelectMD5Command { get; }
 
         public ICommand OpenCommand
         {
-            get { return openCommand; }
-            set { SetProperty(ref openCommand, value); }
+            get => openCommand;
+            set => SetProperty(ref openCommand, value);
         }
 
         public ICommand AboutCommand
         {
-            get { return aboutCommand; }
-            set { SetProperty(ref aboutCommand, value); }
+            get => aboutCommand;
+            set => SetProperty(ref aboutCommand, value);
         }
 
         public object ContentView
         {
-            get { return contentView; }
-            set { SetProperty(ref contentView, value); }
+            get => contentView;
+            set => SetProperty(ref contentView, value);
         }
 
         public HashMode HashMode
         {
-            get { return hashMode; }
-            set { SetProperty(ref hashMode, value); }
+            get => hashMode;
+            set => SetProperty(ref hashMode, value);
         }
 
         public bool IsHexadecimalFormatting
         {
-            get { return isHexadecimalFormatting; }
+            get => isHexadecimalFormatting;
             set
             {
                 if (SetProperty(ref isHexadecimalFormatting, value))
@@ -95,7 +91,7 @@ namespace Waf.FileHashGenerator.Applications.ViewModels
 
         public bool IsBase64Formatting
         {
-            get { return isBase64Formatting; }
+            get => isBase64Formatting;
             set
             {
                 if (SetProperty(ref isBase64Formatting, value))

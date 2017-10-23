@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Waf.FileHashGenerator.Applications.Views;
 using System.ComponentModel.Composition;
-using System.Windows.Shell;
 
 namespace Waf.FileHashGenerator.Presentation.Views
 {
@@ -25,13 +15,13 @@ namespace Waf.FileHashGenerator.Presentation.Views
         }
 
 
-        public double VirtualScreenWidth { get { return SystemParameters.VirtualScreenWidth; } }
+        public double VirtualScreenWidth => SystemParameters.VirtualScreenWidth;
 
-        public double VirtualScreenHeight { get { return SystemParameters.VirtualScreenHeight; } }
+        public double VirtualScreenHeight => SystemParameters.VirtualScreenHeight;
 
         public bool IsMaximized
         {
-            get { return WindowState == WindowState.Maximized; }
+            get => WindowState == WindowState.Maximized;
             set
             {
                 if (value)

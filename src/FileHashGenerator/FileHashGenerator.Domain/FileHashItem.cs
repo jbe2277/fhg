@@ -5,8 +5,7 @@ namespace Waf.FileHashGenerator.Domain
 {
     public class FileHashItem : Model
     {
-        private readonly string fileName;
-        private byte[] hashBytes = new byte[0];
+        private byte[] hashBytes = Array.Empty<byte>();
         private string hash;
         private string expectedHash;
         private bool isCaseSensitive;
@@ -16,21 +15,21 @@ namespace Waf.FileHashGenerator.Domain
 
         public FileHashItem(string fileName)
         {
-            this.fileName = fileName;
+            FileName = fileName;
         }
 
 
-        public string FileName { get { return fileName; } }
+        public string FileName { get; }
 
         public byte[] HashBytes
         {
-            get { return hashBytes; }
-            set { SetProperty(ref hashBytes, value); }
+            get => hashBytes;
+            set => SetProperty(ref hashBytes, value);
         }
 
         public string Hash
         {
-            get { return hash; }
+            get => hash;
             set
             {
                 if (SetProperty(ref hash, value))
@@ -42,7 +41,7 @@ namespace Waf.FileHashGenerator.Domain
 
         public string ExpectedHash
         {
-            get { return expectedHash; }
+            get => expectedHash;
             set
             {
                 if (SetProperty(ref expectedHash, value))
@@ -54,7 +53,7 @@ namespace Waf.FileHashGenerator.Domain
 
         public bool IsCaseSensitive 
         { 
-            get { return isCaseSensitive; }
+            get => isCaseSensitive;
             set 
             {
                 if (SetProperty(ref isCaseSensitive, value))
@@ -66,14 +65,14 @@ namespace Waf.FileHashGenerator.Domain
 
         public double Progress
         {
-            get { return progress; }
-            set { SetProperty(ref progress, value); }
+            get => progress;
+            set => SetProperty(ref progress, value);
         }
 
         public bool? IsHashValid
         {
-            get { return isHashValid; }
-            private set { SetProperty(ref isHashValid, value); }
+            get => isHashValid;
+            private set => SetProperty(ref isHashValid, value);
         }
 
         private void UpdateIsHashValid()
