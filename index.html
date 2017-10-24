@@ -5,10 +5,112 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Waf FileHashGenerator</title>
+    <title>Waf File Hash Generator</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Move down content because we have a fixed navbar that is 50px tall */
+        body {
+            padding-top: 50px;
+            padding-bottom: 30px;
+        }
+
+        li {
+            margin-bottom: 3px;
+        }
+
+        .nav li {
+            margin-bottom: 0px;
+        }
+
+        .jumbotron {
+            padding-top: 10px;
+            padding-bottom: 0px;
+        }
+
+            .jumbotron h1 {
+                font-size: 47px;
+            }
+
+            .jumbotron p {
+                font-size: 16px;
+                margin-bottom: 25px;
+            }
+
+        @media only screen and (max-width: 767px) {
+            .jumbotron {
+                margin-bottom: 10px;
+                padding-top: 20px;
+            }
+
+                .jumbotron h1 {
+                    display: none;
+                }
+        }
+    </style>
 </head>
 <body>
-    <h1>Waf FileHashGenerator</h1>
-    <p>This page is under construction...</p>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Waf File Hash Generator</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="https://jbe2277.github.io/fhg/clickonce/FileHashGenerator.application">Run application &raquo;</a></li>
+                    <li><a href="https://github.com/jbe2277/fhg">Source code</a></li>
+                    <li><a href="https://github.com/jbe2277/fhg/blob/master/LICENSE">License</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Waf File Hash Generator</h1>
+            <p>Waf File Hash Generator is a simple tool to generate the hash values of one or more files.</p>
+            <p><a class="btn btn-primary btn-lg" href="https://jbe2277.github.io/fhg/clickonce/FileHashGenerator.application" role="button">Run application &raquo;</a></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row featurette">
+            <div class="col-md-5">
+                <h3 class="featurette-heading">Features</h3>
+                <ul>
+                    <li>Simple tool that generates the hash values of one or more files.</li>
+                    <li>Supports: SHA1, SHA256, SHA512 and MD5.</li>
+                    <li>Format hash as: Hexadecimal or Base64 encoded.</li>
+                    <li>Utilizes the resources of modern hardware: Uses multiple CPU cores and 64bit if available.</li>
+                    <li>Verifies the generated hash value.</li>
+                    <li>Open files:
+                        <ul>
+                            <li>Open file dialog</li>
+                            <li>Drag and drop into the application window or on the application icon</li>
+                            <li>Command line parameter.</li>
+                        </ul>
+                    </li>
+                    <li>Supported languages: English and German.</li>
+                    <li>Optimized for keyboard only access.</li>
+                </ul>
+                <p><br /></p>
+            </div>
+            <div class="col-md-7">
+                <img class="featurette-image img-responsive center-block" title="Waf File Hash Generator" alt="Waf File Hash Generator" src="images/filehashgenerator.png">
+            </div>
+        </div>
+    </div>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"> </script>
 </body>
 </html>
