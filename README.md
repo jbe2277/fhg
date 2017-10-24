@@ -1,2 +1,3 @@
-# fhg
-Waf File Hash Generator is a simple tool to generate the hash values of one or more files.
+# Waf File Hash Generator
+
+Please see [jbe2277.github.io/fhg](https://jbe2277.github.io/fhg) for more information.
