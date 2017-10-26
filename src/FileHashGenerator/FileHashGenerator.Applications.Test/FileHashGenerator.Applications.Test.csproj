@@ -45,7 +45,6 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Controllers\ModuleControllerTest.cs" />
-    <Compile Include="DispatcherHelper.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ProgressStreamTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
