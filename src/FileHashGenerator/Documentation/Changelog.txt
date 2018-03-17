@@ -1,6 +1,10 @@
 Changelog
 ---------
 
+Version 4.0.1.100 (Release)
+- Upgrade to the new Win Application Framework (WAF) 4.2.0.
+
+
 Version 4.0.0.100 (Release)
 - Upgrade projects to target .NET 4.6.1.
 - Upgrade to the new Win Application Framework (WAF) 4.1.0.
