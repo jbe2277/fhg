@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
 
 
         [ImportingConstructor]
-        public ModuleController(IMessageService messageService, IFileDialogService fileDialogService, IEnvironmentService environmentService,
+        public ModuleController(IMessageService messageService, IFileDialogService fileDialogService, ISettingsService settingsService, IEnvironmentService environmentService,
             ExportFactory<Sha512HashController> sha512HashControllerFactory, ExportFactory<Sha256HashController> sha256HashControllerFactory,
             ExportFactory<Sha1HashController> sha1HashControllerFactory, ExportFactory<MD5HashController> md5HashControllerFactory,
             Lazy<ShellViewModel> shellViewModel, Lazy<FileHashListViewModel> fileHashListViewModel, ExportFactory<AboutViewModel> aboutViewModelFactory)
@@ -56,6 +57,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
             this.fileHashListViewModel = fileHashListViewModel;
             this.aboutViewModelFactory = aboutViewModelFactory;
 
+            settingsService.ErrorOccurred += (sender, e) => Trace.TraceError("Error in SettingsService: {0}", e.Error);
             openCommand = new DelegateCommand(OpenFile);
             closeCommand = new DelegateCommand(CloseFile);
             aboutCommand = new DelegateCommand(ShowAboutView);
