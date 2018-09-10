@@ -14,3 +14,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "Waf.FileHashGenerator.Presentation.Views.FileHashListView.#OnDragOver(System.Windows.DragEventArgs)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "Waf.FileHashGenerator.Presentation.Views.FileHashListView.#OnDrop(System.Windows.DragEventArgs)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "0", Scope = "member", Target = "Waf.FileHashGenerator.Presentation.Converters.EnumToFontWeightConverter.#Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate", Scope = "member", Target = "Waf.FileHashGenerator.Presentation.DesignData.MockSettingsService.#RaiseErrorOccurred(System.Waf.Applications.Services.SettingsErrorEventArgs)")]
+

@@ -110,14 +110,6 @@ namespace Waf.FileHashGenerator.Applications.Controllers
 
         public void Shutdown()
         {
-            try
-            {
-                Settings.Default.Save();
-            }
-            catch (Exception)
-            {
-                // When more application instances are closed at the same time then an exception occurs.
-            }
         }
 
         private void OpenFile()

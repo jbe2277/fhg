@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.Waf.Applications;
+using System.Waf.Applications.Services;
 using System.Windows.Input;
 using Waf.FileHashGenerator.Applications.Properties;
 using Waf.FileHashGenerator.Applications.Views;
@@ -10,6 +11,7 @@ namespace Waf.FileHashGenerator.Applications.ViewModels
     [Export]
     public class ShellViewModel : ViewModel<IShellView>
     {
+        private readonly AppSettings settings;
         private ICommand openCommand;
         private ICommand aboutCommand;
         private object contentView;
@@ -19,27 +21,27 @@ namespace Waf.FileHashGenerator.Applications.ViewModels
 
 
         [ImportingConstructor]
-        public ShellViewModel(IShellView view) : base(view)
+        public ShellViewModel(IShellView view, ISettingsService settingsService) : base(view)
         {
             SelectSha512Command = new DelegateCommand(() => HashMode = HashMode.Sha512);
             SelectSha256Command = new DelegateCommand(() => HashMode = HashMode.Sha256);
             SelectSha1Command = new DelegateCommand(() => HashMode = HashMode.Sha1);
             SelectMD5Command = new DelegateCommand(() => HashMode = HashMode.MD5);
             isHexadecimalFormatting = true;
-
+            settings = settingsService.Get<AppSettings>();
             view.Closed += ViewClosed;
 
             // Restore the window size when the values are valid.
-            if (Settings.Default.Left >= 0 && Settings.Default.Top >= 0 && Settings.Default.Width > 0 && Settings.Default.Height > 0
-                && Settings.Default.Left + Settings.Default.Width <= view.VirtualScreenWidth
-                && Settings.Default.Top + Settings.Default.Height <= view.VirtualScreenHeight)
+            if (settings.Left >= 0 && settings.Top >= 0 && settings.Width > 0 && settings.Height > 0
+                && settings.Left + settings.Width <= view.VirtualScreenWidth
+                && settings.Top + settings.Height <= view.VirtualScreenHeight)
             {
-                ViewCore.Left = Settings.Default.Left;
-                ViewCore.Top = Settings.Default.Top;
-                ViewCore.Height = Settings.Default.Height;
-                ViewCore.Width = Settings.Default.Width;
+                ViewCore.Left = settings.Left;
+                ViewCore.Top = settings.Top;
+                ViewCore.Height = settings.Height;
+                ViewCore.Width = settings.Width;
             }
-            ViewCore.IsMaximized = Settings.Default.IsMaximized;
+            ViewCore.IsMaximized = settings.IsMaximized;
         }
 
 
@@ -113,11 +115,11 @@ namespace Waf.FileHashGenerator.Applications.ViewModels
 
         private void ViewClosed(object sender, EventArgs e)
         {
-            Settings.Default.Left = ViewCore.Left;
-            Settings.Default.Top = ViewCore.Top;
-            Settings.Default.Height = ViewCore.Height;
-            Settings.Default.Width = ViewCore.Width;
-            Settings.Default.IsMaximized = ViewCore.IsMaximized;
+            settings.Left = ViewCore.Left;
+            settings.Top = ViewCore.Top;
+            settings.Height = ViewCore.Height;
+            settings.Width = ViewCore.Width;
+            settings.IsMaximized = ViewCore.IsMaximized;
         }
     }
 }

@@ -101,6 +101,7 @@
     <Compile Include="Converters\FileNameConverter.cs" />
     <Compile Include="Converters\IsHashValidToImageSourceConverter.cs" />
     <Compile Include="Converters\IsHashValidToTextConverter.cs" />
+    <Compile Include="DesignData\MockSettingsService.cs" />
     <Compile Include="DesignData\MockView.cs" />
     <Compile Include="DesignData\SampleAboutViewModel.cs" />
     <Compile Include="DesignData\SampleFileHashListViewModel.cs" />

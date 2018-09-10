@@ -6,7 +6,7 @@ namespace Waf.FileHashGenerator.Presentation.DesignData
 {
     public class SampleShellViewModel : ShellViewModel
     {
-        public SampleShellViewModel() : base(new MockShellView())
+        public SampleShellViewModel() : base(new MockShellView(), new MockSettingsService())
         {
 
         }
