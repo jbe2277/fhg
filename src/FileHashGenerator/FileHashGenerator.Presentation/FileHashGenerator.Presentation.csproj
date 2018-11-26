@@ -30,7 +30,7 @@
     <PublisherName>Waf</PublisherName>
     <SuiteName>Waf File Hash Generator</SuiteName>
     <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>4.0.2.100</ApplicationVersion>
+    <ApplicationVersion>4.0.3.100</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -215,28 +215,6 @@
     <PackageReference Include="System.Waf.Wpf">
       <Version>5.0.0-alpha1</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <PublishFile Include="System.Waf.Core">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-	<PublishFile Include="System.Waf.Wpf">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
