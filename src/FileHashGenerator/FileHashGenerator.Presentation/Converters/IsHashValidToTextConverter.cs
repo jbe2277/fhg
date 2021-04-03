@@ -7,7 +7,7 @@ namespace Waf.FileHashGenerator.Presentation.Converters
 {
     public class IsHashValidToTextConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             bool? isHashValid = (bool?)value;
             if (isHashValid == null)
@@ -24,7 +24,7 @@ namespace Waf.FileHashGenerator.Presentation.Converters
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             throw new NotSupportedException();
         }

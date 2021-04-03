@@ -18,10 +18,9 @@ namespace Waf.FileHashGenerator.Presentation
 {
     public partial class App : Application
     {
-        private AggregateCatalog catalog;
-        private CompositionContainer container;
-        private IEnumerable<IModuleController> moduleControllers;
-
+        private AggregateCatalog? catalog;
+        private CompositionContainer? container;
+        private IEnumerable<IModuleController> moduleControllers = Array.Empty<IModuleController>();
 
         public App()
         {
@@ -31,7 +30,6 @@ namespace Waf.FileHashGenerator.Presentation
             ProfileOptimization.SetProfileRoot(profileRoot);
             ProfileOptimization.StartProfile("Startup.profile");
         }
-
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -63,9 +61,8 @@ namespace Waf.FileHashGenerator.Presentation
         protected override void OnExit(ExitEventArgs e)
         {
             foreach (var moduleController in moduleControllers.Reverse()) { moduleController.Shutdown(); }
-            container.Dispose();
-            catalog.Dispose();
-
+            container?.Dispose();
+            catalog?.Dispose();
             base.OnExit(e);
         }
 
@@ -79,9 +76,9 @@ namespace Waf.FileHashGenerator.Presentation
             HandleException(e.ExceptionObject as Exception, e.IsTerminating);
         }
 
-        private static void HandleException(Exception e, bool isTerminating)
+        private static void HandleException(Exception? e, bool isTerminating)
         {
-            if (e == null) { return; }
+            if (e is null) return;
 
             Trace.TraceError(e.ToString());
 

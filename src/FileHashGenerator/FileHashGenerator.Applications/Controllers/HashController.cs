@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Waf.Applications.Services;
+using System.Waf.Foundation;
 using Waf.FileHashGenerator.Applications.Properties;
 using Waf.FileHashGenerator.Applications.Services;
 using Waf.FileHashGenerator.Domain;
@@ -17,8 +18,8 @@ namespace Waf.FileHashGenerator.Applications.Controllers
         private readonly IMessageService messageService;
         private readonly IShellService shellService;
         private readonly Dictionary<FileHashItem, CancellationTokenSource> cancellationTokenSources;
-        private IHashFormatter hashFormatter;
-
+        private IHashFormatter hashFormatter = null!;
+        private IWeakEventProxy? fileHashItemsCollectionChangedProxy;
 
         public HashController(IMessageService messageService, IShellService shellService)
         {
@@ -27,8 +28,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
             cancellationTokenSources = new Dictionary<FileHashItem, CancellationTokenSource>();
         }
 
-
-        public FileHashRoot Root { get; set; }
+        public FileHashRoot Root { get; set; } = null!;
 
         internal IHashFormatter HashFormatter 
         {
@@ -50,37 +50,36 @@ namespace Waf.FileHashGenerator.Applications.Controllers
             }
         }
 
-
         public void Initialize()
         {
             foreach (var item in Root.FileHashItems)
             {
                 ComputeHash(item);
             }
-            CollectionChangedEventManager.AddHandler((INotifyCollectionChanged)Root.FileHashItems, FileHashItemsCollectionChanged);
+            fileHashItemsCollectionChangedProxy = WeakEvent.CollectionChanged.Add((INotifyCollectionChanged)Root.FileHashItems, FileHashItemsCollectionChanged);
         }
 
         public void Shutdown()
         {
-            CollectionChangedEventManager.RemoveHandler((INotifyCollectionChanged)Root.FileHashItems, FileHashItemsCollectionChanged);
+            fileHashItemsCollectionChangedProxy?.Remove();
             foreach (var cts in cancellationTokenSources.Values) { cts.Cancel(); }
             cancellationTokenSources.Clear();
         }
 
         protected abstract Task<byte[]> ComputeHashCoreAsync(string fileName, CancellationToken cancellationToken, IProgress<double> progress);
 
-        private void FileHashItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void FileHashItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
-                foreach (FileHashItem item in e.NewItems)
+                foreach (FileHashItem item in e.NewItems ?? Array.Empty<FileHashItem>())
                 {
                     ComputeHash(item);
                 }
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)
             {
-                foreach (FileHashItem item in e.OldItems)
+                foreach (FileHashItem item in e.OldItems ?? Array.Empty<FileHashItem>())
                 {
                     cancellationTokenSources[item].Cancel();
                     cancellationTokenSources.Remove(item);

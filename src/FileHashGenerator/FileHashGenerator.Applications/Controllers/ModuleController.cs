@@ -35,7 +35,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
         private readonly DelegateCommand aboutCommand;
         private readonly FileHashRoot root;
         private IHashFormatter hashFormatter;
-        private HashController hashController;
+        private HashController? hashController;
 
 
         [ImportingConstructor]
@@ -47,7 +47,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
             this.messageService = messageService;
             this.fileDialogService = fileDialogService;
             this.environmentService = environmentService;
-            hexadecimalFormatter = new HexadecimalFormatter();
+            hashFormatter = hexadecimalFormatter = new HexadecimalFormatter();
             base64Formatter = new Base64Formatter();
             this.sha512HashControllerFactory = sha512HashControllerFactory;
             this.sha256HashControllerFactory = sha256HashControllerFactory;
@@ -119,13 +119,13 @@ namespace Waf.FileHashGenerator.Applications.Controllers
             FileDialogResult result = fileDialogService.ShowOpenFileDialog(ShellViewModel.View, new FileType(Resources.AllFiles, ".*"));
             if (result.IsValid)
             {
-                OpenCore(new[] { result.FileName });
+                OpenCore(new[] { result.FileName! });
             }
         }
 
-        private void CloseFile(object parameter)
+        private void CloseFile(object? parameter)
         {
-            var item = (FileHashItem)parameter;
+            var item = (FileHashItem)parameter!;
             root.RemoveFileHashItem(item);
         }
 
@@ -193,7 +193,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
             hashController = null;
         }
 
-        private void ShellViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void ShellViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(ShellViewModel.HashMode))
             {
@@ -207,7 +207,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
 
         private void UpdateFormatter()
         {
-            HashFormatter = ShellViewModel.IsHexadecimalFormatting ? (IHashFormatter)hexadecimalFormatter : base64Formatter;
+            HashFormatter = ShellViewModel.IsHexadecimalFormatting ? hexadecimalFormatter : base64Formatter;
         }
 
         private void ShowAboutView()

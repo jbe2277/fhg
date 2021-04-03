@@ -11,16 +11,14 @@ namespace Waf.FileHashGenerator.Applications.ViewModels
     [Export]
     public class FileHashListViewModel : ViewModel<IFileHashListView>
     {
-        private IReadOnlyList<FileHashItem> fileHashItems;
-        private string hashHeader;
-        private ICommand closeCommand;
+        private IReadOnlyList<FileHashItem> fileHashItems = Array.Empty<FileHashItem>();
+        private string hashHeader = "";
+        private ICommand closeCommand = DelegateCommand.DisabledCommand;
 
-        
         [ImportingConstructor]
         public FileHashListViewModel(IFileHashListView view) : base(view)
         {
         }
-
 
         public IReadOnlyList<FileHashItem> FileHashItems
         {
@@ -34,7 +32,7 @@ namespace Waf.FileHashGenerator.Applications.ViewModels
             set => SetProperty(ref hashHeader, value);
         }
 
-        public Action<IReadOnlyList<string>> OpenFilesAction { get; set; }
+        public Action<IReadOnlyList<string>> OpenFilesAction { get; set; } = null!;
 
         public ICommand CloseCommand
         {

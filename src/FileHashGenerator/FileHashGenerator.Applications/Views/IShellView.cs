@@ -19,9 +19,7 @@ namespace Waf.FileHashGenerator.Applications.Views
 
         bool IsMaximized { get; set; }
 
-
-        event EventHandler Closed;
-
+        event EventHandler? Closed;
 
         void Show();
 

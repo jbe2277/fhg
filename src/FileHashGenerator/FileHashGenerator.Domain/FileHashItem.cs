@@ -6,8 +6,8 @@ namespace Waf.FileHashGenerator.Domain
     public class FileHashItem : Model
     {
         private byte[] hashBytes = Array.Empty<byte>();
-        private string hash;
-        private string expectedHash;
+        private string? hash;
+        private string? expectedHash;
         private bool isCaseSensitive;
         private double progress;
         private bool? isHashValid;
@@ -27,7 +27,7 @@ namespace Waf.FileHashGenerator.Domain
             set => SetProperty(ref hashBytes, value);
         }
 
-        public string Hash
+        public string? Hash
         {
             get => hash;
             set
@@ -39,7 +39,7 @@ namespace Waf.FileHashGenerator.Domain
             }
         }
 
-        public string ExpectedHash
+        public string? ExpectedHash
         {
             get => expectedHash;
             set
