@@ -8,7 +8,7 @@ namespace Waf.FileHashGenerator.Applications.Services
         
         public string FormatHash(byte[] hash)
         {
-            return BitConverter.ToString(hash).Replace("-", "");
+            return BitConverter.ToString(hash).Replace("-", "", StringComparison.Ordinal);
         }
     }
 }

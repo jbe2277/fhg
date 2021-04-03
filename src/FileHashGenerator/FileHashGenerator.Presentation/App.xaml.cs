@@ -41,11 +41,8 @@ namespace Waf.FileHashGenerator.Presentation
             AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
 
             catalog = new AggregateCatalog();
-            // Add the WpfApplicationFramework assembly to the catalog
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(WafConfiguration).Assembly));
-            // Add the Waf.FileHashGenerator.Applications assembly
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(ShellViewModel).Assembly));
-            // Add this assembly
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(App).Assembly));
 
             container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
