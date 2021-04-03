@@ -6,7 +6,6 @@
     <RootNamespace>Waf.FileHashGenerator.Presentation</RootNamespace>
     <AssemblyName>FileHashGenerator</AssemblyName>
     <ApplicationIcon>Resources\Images\FileHashGenerator.ico</ApplicationIcon>
-    <ApplicationManifest>Properties\App.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
