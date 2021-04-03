@@ -22,9 +22,6 @@ namespace Test.FileHashGenerator.Applications.ViewModels
             shellViewModel.Show();
             Assert.IsTrue(shellView.IsVisible);
 
-            // In this case it tries to get the title of the unit test framework which is ""
-            Assert.AreEqual("", shellViewModel.Title);
-
             // Close the ShellView via the ExitCommand
             shellViewModel.Close();
             Assert.IsFalse(shellView.IsVisible);

@@ -26,7 +26,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
                 using (var stream = new ProgressStream(File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.Read),
                     cancellationToken, progress))
                 {
-                    using (var sha = new SHA512Cng())
+                    using (var sha = SHA512.Create())
                     {
                         return sha.ComputeHash(stream);
                     }

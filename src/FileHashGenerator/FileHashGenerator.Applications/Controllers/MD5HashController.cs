@@ -26,7 +26,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
                 using (var stream = new ProgressStream(File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.Read),
                     cancellationToken, progress))
                 {
-                    using (var md5 = new MD5Cng())
+                    using (var md5 = MD5.Create())
                     {
                         return md5.ComputeHash(stream);
                     }
