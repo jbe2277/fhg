@@ -12,9 +12,9 @@ namespace Waf.FileHashGenerator.Applications.ViewModels
     public class ShellViewModel : ViewModel<IShellView>
     {
         private readonly AppSettings settings;
-        private ICommand openCommand;
-        private ICommand aboutCommand;
-        private object contentView;
+        private ICommand openCommand = DelegateCommand.DisabledCommand;
+        private ICommand aboutCommand = DelegateCommand.DisabledCommand;
+        private object contentView = null!;
         private HashMode hashMode;
         private bool isHexadecimalFormatting;
         private bool isBase64Formatting;
@@ -113,7 +113,7 @@ namespace Waf.FileHashGenerator.Applications.ViewModels
             ViewCore.Close();
         }
 
-        private void ViewClosed(object sender, EventArgs e)
+        private void ViewClosed(object? sender, EventArgs e)
         {
             settings.Left = ViewCore.Left;
             settings.Top = ViewCore.Top;

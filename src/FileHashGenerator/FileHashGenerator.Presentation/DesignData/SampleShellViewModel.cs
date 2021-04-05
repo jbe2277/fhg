@@ -28,7 +28,7 @@ namespace Waf.FileHashGenerator.Presentation.DesignData
             
             public bool IsMaximized { get; set; }
             
-            public event EventHandler Closed;
+            public event EventHandler? Closed;
 
             public void Show()
             {

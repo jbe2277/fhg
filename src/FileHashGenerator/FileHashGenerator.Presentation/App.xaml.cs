@@ -18,10 +18,9 @@ namespace Waf.FileHashGenerator.Presentation
 {
     public partial class App : Application
     {
-        private AggregateCatalog catalog;
-        private CompositionContainer container;
-        private IEnumerable<IModuleController> moduleControllers;
-
+        private AggregateCatalog? catalog;
+        private CompositionContainer? container;
+        private IEnumerable<IModuleController> moduleControllers = Array.Empty<IModuleController>();
 
         public App()
         {
@@ -32,7 +31,6 @@ namespace Waf.FileHashGenerator.Presentation
             ProfileOptimization.StartProfile("Startup.profile");
         }
 
-
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -41,11 +39,8 @@ namespace Waf.FileHashGenerator.Presentation
             AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
 
             catalog = new AggregateCatalog();
-            // Add the WpfApplicationFramework assembly to the catalog
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(WafConfiguration).Assembly));
-            // Add the Waf.FileHashGenerator.Applications assembly
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(ShellViewModel).Assembly));
-            // Add this assembly
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(App).Assembly));
 
             container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
@@ -66,9 +61,8 @@ namespace Waf.FileHashGenerator.Presentation
         protected override void OnExit(ExitEventArgs e)
         {
             foreach (var moduleController in moduleControllers.Reverse()) { moduleController.Shutdown(); }
-            container.Dispose();
-            catalog.Dispose();
-
+            container?.Dispose();
+            catalog?.Dispose();
             base.OnExit(e);
         }
 
@@ -82,9 +76,9 @@ namespace Waf.FileHashGenerator.Presentation
             HandleException(e.ExceptionObject as Exception, e.IsTerminating);
         }
 
-        private static void HandleException(Exception e, bool isTerminating)
+        private static void HandleException(Exception? e, bool isTerminating)
         {
-            if (e == null) { return; }
+            if (e is null) return;
 
             Trace.TraceError(e.ToString());
 

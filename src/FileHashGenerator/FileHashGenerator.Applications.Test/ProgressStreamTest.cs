@@ -13,8 +13,8 @@ namespace Test.FileHashGenerator.Applications
         [TestMethod]
         public void ConstructorTest()
         {
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new ProgressStream(null, new CancellationToken(), new Progress<double>()));
-            AssertHelper.ExpectedException<ArgumentNullException>(() => new ProgressStream(new MemoryStream(), new CancellationToken(), null));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new ProgressStream(null!, new CancellationToken(), new Progress<double>()));
+            AssertHelper.ExpectedException<ArgumentNullException>(() => new ProgressStream(new MemoryStream(), new CancellationToken(), null!));
         }
 
         [TestMethod]

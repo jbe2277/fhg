@@ -27,10 +27,10 @@ namespace Test.FileHashGenerator.Domain
             AssertHelper.PropertyChangedEvent(item, x => x.ExpectedHash, () => item.ExpectedHash = "123");
             Assert.AreEqual("123", item.ExpectedHash);
 
-            Assert.IsFalse((bool)item.IsHashValid);
+            Assert.IsTrue(item.IsHashValid == false);
 
             AssertHelper.PropertyChangedEvent(item, x => x.IsHashValid, () => item.ExpectedHash = "1234");
-            Assert.IsTrue((bool)item.IsHashValid);
+            Assert.IsTrue(item.IsHashValid == true);
 
             AssertHelper.PropertyChangedEvent(item, x => x.IsHashValid, () => item.Hash = null);
             Assert.IsNull(item.IsHashValid);
@@ -44,18 +44,18 @@ namespace Test.FileHashGenerator.Domain
             item.IsCaseSensitive = false;
             item.Hash = "D41D8CD98F00B204E9800998ECF8427E";
             item.ExpectedHash = "D41D8CD98F00B204E9800998ECF8427E";
-            Assert.IsTrue((bool)item.IsHashValid);
+            Assert.IsTrue(item.IsHashValid == true);
 
             item.ExpectedHash = "D41D8CD98F00B204E9800998ECF8427E".ToLowerInvariant();
-            Assert.IsTrue((bool)item.IsHashValid);
+            Assert.IsTrue(item.IsHashValid == true);
 
             item.IsCaseSensitive = true;
             item.Hash = "1B2M2Y8AsgTpgAmY7PhCfg==";
             item.ExpectedHash = "1B2M2Y8AsgTpgAmY7PhCfg==";
-            Assert.IsTrue((bool)item.IsHashValid);
+            Assert.IsTrue(item.IsHashValid == true);
 
             item.ExpectedHash = "1B2M2Y8AsgTpgAmY7PhCfg==".ToLowerInvariant();
-            Assert.IsFalse((bool)item.IsHashValid);
+            Assert.IsTrue(item.IsHashValid == false);
         }
     }
 }

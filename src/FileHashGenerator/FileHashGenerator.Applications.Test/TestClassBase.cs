@@ -10,13 +10,11 @@ namespace Test.FileHashGenerator.Applications
     [TestClass]
     public abstract class TestClassBase
     {
-        private AggregateCatalog catalog;
+        private AggregateCatalog catalog = null!;
 
+        protected UnitTestSynchronizationContext Context { get; private set; } = null!;
 
-        protected UnitTestSynchronizationContext Context { get; private set; }
-
-        protected CompositionContainer Container { get; private set; }
-
+        protected CompositionContainer Container { get; private set; } = null!;
 
         [TestInitialize]
         public void TestInitialize()

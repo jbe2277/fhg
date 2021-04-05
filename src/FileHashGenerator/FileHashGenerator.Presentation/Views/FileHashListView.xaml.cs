@@ -13,16 +13,13 @@ namespace Waf.FileHashGenerator.Presentation.Views
     {
         private readonly Lazy<FileHashListViewModel> viewModel;
 
-        
         public FileHashListView()
         {
             InitializeComponent();
-            viewModel = new Lazy<FileHashListViewModel>(() => ViewHelper.GetViewModel<FileHashListViewModel>(this));
+            viewModel = new Lazy<FileHashListViewModel>(this.GetViewModel<FileHashListViewModel>()!);
         }
 
-
         private FileHashListViewModel ViewModel => viewModel.Value;
-
 
         protected override void OnDragOver(DragEventArgs e)
         {

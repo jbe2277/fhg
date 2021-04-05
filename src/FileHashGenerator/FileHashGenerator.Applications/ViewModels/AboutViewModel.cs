@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.FileHashGenerator.Applications.Views;
@@ -16,7 +17,6 @@ namespace Waf.FileHashGenerator.Applications.ViewModels
             ShowWebsiteCommand = new DelegateCommand(ShowWebsite);
         }
 
-
         public ICommand ShowWebsiteCommand { get; }
 
         public string ProductName => ApplicationInfo.ProductName;
@@ -27,20 +27,19 @@ namespace Waf.FileHashGenerator.Applications.ViewModels
 
         public string NetVersion => Environment.Version.ToString();
 
-        public bool Is64BitProcess => Environment.Is64BitProcess;
-
+        public Architecture ProcessArchitecture => RuntimeInformation.ProcessArchitecture;
 
         public void ShowDialog(object owner)
         {
             ViewCore.ShowDialog(owner);
         }
 
-        private void ShowWebsite(object parameter)
+        private void ShowWebsite(object? parameter)
         {
-            string url = (string)parameter;
+            string url = (string)parameter!;
             try
             {
-                Process.Start(url);
+                Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
             }
             catch (Exception e)
             {

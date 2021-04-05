@@ -22,9 +22,6 @@ namespace Test.FileHashGenerator.Applications.ViewModels
             shellViewModel.Show();
             Assert.IsTrue(shellView.IsVisible);
 
-            // In this case it tries to get the title of the unit test framework which is ""
-            Assert.AreEqual("", shellViewModel.Title);
-
             // Close the ShellView via the ExitCommand
             shellViewModel.Close();
             Assert.IsFalse(shellView.IsVisible);
@@ -142,7 +139,7 @@ namespace Test.FileHashGenerator.Applications.ViewModels
             Assert.AreEqual(HashMode.Sha512, viewModel.HashMode);
         }
 
-        private void SetSettingsValues(AppSettings settings, double left = 0, double top = 0, double width = 0, double height = 0, bool isMaximized = false)
+        private static void SetSettingsValues(AppSettings settings, double left = 0, double top = 0, double width = 0, double height = 0, bool isMaximized = false)
         {
             settings.Left = left;
             settings.Top = top;
@@ -151,7 +148,7 @@ namespace Test.FileHashGenerator.Applications.ViewModels
             settings.IsMaximized = isMaximized;
         }
 
-        private void AssertSettingsValues(AppSettings settings, double left, double top, double width, double height, bool isMaximized)
+        private static void AssertSettingsValues(AppSettings settings, double left, double top, double width, double height, bool isMaximized)
         {
             Assert.AreEqual(left, settings.Left);
             Assert.AreEqual(top, settings.Top);

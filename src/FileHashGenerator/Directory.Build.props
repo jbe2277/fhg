@@ -1,0 +1,11 @@
+﻿<Project>
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Nullable>enable</Nullable>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)/SharedAssemblyInfo.cs" Link="Properties/SharedAssemblyInfo.cs" />
+  </ItemGroup>
+</Project>
