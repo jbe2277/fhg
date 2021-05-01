@@ -1,0 +1,123 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "FileHashGenerator/1.0.0": {
+        "dependencies": {
+          "Waf.FileHashGenerator.Applications": "1.0.0"
+        },
+        "runtime": {
+          "FileHashGenerator.dll": {}
+        },
+        "resources": {
+          "de/FileHashGenerator.resources.dll": {
+            "locale": "de"
+          }
+        }
+      },
+      "System.ComponentModel.Annotations/4.5.0": {},
+      "System.ComponentModel.Composition/4.7.0": {
+        "runtime": {
+          "lib/netcoreapp2.0/System.ComponentModel.Composition.dll": {
+            "assemblyVersion": "4.0.1.0",
+            "fileVersion": "4.700.19.56404"
+          }
+        }
+      },
+      "System.Waf.Core/6.3.0": {
+        "dependencies": {
+          "System.ComponentModel.Annotations": "4.5.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Waf.Core.dll": {
+            "assemblyVersion": "6.3.0.100",
+            "fileVersion": "6.3.0.100"
+          }
+        }
+      },
+      "System.Waf.Wpf/6.3.0": {
+        "dependencies": {
+          "System.ComponentModel.Composition": "4.7.0",
+          "System.Waf.Core": "6.3.0"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/System.Waf.Wpf.dll": {
+            "assemblyVersion": "6.3.0.100",
+            "fileVersion": "6.3.0.100"
+          }
+        }
+      },
+      "Waf.FileHashGenerator.Applications/1.0.0": {
+        "dependencies": {
+          "System.Waf.Wpf": "6.3.0",
+          "Waf.FileHashGenerator.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Waf.FileHashGenerator.Applications.dll": {}
+        },
+        "resources": {
+          "de/Waf.FileHashGenerator.Applications.resources.dll": {
+            "locale": "de"
+          }
+        }
+      },
+      "Waf.FileHashGenerator.Domain/1.0.0": {
+        "dependencies": {
+          "System.Waf.Core": "6.3.0"
+        },
+        "runtime": {
+          "Waf.FileHashGenerator.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "FileHashGenerator/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.ComponentModel.Annotations/4.5.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UxYQ3FGUOtzJ7LfSdnYSFd7+oEv6M8NgUatatIN2HxNtDdlcvFAf+VIq4Of9cDMJEJC0aSRv/x898RYhB4Yppg==",
+      "path": "system.componentmodel.annotations/4.5.0",
+      "hashPath": "system.componentmodel.annotations.4.5.0.nupkg.sha512"
+    },
+    "System.ComponentModel.Composition/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TKOHGbuqp7++lEna7+p19kTR8rKeAeoo2Faab2n2q7spV2CWPevmUkghMG6POKfSdeQhtAJoNZ33FT+01CNe3g==",
+      "path": "system.componentmodel.composition/4.7.0",
+      "hashPath": "system.componentmodel.composition.4.7.0.nupkg.sha512"
+    },
+    "System.Waf.Core/6.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-f4h0NEQjMcuaiN8EKoejfFHvBnS2fepAK2/bEmzigKoxrNpSfTfkyWGqwIFRLgFPgiAV12FIv78/Ha/0hrMPMA==",
+      "path": "system.waf.core/6.3.0",
+      "hashPath": "system.waf.core.6.3.0.nupkg.sha512"
+    },
+    "System.Waf.Wpf/6.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-E+rUBNiMDafcY+QmonWDSPd7JuUx1d/xTszH8KBOSvXKhy/8DdX/DydUGYj94f8BFpCG4picMYdPNaT4UXW+Nw==",
+      "path": "system.waf.wpf/6.3.0",
+      "hashPath": "system.waf.wpf.6.3.0.nupkg.sha512"
+    },
+    "Waf.FileHashGenerator.Applications/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Waf.FileHashGenerator.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
