@@ -1,5 +1,4 @@
-name: .NET
-
+name: FileHashGenerator
 on:
   push:
     paths:
