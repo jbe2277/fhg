@@ -10,8 +10,8 @@ namespace Test.FileHashGenerator.Applications.ViewModels
         [TestMethod]
         public void PropertiesTest()
         {
-            MockAboutView aboutView = new MockAboutView();
-            AboutViewModel aboutViewModel = new AboutViewModel(aboutView);
+            var aboutView = new MockAboutView();
+            var aboutViewModel = new AboutViewModel(aboutView);
             var productName = aboutViewModel.ProductName;
             var version = aboutViewModel.Version;
             var osVersion = aboutViewModel.OSVersion;

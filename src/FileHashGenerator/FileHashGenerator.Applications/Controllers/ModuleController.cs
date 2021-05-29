@@ -37,7 +37,6 @@ namespace Waf.FileHashGenerator.Applications.Controllers
         private IHashFormatter hashFormatter;
         private HashController? hashController;
 
-
         [ImportingConstructor]
         public ModuleController(IMessageService messageService, IFileDialogService fileDialogService, ISettingsService settingsService, IEnvironmentService environmentService,
             ExportFactory<Sha512HashController> sha512HashControllerFactory, ExportFactory<Sha256HashController> sha256HashControllerFactory,
@@ -65,7 +64,6 @@ namespace Waf.FileHashGenerator.Applications.Controllers
             root = new FileHashRoot();
         }
 
-
         private ShellViewModel ShellViewModel => shellViewModel.Value;
 
         private FileHashListViewModel FileHashListViewModel => fileHashListViewModel.Value;
@@ -75,17 +73,14 @@ namespace Waf.FileHashGenerator.Applications.Controllers
             get => hashFormatter;
             set
             {
-                if (hashFormatter != value)
+                if (hashFormatter == value) return;
+                hashFormatter = value;
+                if (hashController != null)
                 {
-                    hashFormatter = value;
-                    if (hashController != null)
-                    {
-                        hashController.HashFormatter = value;
-                    }
+                    hashController.HashFormatter = value;
                 }
             }
         }
-
 
         public void Initialize()
         {
@@ -110,29 +105,22 @@ namespace Waf.FileHashGenerator.Applications.Controllers
             }
         }
 
-        public void Shutdown()
-        {
-        }
+        public void Shutdown() { }
 
         private void OpenFile()
         {
-            FileDialogResult result = fileDialogService.ShowOpenFileDialog(ShellViewModel.View, new FileType(Resources.AllFiles, ".*"));
+            var result = fileDialogService.ShowOpenFileDialog(ShellViewModel.View, new FileType(Resources.AllFiles, ".*"));
             if (result.IsValid)
             {
                 OpenCore(new[] { result.FileName! });
             }
         }
 
-        private void CloseFile(object? parameter)
-        {
-            var item = (FileHashItem)parameter!;
-            root.RemoveFileHashItem(item);
-        }
+        private void CloseFile(object? parameter) => root.RemoveFileHashItem((FileHashItem)parameter!);
 
         private void OpenCore(IEnumerable<string> fileNames)
         {
             var filesNotFound = new List<string>();
-
             foreach (string fileName in fileNames)
             {
                 if (!root.FileHashItems.Any(x => x.FileName == fileName))
@@ -147,43 +135,38 @@ namespace Waf.FileHashGenerator.Applications.Controllers
                     }
                 }
             }
-
             if (filesNotFound.Any())
             {
-                messageService.ShowError(ShellViewModel.View, string.Format(CultureInfo.CurrentCulture, Resources.FilesNotFoundError, 
-                    string.Join(Environment.NewLine, filesNotFound)));
+                messageService.ShowError(ShellViewModel.View, Resources.FilesNotFoundError, string.Join(Environment.NewLine, filesNotFound));
             }
         }
 
         private void UpdateHashMode()
         {
-            if (ShellViewModel.HashMode == HashMode.Sha512)
+            switch (ShellViewModel.HashMode)
             {
-                UpdateHashModeCore(sha512HashControllerFactory.CreateExport().Value, Resources.Sha512);
-            }
-            else if (ShellViewModel.HashMode == HashMode.Sha256)
-            {
-                UpdateHashModeCore(sha256HashControllerFactory.CreateExport().Value, Resources.Sha256);
-            }
-            else if (ShellViewModel.HashMode == HashMode.Sha1)
-            {
-                UpdateHashModeCore(sha1HashControllerFactory.CreateExport().Value, Resources.Sha1);
-            }
-            else
-            {
-                UpdateHashModeCore(md5HashControllerFactory.CreateExport().Value, Resources.MD5);
+                case HashMode.Sha512:
+                    UpdateHashModeCore(sha512HashControllerFactory.CreateExport().Value, Resources.Sha512);
+                    break;
+                case HashMode.Sha256:
+                    UpdateHashModeCore(sha256HashControllerFactory.CreateExport().Value, Resources.Sha256);
+                    break;
+                case HashMode.Sha1:
+                    UpdateHashModeCore(sha1HashControllerFactory.CreateExport().Value, Resources.Sha1);
+                    break;
+                default:
+                    UpdateHashModeCore(md5HashControllerFactory.CreateExport().Value, Resources.MD5);
+                    break;
             }
         }
 
         private void UpdateHashModeCore(HashController newHashController, string header)
         {
             CancelActiveController();
-
             hashController = newHashController;
             hashController.Root = root;
             hashController.HashFormatter = HashFormatter;
             hashController.Initialize();
-
             FileHashListViewModel.HashHeader = header;
         }
 
@@ -205,10 +188,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
             }
         }
 
-        private void UpdateFormatter()
-        {
-            HashFormatter = ShellViewModel.IsHexadecimalFormatting ? hexadecimalFormatter : base64Formatter;
-        }
+        private void UpdateFormatter() => HashFormatter = ShellViewModel.IsHexadecimalFormatting ? hexadecimalFormatter : base64Formatter;
 
         private void ShowAboutView()
         {

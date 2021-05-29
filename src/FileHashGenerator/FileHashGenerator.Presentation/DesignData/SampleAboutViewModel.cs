@@ -9,7 +9,6 @@ namespace Waf.FileHashGenerator.Presentation.DesignData
         {
         }
 
-
         public new string ProductName => "DesignTime File Hash Generator";
 
         public new string Version => "1.0.0.0";

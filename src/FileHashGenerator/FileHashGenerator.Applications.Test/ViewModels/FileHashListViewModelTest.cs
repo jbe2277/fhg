@@ -22,7 +22,7 @@ namespace Test.FileHashGenerator.Applications.ViewModels
             AssertHelper.PropertyChangedEvent(viewModel, x => x.HashHeader, () => viewModel.HashHeader = "SHA1");
             Assert.AreEqual("SHA1", viewModel.HashHeader);
 
-            DelegateCommand closeCommand = new DelegateCommand(() => { });
+            var closeCommand = new DelegateCommand(() => { });
             AssertHelper.PropertyChangedEvent(viewModel, x => x.CloseCommand, () => viewModel.CloseCommand = closeCommand);
             Assert.AreEqual(closeCommand, viewModel.CloseCommand);
         }

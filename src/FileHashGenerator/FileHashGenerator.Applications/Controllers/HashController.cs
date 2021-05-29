@@ -34,17 +34,15 @@ namespace Waf.FileHashGenerator.Applications.Controllers
         {
             get => hashFormatter;
             set 
-            { 
-                if (hashFormatter != value)
+            {
+                if (hashFormatter == value) return;
+                hashFormatter = value;
+                if (Root != null)
                 {
-                    hashFormatter = value;
-                    if (Root != null)
+                    foreach (var item in Root.FileHashItems)
                     {
-                        foreach (var item in Root.FileHashItems)
-                        {
-                            item.IsCaseSensitive = value.IsCaseSensitive;
-                            item.Hash = value.FormatHash(item.HashBytes);
-                        }
+                        item.IsCaseSensitive = value.IsCaseSensitive;
+                        item.Hash = value.FormatHash(item.HashBytes);
                     }
                 }
             }
@@ -52,17 +50,14 @@ namespace Waf.FileHashGenerator.Applications.Controllers
 
         public void Initialize()
         {
-            foreach (var item in Root.FileHashItems)
-            {
-                ComputeHash(item);
-            }
+            foreach (var item in Root.FileHashItems) ComputeHash(item);
             fileHashItemsCollectionChangedProxy = WeakEvent.CollectionChanged.Add((INotifyCollectionChanged)Root.FileHashItems, FileHashItemsCollectionChanged);
         }
 
         public void Shutdown()
         {
             fileHashItemsCollectionChangedProxy?.Remove();
-            foreach (var cts in cancellationTokenSources.Values) { cts.Cancel(); }
+            foreach (var cts in cancellationTokenSources.Values) cts.Cancel();
             cancellationTokenSources.Clear();
         }
 
@@ -72,10 +67,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
-                foreach (FileHashItem item in e.NewItems ?? Array.Empty<FileHashItem>())
-                {
-                    ComputeHash(item);
-                }
+                foreach (FileHashItem item in e.NewItems ?? Array.Empty<FileHashItem>()) ComputeHash(item);
             }
             else if (e.Action == NotifyCollectionChangedAction.Remove)
             {
@@ -111,7 +103,7 @@ namespace Waf.FileHashGenerator.Applications.Controllers
             catch (Exception e)
             {
                 Trace.TraceError(e.ToString());
-                messageService.ShowError(shellService.ShellView, string.Format(CultureInfo.CurrentCulture, Resources.UnknownComputeHashError, e));
+                messageService.ShowError(shellService.ShellView, Resources.UnknownComputeHashError, e);
             }
             finally
             {

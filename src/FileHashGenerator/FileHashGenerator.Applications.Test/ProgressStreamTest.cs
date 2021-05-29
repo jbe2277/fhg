@@ -20,16 +20,14 @@ namespace Test.FileHashGenerator.Applications
         [TestMethod]
         public void BasicStreamTest()
         {
-            using (var stream = new ProgressStream(new MemoryStream(), new CancellationToken(), new Progress<double>()))
-            {
-                Assert.IsTrue(stream.CanRead);
-                Assert.IsTrue(stream.CanSeek);
-                Assert.IsTrue(stream.CanWrite);
-                Assert.AreEqual(0, stream.Length);
-                Assert.AreEqual(0, stream.Position);
+            using var stream = new ProgressStream(new MemoryStream(), new CancellationToken(), new Progress<double>());
+            Assert.IsTrue(stream.CanRead);
+            Assert.IsTrue(stream.CanSeek);
+            Assert.IsTrue(stream.CanWrite);
+            Assert.AreEqual(0, stream.Length);
+            Assert.AreEqual(0, stream.Position);
 
-                stream.Flush();
-            }
+            stream.Flush();
         }
     }
 }

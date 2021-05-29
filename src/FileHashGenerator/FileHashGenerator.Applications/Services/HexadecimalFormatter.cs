@@ -6,9 +6,6 @@ namespace Waf.FileHashGenerator.Applications.Services
     {
         public bool IsCaseSensitive => false;
         
-        public string FormatHash(byte[] hash)
-        {
-            return BitConverter.ToString(hash).Replace("-", "", StringComparison.Ordinal);
-        }
+        public string FormatHash(byte[] hash) => BitConverter.ToString(hash).Replace("-", "", StringComparison.Ordinal);
     }
 }

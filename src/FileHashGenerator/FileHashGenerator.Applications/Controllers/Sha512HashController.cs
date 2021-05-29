@@ -13,24 +13,17 @@ namespace Waf.FileHashGenerator.Applications.Controllers
     internal class Sha512HashController : HashController
     {
         [ImportingConstructor]
-        public Sha512HashController(IMessageService messageService, IShellService shellService)
-            : base(messageService, shellService)
+        public Sha512HashController(IMessageService messageService, IShellService shellService) : base(messageService, shellService)
         {
         }
-
 
         protected override Task<byte[]> ComputeHashCoreAsync(string fileName, CancellationToken cancellationToken, IProgress<double> progress)
         {
             return Task.Run(() =>
             {
-                using (var stream = new ProgressStream(File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.Read),
-                    cancellationToken, progress))
-                {
-                    using (var sha = SHA512.Create())
-                    {
-                        return sha.ComputeHash(stream);
-                    }
-                }
+                using var stream = new ProgressStream(File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.Read), cancellationToken, progress);
+                using var sha = SHA512.Create();
+                return sha.ComputeHash(stream);
             });
         }
     }

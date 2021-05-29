@@ -131,13 +131,15 @@ namespace Test.FileHashGenerator.Applications.Controllers
             
             // Open files via command line parameters
             environmentService.DocumentFileNames = new[] { "NotExistingFile1", "NotExistingFile2" };
-            messageService.Clear();
+            bool errorShown = false;
+            messageService.ShowErrorStub = (owner, msg) => 
+            { 
+                errorShown = true;
+                Assert.IsNotNull(msg);
+            };
             controller.Run();
 
-            Assert.AreEqual(MessageType.Error, messageService.MessageType);
-            Assert.IsNotNull(messageService.Message);
-            Assert.IsNotNull(messageService.Owner);
-
+            Assert.IsTrue(errorShown);
             Assert.IsFalse(fileHashListViewModel.FileHashItems.Any());
             
             controller.Shutdown();

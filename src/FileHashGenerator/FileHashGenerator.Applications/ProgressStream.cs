@@ -14,7 +14,6 @@ namespace Waf.FileHashGenerator.Applications
         private int nextCallback;
         private int nextCallbackReset;
 
-
         public ProgressStream(Stream stream, CancellationToken cancellationToken, IProgress<double> progressCallback)
         {
             this.stream = stream ?? throw new ArgumentNullException(nameof(stream));
@@ -22,7 +21,6 @@ namespace Waf.FileHashGenerator.Applications
             this.progressCallback = progressCallback ?? throw new ArgumentNullException(nameof(progressCallback));
             nextCallbackReset = -1;
         }
-
 
         public override bool CanRead => stream.CanRead;
 
@@ -37,7 +35,6 @@ namespace Waf.FileHashGenerator.Applications
             get => stream.Position;
             set => stream.Position = value;
         }
-
 
         public override int Read(byte[] buffer, int offset, int count)
         {
@@ -59,25 +56,13 @@ namespace Waf.FileHashGenerator.Applications
             return result;
         }
 
-        public override long Seek(long offset, SeekOrigin origin)
-        {
-            return stream.Seek(offset, origin);
-        }
+        public override long Seek(long offset, SeekOrigin origin) => stream.Seek(offset, origin);
 
-        public override void SetLength(long value)
-        {
-            stream.SetLength(value);
-        }
+        public override void SetLength(long value) => stream.SetLength(value);
 
-        public override void Write(byte[] buffer, int offset, int count)
-        {
-            stream.Write(buffer, offset, count);
-        }
+        public override void Write(byte[] buffer, int offset, int count) => stream.Write(buffer, offset, count);
 
-        public override void Flush()
-        {
-            stream.Flush();
-        }
+        public override void Flush() => stream.Flush();
 
         protected override void Dispose(bool disposing)
         {

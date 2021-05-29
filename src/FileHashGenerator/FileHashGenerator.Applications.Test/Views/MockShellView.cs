@@ -24,14 +24,9 @@ namespace Test.FileHashGenerator.Applications.Views
 
         public bool IsMaximized { get; set; }
 
-
         public event EventHandler? Closed;
 
-
-        public void Show()
-        {
-            IsVisible = true;
-        }
+        public void Show() => IsVisible = true;
 
         public void Close()
         {
@@ -47,9 +42,6 @@ namespace Test.FileHashGenerator.Applications.Views
             Height = double.NaN;
         }
 
-        protected virtual void OnClosed(EventArgs e)
-        {
-            Closed?.Invoke(this, e);
-        }
+        protected virtual void OnClosed(EventArgs e) => Closed?.Invoke(this, e);
     }
 }

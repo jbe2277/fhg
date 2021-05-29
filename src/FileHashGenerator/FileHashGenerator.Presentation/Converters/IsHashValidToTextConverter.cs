@@ -10,23 +10,14 @@ namespace Waf.FileHashGenerator.Presentation.Converters
         public object? Convert(object? value, Type? targetType, object? parameter, CultureInfo? culture)
         {
             bool? isHashValid = (bool?)value;
-            if (isHashValid == null)
+            return isHashValid switch
             {
-                return Resources.HashNotCompared;
-            }
-            else if (isHashValid == true)
-            {
-                return Resources.HashValid;
-            }
-            else
-            {
-                return Resources.HashNotValid;
-            }
+                null => Resources.HashNotCompared,
+                true => Resources.HashValid,
+                _ => Resources.HashNotValid
+            };
         }
 
-        public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
-        {
-            throw new NotSupportedException();
-        }
+        public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture) => throw new NotSupportedException();
     }
 }

@@ -19,7 +19,6 @@ namespace Waf.FileHashGenerator.Applications.ViewModels
         private bool isHexadecimalFormatting;
         private bool isBase64Formatting;
 
-
         [ImportingConstructor]
         public ShellViewModel(IShellView view, ISettingsService settingsService) : base(view)
         {
@@ -43,7 +42,6 @@ namespace Waf.FileHashGenerator.Applications.ViewModels
             }
             ViewCore.IsMaximized = settings.IsMaximized;
         }
-
 
         public string Title => ApplicationInfo.ProductName;
 
@@ -103,15 +101,9 @@ namespace Waf.FileHashGenerator.Applications.ViewModels
             }
         }
 
-        public void Show()
-        {
-            ViewCore.Show();
-        }
+        public void Show() => ViewCore.Show();
 
-        public void Close()
-        {
-            ViewCore.Close();
-        }
+        public void Close() => ViewCore.Close();
 
         private void ViewClosed(object? sender, EventArgs e)
         {

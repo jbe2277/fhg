@@ -11,7 +11,6 @@ namespace Test.FileHashGenerator.Domain
         public void AddAndRemoveFileHashItemTest()
         {
             var root = new FileHashRoot();
-
             Assert.IsFalse(root.FileHashItems.Any());
 
             var fileHashItem = root.AddNewFileHashItem(@"c:\test.txt");

@@ -8,15 +8,12 @@ namespace Waf.FileHashGenerator.Domain
     {
         private readonly ObservableCollection<FileHashItem> fileHashItems;
 
-
         public FileHashRoot()
         {
             fileHashItems = new ObservableCollection<FileHashItem>();
         }
 
-
         public IReadOnlyList<FileHashItem> FileHashItems => fileHashItems;
-
 
         public FileHashItem AddNewFileHashItem(string fileName)
         {
@@ -25,9 +22,6 @@ namespace Waf.FileHashGenerator.Domain
             return fileHashItem;
         }
 
-        public void RemoveFileHashItem(FileHashItem fileHashItem)
-        {
-            fileHashItems.Remove(fileHashItem);
-        }
+        public void RemoveFileHashItem(FileHashItem fileHashItem) => fileHashItems.Remove(fileHashItem);
     }
 }

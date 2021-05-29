@@ -15,20 +15,12 @@ namespace Test.FileHashGenerator.Applications.Services
             ProgressReports = new Dictionary<object, double>();
         }
         
-
         public object ShellView { get; }
 
         public Dictionary<object, double> ProgressReports { get; }
 
+        public void UpdateProgress(object source, double progress) => ProgressReports[source] = progress;
 
-        public void UpdateProgress(object source, double progress)
-        {
-            ProgressReports[source] = progress;
-        }
-
-        public void RemoveProgress(object source)
-        {
-            ProgressReports.Remove(source);
-        }
+        public void RemoveProgress(object source) => ProgressReports.Remove(source);
     }
 }

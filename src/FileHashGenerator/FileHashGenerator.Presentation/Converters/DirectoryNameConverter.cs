@@ -13,9 +13,6 @@ namespace Waf.FileHashGenerator.Presentation.Converters
             return !string.IsNullOrEmpty(path) ? Path.GetDirectoryName(path) : null;
         }
 
-        public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture)
-        {
-            throw new NotSupportedException();
-        }
+        public object? ConvertBack(object? value, Type? targetType, object? parameter, CultureInfo? culture) => throw new NotSupportedException();
     }
 }

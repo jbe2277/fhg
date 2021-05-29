@@ -27,7 +27,7 @@ namespace Test.FileHashGenerator.Applications
             catalog.Catalogs.Add(new AssemblyCatalog(typeof(TestClassBase).Assembly));
 
             Container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-            CompositionBatch batch = new CompositionBatch();
+            var batch = new CompositionBatch();
             batch.AddExportedValue(Container);
             Container.Compose(batch);
 

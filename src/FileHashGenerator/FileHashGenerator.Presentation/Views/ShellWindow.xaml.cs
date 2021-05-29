@@ -14,7 +14,6 @@ namespace Waf.FileHashGenerator.Presentation.Views
             InitializeComponent();
         }
 
-
         public double VirtualScreenWidth => SystemParameters.VirtualScreenWidth;
 
         public double VirtualScreenHeight => SystemParameters.VirtualScreenHeight;
@@ -35,17 +34,11 @@ namespace Waf.FileHashGenerator.Presentation.Views
             }
         }
 
-        private void ViewPopupOpened(object sender, EventArgs e)
-        {
-            hexadecimalButton.Focus();
-        }
+        private void ViewPopupOpened(object sender, EventArgs e) => hexadecimalButton.Focus();
 
         private void ViewPopupKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Escape)
-            {
-                viewPopup.IsOpen = false;
-            }
+            if (e.Key == Key.Escape) viewPopup.IsOpen = false;
         }
     }
 }

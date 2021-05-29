@@ -96,7 +96,7 @@ namespace Test.FileHashGenerator.Applications.ViewModels
         {
             var viewModel = Container.GetExportedValue<ShellViewModel>();
 
-            DelegateCommand openCommand = new DelegateCommand(() => { });
+            var openCommand = new DelegateCommand(() => { });
             AssertHelper.PropertyChangedEvent(viewModel, x => x.OpenCommand, () => viewModel.OpenCommand = openCommand);
             Assert.AreEqual(openCommand, viewModel.OpenCommand);
 
@@ -112,7 +112,7 @@ namespace Test.FileHashGenerator.Applications.ViewModels
             Assert.IsTrue(viewModel.IsHexadecimalFormatting);
             Assert.IsFalse(viewModel.IsBase64Formatting);
 
-            DelegateCommand aboutCommand = new DelegateCommand(() => { });
+            var aboutCommand = new DelegateCommand(() => { });
             AssertHelper.PropertyChangedEvent(viewModel, x => x.AboutCommand, () => viewModel.AboutCommand = aboutCommand);
             Assert.AreEqual(aboutCommand, viewModel.AboutCommand);
 

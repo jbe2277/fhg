@@ -6,9 +6,6 @@ namespace Waf.FileHashGenerator.Applications.Services
     {
         public bool IsCaseSensitive => true;
         
-        public string FormatHash(byte[] hash)
-        {
-            return Convert.ToBase64String(hash);
-        }
+        public string FormatHash(byte[] hash) => Convert.ToBase64String(hash);
     }
 }

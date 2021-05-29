@@ -14,7 +14,6 @@ namespace Waf.FileHashGenerator.Presentation.Services
         private readonly Lazy<ShellWindow> shellView;
         private readonly Dictionary<object, double> progressReports;
 
-
         [ImportingConstructor]
         public ShellService(Lazy<ShellWindow> shellView)
         {
@@ -22,9 +21,7 @@ namespace Waf.FileHashGenerator.Presentation.Services
             progressReports = new Dictionary<object, double>();
         }
         
-
         public object ShellView => shellView.Value;
-
 
         public void UpdateProgress(object source, double progress)
         {

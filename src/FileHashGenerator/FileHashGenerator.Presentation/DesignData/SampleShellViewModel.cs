@@ -8,7 +8,6 @@ namespace Waf.FileHashGenerator.Presentation.DesignData
     {
         public SampleShellViewModel() : base(new MockShellView(), new MockSettingsService())
         {
-
         }
 
 
@@ -30,18 +29,11 @@ namespace Waf.FileHashGenerator.Presentation.DesignData
             
             public event EventHandler? Closed;
 
-            public void Show()
-            {
-            }
+            public void Show() { }
 
-            public void Close()
-            {
-            }
+            public void Close() { }
 
-            protected virtual void OnClosed(EventArgs e)
-            {
-                Closed?.Invoke(this, e);
-            }
+            protected virtual void OnClosed(EventArgs e) => Closed?.Invoke(this, e);
         }
     }
 }

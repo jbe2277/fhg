@@ -16,7 +16,6 @@ namespace Waf.FileHashGenerator.Presentation.DesignData
         }
 
 
-
         private class MockFileHashListView : MockView, IFileHashListView
         {
         }

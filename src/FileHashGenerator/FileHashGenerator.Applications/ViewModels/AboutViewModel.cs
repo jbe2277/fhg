@@ -29,11 +29,8 @@ namespace Waf.FileHashGenerator.Applications.ViewModels
 
         public Architecture ProcessArchitecture => RuntimeInformation.ProcessArchitecture;
 
-        public void ShowDialog(object owner)
-        {
-            ViewCore.ShowDialog(owner);
-        }
-
+        public void ShowDialog(object owner) => ViewCore.ShowDialog(owner);
+        
         private void ShowWebsite(object? parameter)
         {
             string url = (string)parameter!;

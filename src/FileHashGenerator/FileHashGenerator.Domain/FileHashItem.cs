@@ -12,12 +12,10 @@ namespace Waf.FileHashGenerator.Domain
         private double progress;
         private bool? isHashValid;
 
-
         public FileHashItem(string fileName)
         {
             FileName = fileName;
         }
-
 
         public string FileName { get; }
 
@@ -77,15 +75,9 @@ namespace Waf.FileHashGenerator.Domain
 
         private void UpdateIsHashValid()
         {
-            if (string.IsNullOrEmpty(Hash) || string.IsNullOrEmpty(ExpectedHash))
-            {
-                IsHashValid = null;
-            }
-            else
-            {
-                var comparisonType = IsCaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
-                IsHashValid = string.Equals(Hash, ExpectedHash, comparisonType);
-            }
+            IsHashValid = string.IsNullOrEmpty(Hash) || string.IsNullOrEmpty(ExpectedHash) 
+                ? null 
+                : string.Equals(Hash, ExpectedHash, IsCaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
         }
     }
 }
