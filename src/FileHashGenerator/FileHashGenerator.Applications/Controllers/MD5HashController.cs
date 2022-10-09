@@ -13,13 +13,10 @@ internal class MD5HashController : HashController
     {
     }
 
-    protected override Task<byte[]> ComputeHashCoreAsync(string fileName, CancellationToken cancellationToken, IProgress<double> progress)
+    protected override async Task<byte[]> ComputeHashCoreAsync(string fileName, CancellationToken cancellationToken, IProgress<double> progress)
     {
-        return Task.Run(() =>
-        {
-            using var stream = new ProgressStream(File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.Read), cancellationToken, progress);
-            using var md5 = MD5.Create();
-            return md5.ComputeHash(stream);
-        });
+        using var stream = new ProgressStream(File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.Read), cancellationToken, progress);
+        using var md5 = MD5.Create();
+        return await md5.ComputeHashAsync(stream).ConfigureAwait(false);
     }
 }
