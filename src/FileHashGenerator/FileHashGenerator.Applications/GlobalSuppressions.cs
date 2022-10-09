@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-[assembly: SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "Waf.FileHashGenerator.Applications.Controllers.ModuleController.#Shutdown()")]
+﻿[assembly: SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Scope = "member", Target = "Waf.FileHashGenerator.Applications.Controllers.ModuleController.#Shutdown()")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Waf.FileHashGenerator.Applications.ViewModels.AboutViewModel.#NetVersion")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Waf.FileHashGenerator.Applications.ViewModels.AboutViewModel.#OSVersion")]
 [assembly: SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Waf.FileHashGenerator.Applications.ViewModels.AboutViewModel.#ProductName")]

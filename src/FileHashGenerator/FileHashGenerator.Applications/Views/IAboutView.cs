@@ -1,9 +1,8 @@
 ﻿using System.Waf.Applications;
 
-namespace Waf.FileHashGenerator.Applications.Views
+namespace Waf.FileHashGenerator.Applications.Views;
+
+public interface IAboutView : IView
 {
-    public interface IAboutView : IView
-    {
-        void ShowDialog(object owner);
-    }
+    void ShowDialog(object owner);
 }

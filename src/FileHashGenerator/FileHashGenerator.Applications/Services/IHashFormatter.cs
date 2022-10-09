@@ -1,9 +1,8 @@
-﻿namespace Waf.FileHashGenerator.Applications.Services
+﻿namespace Waf.FileHashGenerator.Applications.Services;
+
+public interface IHashFormatter
 {
-    public interface IHashFormatter
-    {
-        bool IsCaseSensitive { get; }
-        
-        string FormatHash(byte[] hash);
-    }
+    bool IsCaseSensitive { get; }
+    
+    string FormatHash(byte[] hash);
 }

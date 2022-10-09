@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
+﻿namespace Waf.FileHashGenerator.Applications.Services;
 
-namespace Waf.FileHashGenerator.Applications.Services
+public interface IEnvironmentService
 {
-    public interface IEnvironmentService
-    {
-        IReadOnlyList<string> DocumentFileNames { get; }
-    }
+    IReadOnlyList<string> DocumentFileNames { get; }
 }

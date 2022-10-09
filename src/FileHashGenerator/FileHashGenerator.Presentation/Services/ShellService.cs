@@ -1,52 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
+﻿using System.ComponentModel.Composition;
 using System.Windows.Shell;
 using Waf.FileHashGenerator.Applications.Services;
 using Waf.FileHashGenerator.Presentation.Views;
 
-namespace Waf.FileHashGenerator.Presentation.Services
+namespace Waf.FileHashGenerator.Presentation.Services;
+
+[Export(typeof(IShellService))]
+public class ShellService : IShellService
 {
-    [Export(typeof(IShellService))]
-    public class ShellService : IShellService
+    private readonly Lazy<ShellWindow> shellView;
+    private readonly Dictionary<object, double> progressReports;
+
+    [ImportingConstructor]
+    public ShellService(Lazy<ShellWindow> shellView)
     {
-        private readonly Lazy<ShellWindow> shellView;
-        private readonly Dictionary<object, double> progressReports;
+        this.shellView = shellView;
+        progressReports = new Dictionary<object, double>();
+    }
+    
+    public object ShellView => shellView.Value;
 
-        [ImportingConstructor]
-        public ShellService(Lazy<ShellWindow> shellView)
+    public void UpdateProgress(object source, double progress)
+    {
+        progressReports[source] = progress;
+        UpdateTaskbarItem();
+    }
+
+    public void RemoveProgress(object source)
+    {
+        progressReports.Remove(source);
+        UpdateTaskbarItem();
+    }
+
+    private void UpdateTaskbarItem()
+    {
+        if (progressReports.Any())
         {
-            this.shellView = shellView;
-            progressReports = new Dictionary<object, double>();
+            shellView.Value.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Normal;
+            double value = progressReports.Values.Sum() / progressReports.Count;
+            shellView.Value.TaskbarItemInfo.ProgressValue = value;
         }
-        
-        public object ShellView => shellView.Value;
-
-        public void UpdateProgress(object source, double progress)
+        else
         {
-            progressReports[source] = progress;
-            UpdateTaskbarItem();
-        }
-
-        public void RemoveProgress(object source)
-        {
-            progressReports.Remove(source);
-            UpdateTaskbarItem();
-        }
-
-        private void UpdateTaskbarItem()
-        {
-            if (progressReports.Any())
-            {
-                shellView.Value.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Normal;
-                double value = progressReports.Values.Sum() / progressReports.Count;
-                shellView.Value.TaskbarItemInfo.ProgressValue = value;
-            }
-            else
-            {
-                shellView.Value.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.None;
-            }
+            shellView.Value.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.None;
         }
     }
 }

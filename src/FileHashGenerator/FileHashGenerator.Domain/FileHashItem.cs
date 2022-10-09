@@ -1,83 +1,61 @@
-﻿using System;
-using System.Waf.Foundation;
+﻿namespace Waf.FileHashGenerator.Domain;
 
-namespace Waf.FileHashGenerator.Domain
+public class FileHashItem : Model
 {
-    public class FileHashItem : Model
+    private byte[] hashBytes = Array.Empty<byte>();
+    private string? hash;
+    private string? expectedHash;
+    private bool isCaseSensitive;
+    private double progress;
+    private bool? isHashValid;
+
+    public FileHashItem(string fileName)
     {
-        private byte[] hashBytes = Array.Empty<byte>();
-        private string? hash;
-        private string? expectedHash;
-        private bool isCaseSensitive;
-        private double progress;
-        private bool? isHashValid;
+        FileName = fileName;
+    }
 
-        public FileHashItem(string fileName)
+    public string FileName { get; }
+
+    public byte[] HashBytes { get => hashBytes; set => SetProperty(ref hashBytes, value); }
+
+    public string? Hash
+    {
+        get => hash;
+        set
         {
-            FileName = fileName;
+            if (!SetProperty(ref hash, value)) return;
+            UpdateIsHashValid();
         }
+    }
 
-        public string FileName { get; }
-
-        public byte[] HashBytes
+    public string? ExpectedHash
+    {
+        get => expectedHash;
+        set
         {
-            get => hashBytes;
-            set => SetProperty(ref hashBytes, value);
+            if (!SetProperty(ref expectedHash, value)) return;
+            UpdateIsHashValid();
         }
+    }
 
-        public string? Hash
+    public bool IsCaseSensitive 
+    { 
+        get => isCaseSensitive;
+        set 
         {
-            get => hash;
-            set
-            {
-                if (SetProperty(ref hash, value))
-                {
-                    UpdateIsHashValid();
-                }
-            }
+            if (!SetProperty(ref isCaseSensitive, value)) return;
+            UpdateIsHashValid();
         }
+    }
 
-        public string? ExpectedHash
-        {
-            get => expectedHash;
-            set
-            {
-                if (SetProperty(ref expectedHash, value))
-                {
-                    UpdateIsHashValid();
-                }
-            }
-        }
+    public double Progress { get => progress; set => SetProperty(ref progress, value); }
 
-        public bool IsCaseSensitive 
-        { 
-            get => isCaseSensitive;
-            set 
-            {
-                if (SetProperty(ref isCaseSensitive, value))
-                {
-                    UpdateIsHashValid();
-                }
-            }
-        }
+    public bool? IsHashValid { get => isHashValid; private set => SetProperty(ref isHashValid, value); }
 
-        public double Progress
-        {
-            get => progress;
-            set => SetProperty(ref progress, value);
-        }
-
-        public bool? IsHashValid
-        {
-            get => isHashValid;
-            private set => SetProperty(ref isHashValid, value);
-        }
-
-        private void UpdateIsHashValid()
-        {
-            IsHashValid = string.IsNullOrEmpty(Hash) || string.IsNullOrEmpty(ExpectedHash) 
-                ? null 
-                : string.Equals(Hash, ExpectedHash, IsCaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
-        }
+    private void UpdateIsHashValid()
+    {
+        IsHashValid = string.IsNullOrEmpty(Hash) || string.IsNullOrEmpty(ExpectedHash) 
+            ? null 
+            : string.Equals(Hash, ExpectedHash, IsCaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase);
     }
 }

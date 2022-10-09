@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using Waf.FileHashGenerator.Applications.Services;
 
-namespace Test.FileHashGenerator.Applications.Services
+namespace Test.FileHashGenerator.Applications.Services;
+
+[Export, Export(typeof(IEnvironmentService))]
+public class MockEnvironmentService : IEnvironmentService
 {
-    [Export, Export(typeof(IEnvironmentService))]
-    public class MockEnvironmentService : IEnvironmentService
-    {
-        public IReadOnlyList<string> DocumentFileNames { get; set; } = Array.Empty<string>();
-    }
+    public IReadOnlyList<string> DocumentFileNames { get; set; } = Array.Empty<string>();
 }

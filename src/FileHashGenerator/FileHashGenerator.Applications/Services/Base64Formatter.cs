@@ -1,11 +1,8 @@
-﻿using System;
+﻿namespace Waf.FileHashGenerator.Applications.Services;
 
-namespace Waf.FileHashGenerator.Applications.Services
+internal class Base64Formatter : IHashFormatter
 {
-    internal class Base64Formatter : IHashFormatter
-    {
-        public bool IsCaseSensitive => true;
-        
-        public string FormatHash(byte[] hash) => Convert.ToBase64String(hash);
-    }
+    public bool IsCaseSensitive => true;
+    
+    public string FormatHash(byte[] hash) => Convert.ToBase64String(hash);
 }

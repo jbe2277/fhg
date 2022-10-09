@@ -1,11 +1,10 @@
-﻿namespace Waf.FileHashGenerator.Applications.Services
+﻿namespace Waf.FileHashGenerator.Applications.Services;
+
+public interface IShellService
 {
-    public interface IShellService
-    {
-        object ShellView { get; }
+    object ShellView { get; }
 
-        void UpdateProgress(object source, double progress);
+    void UpdateProgress(object source, double progress);
 
-        void RemoveProgress(object source);
-    }
+    void RemoveProgress(object source);
 }

@@ -20,6 +20,14 @@
   </Choose>
 
   <ItemGroup>
+    <Using Include="System.Collections.ObjectModel" />
+    <Using Include="System.Collections.Specialized" />
+    <Using Include="System.ComponentModel" />
+    <Using Include="System.Diagnostics.CodeAnalysis" />
+    <Using Include="System.Waf.Foundation" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)/SharedAssemblyInfo.cs" Link="Properties/SharedAssemblyInfo.cs" />
   </ItemGroup>
 </Project>

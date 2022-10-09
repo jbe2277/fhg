@@ -1,8 +1,7 @@
 ﻿using System.Waf.Applications;
 
-namespace Waf.FileHashGenerator.Applications.Views
+namespace Waf.FileHashGenerator.Applications.Views;
+
+public interface IFileHashListView : IView
 {
-    public interface IFileHashListView : IView
-    {
-    }
 }

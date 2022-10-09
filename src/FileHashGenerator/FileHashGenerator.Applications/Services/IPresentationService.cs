@@ -1,7 +1,6 @@
-﻿namespace Waf.FileHashGenerator.Applications.Services
+﻿namespace Waf.FileHashGenerator.Applications.Services;
+
+public interface IPresentationService
 {
-    public interface IPresentationService
-    {
-        void Initialize();
-    }
+    void Initialize();
 }

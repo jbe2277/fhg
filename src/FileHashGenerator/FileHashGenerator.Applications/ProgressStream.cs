@@ -1,79 +1,74 @@
-﻿using System;
-using System.IO;
-using System.Threading;
+﻿namespace Waf.FileHashGenerator.Applications;
 
-namespace Waf.FileHashGenerator.Applications
+public sealed class ProgressStream : Stream
 {
-    public sealed class ProgressStream : Stream
+    private const int numberOfCallbacks = 1000;
+
+    private readonly Stream stream;
+    private readonly CancellationToken cancellationToken;
+    private readonly IProgress<double> progressCallback;
+    private int nextCallback;
+    private int nextCallbackReset;
+
+    public ProgressStream(Stream stream, CancellationToken cancellationToken, IProgress<double> progressCallback)
     {
-        private const int numberOfCallbacks = 1000;
+        this.stream = stream ?? throw new ArgumentNullException(nameof(stream));
+        this.cancellationToken = cancellationToken;
+        this.progressCallback = progressCallback ?? throw new ArgumentNullException(nameof(progressCallback));
+        nextCallbackReset = -1;
+    }
 
-        private readonly Stream stream;
-        private readonly CancellationToken cancellationToken;
-        private readonly IProgress<double> progressCallback;
-        private int nextCallback;
-        private int nextCallbackReset;
+    public override bool CanRead => stream.CanRead;
 
-        public ProgressStream(Stream stream, CancellationToken cancellationToken, IProgress<double> progressCallback)
+    public override bool CanSeek => stream.CanSeek;
+
+    public override bool CanWrite => stream.CanWrite;
+
+    public override long Length => stream.Length;
+
+    public override long Position
+    {
+        get => stream.Position;
+        set => stream.Position = value;
+    }
+
+    public override int Read(byte[] buffer, int offset, int count)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+
+        if (nextCallbackReset < 0)
         {
-            this.stream = stream ?? throw new ArgumentNullException(nameof(stream));
-            this.cancellationToken = cancellationToken;
-            this.progressCallback = progressCallback ?? throw new ArgumentNullException(nameof(progressCallback));
-            nextCallbackReset = -1;
+            nextCallbackReset = (int)(Length / ((long)count * numberOfCallbacks));
         }
 
-        public override bool CanRead => stream.CanRead;
+        int result = stream.Read(buffer, offset, count);
 
-        public override bool CanSeek => stream.CanSeek;
-
-        public override bool CanWrite => stream.CanWrite;
-
-        public override long Length => stream.Length;
-
-        public override long Position
+        if (--nextCallback <= 0)
         {
-            get => stream.Position;
-            set => stream.Position = value;
+            progressCallback.Report((double)Position / Length);
+            nextCallback = nextCallbackReset;
         }
 
-        public override int Read(byte[] buffer, int offset, int count)
+        return result;
+    }
+
+    public override long Seek(long offset, SeekOrigin origin) => stream.Seek(offset, origin);
+
+    public override void SetLength(long value) => stream.SetLength(value);
+
+    public override void Write(byte[] buffer, int offset, int count) => stream.Write(buffer, offset, count);
+
+    public override void Flush() => stream.Flush();
+
+    protected override void Dispose(bool disposing)
+    {
+        try
         {
-            cancellationToken.ThrowIfCancellationRequested();
-
-            if (nextCallbackReset < 0)
-            {
-                nextCallbackReset = (int)(Length / ((long)count * numberOfCallbacks));
-            }
-
-            int result = stream.Read(buffer, offset, count);
-
-            if (--nextCallback <= 0)
-            {
-                progressCallback.Report((double)Position / Length);
-                nextCallback = nextCallbackReset;
-            }
-
-            return result;
+            if (disposing) stream.Dispose();
         }
-
-        public override long Seek(long offset, SeekOrigin origin) => stream.Seek(offset, origin);
-
-        public override void SetLength(long value) => stream.SetLength(value);
-
-        public override void Write(byte[] buffer, int offset, int count) => stream.Write(buffer, offset, count);
-
-        public override void Flush() => stream.Flush();
-
-        protected override void Dispose(bool disposing)
+        finally
         {
-            try
-            {
-                if (disposing) { stream.Dispose(); }
-            }
-            finally
-            {
-                base.Dispose(disposing);
-            }
+            base.Dispose(disposing);
         }
     }
 }

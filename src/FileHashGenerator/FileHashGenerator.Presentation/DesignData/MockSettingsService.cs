@@ -1,18 +1,16 @@
-﻿using System;
-using System.Waf.Applications.Services;
+﻿using System.Waf.Applications.Services;
 
-namespace Waf.FileHashGenerator.Presentation.DesignData
+namespace Waf.FileHashGenerator.Presentation.DesignData;
+
+public class MockSettingsService : ISettingsService
 {
-    public class MockSettingsService : ISettingsService
-    {
-        public string FileName { get; set; } = "";
+    public string FileName { get; set; } = "";
 
-        public event EventHandler<SettingsErrorEventArgs>? ErrorOccurred;
+    public event EventHandler<SettingsErrorEventArgs>? ErrorOccurred;
 
-        public T Get<T>() where T : class, new() => new T();
+    public T Get<T>() where T : class, new() => new();
 
-        public void Save() { }
+    public void Save() { }
 
-        public void RaiseErrorOccurred(SettingsErrorEventArgs e) => ErrorOccurred?.Invoke(this, e);
-    }
+    public void RaiseErrorOccurred(SettingsErrorEventArgs e) => ErrorOccurred?.Invoke(this, e);
 }
