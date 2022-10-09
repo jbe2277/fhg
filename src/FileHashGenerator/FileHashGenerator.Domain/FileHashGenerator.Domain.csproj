@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>Waf.FileHashGenerator.Domain</RootNamespace>
     <AssemblyName>Waf.FileHashGenerator.Domain</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Waf.Core" Version="6.4.0-alpha1"/>
+    <PackageReference Include="System.Waf.Core" Version="6.4.0"/>
   </ItemGroup>
 </Project>

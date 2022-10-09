@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <RootNamespace>Waf.FileHashGenerator.Presentation</RootNamespace>
     <AssemblyName>FileHashGenerator</AssemblyName>
-    <ApplicationIcon>Resources\Images\FileHashGenerator.ico</ApplicationIcon>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\Images\FileHashGenerator.ico</ApplicationIcon>    
   </PropertyGroup>
 
   <ItemGroup>
