@@ -2,12 +2,7 @@
 
 public class FileHashRoot : Model
 {
-    private readonly ObservableCollection<FileHashItem> fileHashItems;
-
-    public FileHashRoot()
-    {
-        fileHashItems = new ObservableCollection<FileHashItem>();
-    }
+    private readonly ObservableCollection<FileHashItem> fileHashItems = new();
 
     public IReadOnlyList<FileHashItem> FileHashItems => fileHashItems;
 

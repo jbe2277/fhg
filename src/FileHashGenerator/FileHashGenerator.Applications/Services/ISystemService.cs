@@ -1,6 +1,6 @@
 ﻿namespace Waf.FileHashGenerator.Applications.Services;
 
-public interface IEnvironmentService
+public interface ISystemService
 {
     IReadOnlyList<string> DocumentFileNames { get; }
 }

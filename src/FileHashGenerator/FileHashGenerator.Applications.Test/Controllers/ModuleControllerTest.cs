@@ -125,10 +125,10 @@ public class ModuleControllerTest : TestClassBase
 
         var messageService = Container.GetExportedValue<MockMessageService>();
         var fileHashListViewModel = Container.GetExportedValue<FileHashListViewModel>();
-        var environmentService = Container.GetExportedValue<MockEnvironmentService>();
+        var systemService = Container.GetExportedValue<MockSystemService>();
         
         // Open files via command line parameters
-        environmentService.DocumentFileNames = new[] { "NotExistingFile1", "NotExistingFile2" };
+        systemService.DocumentFileNames = new[] { "NotExistingFile1", "NotExistingFile2" };
         bool errorShown = false;
         messageService.ShowErrorStub = (owner, msg) => 
         { 

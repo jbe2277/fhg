@@ -14,7 +14,7 @@ internal class ModuleController : IModuleController
 {
     private readonly IMessageService messageService;
     private readonly IFileDialogService fileDialogService;
-    private readonly IEnvironmentService environmentService;
+    private readonly ISystemService systemService;
     private readonly HexadecimalFormatter hexadecimalFormatter;
     private readonly Base64Formatter base64Formatter;
     private readonly ExportFactory<Sha512HashController> sha512HashControllerFactory;
@@ -32,14 +32,14 @@ internal class ModuleController : IModuleController
     private HashController? hashController;
 
     [ImportingConstructor]
-    public ModuleController(IMessageService messageService, IFileDialogService fileDialogService, ISettingsService settingsService, IEnvironmentService environmentService,
+    public ModuleController(IMessageService messageService, IFileDialogService fileDialogService, ISettingsService settingsService, ISystemService systemService,
         ExportFactory<Sha512HashController> sha512HashControllerFactory, ExportFactory<Sha256HashController> sha256HashControllerFactory,
         ExportFactory<Sha1HashController> sha1HashControllerFactory, ExportFactory<MD5HashController> md5HashControllerFactory,
         Lazy<ShellViewModel> shellViewModel, Lazy<FileHashListViewModel> fileHashListViewModel, ExportFactory<AboutViewModel> aboutViewModelFactory)
     {
         this.messageService = messageService;
         this.fileDialogService = fileDialogService;
-        this.environmentService = environmentService;
+        this.systemService = systemService;
         hashFormatter = hexadecimalFormatter = new HexadecimalFormatter();
         base64Formatter = new Base64Formatter();
         this.sha512HashControllerFactory = sha512HashControllerFactory;
@@ -93,9 +93,9 @@ internal class ModuleController : IModuleController
     public void Run()
     {
         ShellViewModel.Show();
-        if (environmentService.DocumentFileNames.Any())
+        if (systemService.DocumentFileNames.Any())
         {
-            OpenCore(environmentService.DocumentFileNames);
+            OpenCore(systemService.DocumentFileNames);
         }
     }
 
