@@ -1,14 +1,11 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows;
-using System.Windows.Controls;
 using Waf.FileHashGenerator.Applications.ViewModels;
 using Waf.FileHashGenerator.Applications.Views;
 
 namespace Waf.FileHashGenerator.Presentation.Views;
 
-[Export(typeof(IFileHashListView))]
-public partial class FileHashListView : UserControl, IFileHashListView
+public partial class FileHashListView : IFileHashListView
 {
     private readonly Lazy<FileHashListViewModel> viewModel;
 

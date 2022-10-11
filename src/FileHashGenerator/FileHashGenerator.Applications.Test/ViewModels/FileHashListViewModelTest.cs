@@ -12,7 +12,7 @@ public class FileHashListViewModelTest : TestClassBase
     [TestMethod]
     public void PropertiesTest()
     {
-        var viewModel = Container.GetExportedValue<FileHashListViewModel>();
+        var viewModel = Get<FileHashListViewModel>();
 
         var fileHashItems = new List<FileHashItem>();
         AssertHelper.PropertyChangedEvent(viewModel, x => x.FileHashItems, () => viewModel.FileHashItems = fileHashItems);

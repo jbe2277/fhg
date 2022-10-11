@@ -1,19 +1,16 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Windows.Input;
 using Waf.FileHashGenerator.Applications.Views;
 using Waf.FileHashGenerator.Domain;
 
 namespace Waf.FileHashGenerator.Applications.ViewModels;
 
-[Export]
 public class FileHashListViewModel : ViewModel<IFileHashListView>
 {
     private IReadOnlyList<FileHashItem> fileHashItems = Array.Empty<FileHashItem>();
     private string hashHeader = "";
     private ICommand closeCommand = DelegateCommand.DisabledCommand;
 
-    [ImportingConstructor]
     public FileHashListViewModel(IFileHashListView view) : base(view)
     {
     }

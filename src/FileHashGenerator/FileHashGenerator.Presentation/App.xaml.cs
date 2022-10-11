@@ -1,20 +1,17 @@
-﻿using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics;
 using System.Globalization;
-using System.Waf;
 using System.Waf.Applications;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Threading;
-using Waf.FileHashGenerator.Applications.ViewModels;
+using Waf.FileHashGenerator.Applications;
+using Waf.FileHashGenerator.Applications.Services;
 
 namespace Waf.FileHashGenerator.Presentation;
 
 public partial class App : Application
 {
-    private AggregateCatalog? catalog;
-    private CompositionContainer? container;
     private IEnumerable<IModuleController> moduleControllers = Array.Empty<IModuleController>();
 
     protected override void OnStartup(StartupEventArgs e)
@@ -25,18 +22,13 @@ public partial class App : Application
         DispatcherUnhandledException += AppDispatcherUnhandledException;
         AppDomain.CurrentDomain.UnhandledException += AppDomainUnhandledException;
 #endif
-        catalog = new AggregateCatalog();
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(WafConfiguration).Assembly));
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(ShellViewModel).Assembly));
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(App).Assembly));
-        container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-        var batch = new CompositionBatch();
-        batch.AddExportedValue(container);
-        container.Compose(batch);
+        var serviceCollection = new ServiceCollection();
+        serviceCollection.AddApplications().AddPresentation().AddSingletonLazySupport();
+        var serviceProvider = serviceCollection.BuildServiceProvider();
 
         FrameworkElement.LanguageProperty.OverrideMetadata(typeof(FrameworkElement), new FrameworkPropertyMetadata(XmlLanguage.GetLanguage(CultureInfo.CurrentCulture.IetfLanguageTag)));
 
-        moduleControllers = container.GetExportedValues<IModuleController>();
+        moduleControllers = serviceProvider.GetServices<IModuleController>();
         foreach (var x in moduleControllers) x.Initialize();
         foreach (var x in moduleControllers) x.Run();
     }
@@ -44,8 +36,6 @@ public partial class App : Application
     protected override void OnExit(ExitEventArgs e)
     {
         foreach (var x in moduleControllers.Reverse()) x.Shutdown();
-        container?.Dispose();
-        catalog?.Dispose();
         base.OnExit(e);
     }
 

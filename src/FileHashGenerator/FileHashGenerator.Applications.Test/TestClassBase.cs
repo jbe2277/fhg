@@ -1,48 +1,32 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.UnitTesting;
-using System.Waf.UnitTesting.Mocks;
-using Waf.FileHashGenerator.Applications.ViewModels;
+using Waf.FileHashGenerator.Applications;
+using Waf.FileHashGenerator.Applications.Services;
 
 namespace Test.FileHashGenerator.Applications;
 
 [TestClass]
 public abstract class TestClassBase
 {
-    private AggregateCatalog catalog = null!;
+    private IServiceProvider serviceProvider = null!;
 
     protected UnitTestSynchronizationContext Context { get; private set; } = null!;
-
-    protected CompositionContainer Container { get; private set; } = null!;
 
     [TestInitialize]
     public void TestInitialize()
     {
         Context = UnitTestSynchronizationContext.Create();
-
-        catalog = new AggregateCatalog();
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(ShellViewModel).Assembly));
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(MockMessageService).Assembly));
-        catalog.Catalogs.Add(new AssemblyCatalog(typeof(TestClassBase).Assembly));
-
-        Container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-        var batch = new CompositionBatch();
-        batch.AddExportedValue(Container);
-        Container.Compose(batch);
-
+        var serviceCollection = new ServiceCollection();
+        serviceCollection.AddApplications().AddApplicationsTest().AddSingletonLazySupport();
+        serviceProvider = serviceCollection.BuildServiceProvider();
         OnTestInitialize();
     }
 
     [TestCleanup]
-    public void TestCleanup()
-    {
-        OnTestCleanup();
-
-        Container.Dispose();
-        catalog.Dispose();
-        Context.Dispose();
-    }
+    public void TestCleanup() => OnTestCleanup();
+    
+    public T Get<T>() where T : class => serviceProvider.GetRequiredService<T>();
 
     protected virtual void OnTestInitialize() { }
 

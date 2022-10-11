@@ -14,8 +14,8 @@ public class ShellViewModelTest : TestClassBase
     [TestMethod]
     public void ShowAndClose()
     {
-        var shellView = Container.GetExportedValue<MockShellView>();
-        var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+        var shellView = Get<MockShellView>();
+        var shellViewModel = Get<ShellViewModel>();
 
         // Show the ShellView
         Assert.IsFalse(shellView.IsVisible);
@@ -30,15 +30,15 @@ public class ShellViewModelTest : TestClassBase
     [TestMethod]
     public void RestoreWindowLocationAndSize()
     {
-        var shellView = Container.GetExportedValue<MockShellView>();
+        var shellView = Get<MockShellView>();
         shellView.VirtualScreenWidth = 1000;
         shellView.VirtualScreenHeight = 700;
 
-        var settingsService = Container.GetExportedValue<ISettingsService>();
+        var settingsService = Get<ISettingsService>();
         var settings = settingsService.Get<AppSettings>();
         SetSettingsValues(settings, 20, 10, 400, 300, true);
 
-        var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+        var shellViewModel = Get<ShellViewModel>();
         Assert.AreEqual(20, shellView.Left);
         Assert.AreEqual(10, shellView.Top);
         Assert.AreEqual(400, shellView.Width);
@@ -58,11 +58,11 @@ public class ShellViewModelTest : TestClassBase
     [TestMethod]
     public void RestoreWindowLocationAndSizeSpecial()
     {
-        var shellView = Container.GetExportedValue<MockShellView>();
+        var shellView = Get<MockShellView>();
         shellView.VirtualScreenWidth = 1000;
         shellView.VirtualScreenHeight = 700;
 
-        var settingsService = Container.GetExportedValue<ISettingsService>();
+        var settingsService = Get<ISettingsService>();
         var settings = settingsService.Get<AppSettings>();
         shellView.SetNAForLocationAndSize();
 
@@ -94,7 +94,7 @@ public class ShellViewModelTest : TestClassBase
     [TestMethod]
     public void PropertiesTest()
     {
-        var viewModel = Container.GetExportedValue<ShellViewModel>();
+        var viewModel = Get<ShellViewModel>();
 
         var openCommand = new DelegateCommand(() => { });
         AssertHelper.PropertyChangedEvent(viewModel, x => x.OpenCommand, () => viewModel.OpenCommand = openCommand);
@@ -124,7 +124,7 @@ public class ShellViewModelTest : TestClassBase
     [TestMethod]
     public void SelectHashModeTest()
     {
-        var viewModel = Container.GetExportedValue<ShellViewModel>();
+        var viewModel = Get<ShellViewModel>();
 
         AssertHelper.PropertyChangedEvent(viewModel, x => x.HashMode, () => viewModel.SelectMD5Command.Execute(null));
         Assert.AreEqual(HashMode.MD5, viewModel.HashMode);

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Waf.Applications;
 using System.Windows.Input;
@@ -7,10 +6,8 @@ using Waf.FileHashGenerator.Applications.Views;
 
 namespace Waf.FileHashGenerator.Applications.ViewModels;
 
-[Export, PartCreationPolicy(CreationPolicy.NonShared)]
 public class AboutViewModel : ViewModel<IAboutView>
 {
-    [ImportingConstructor]
     public AboutViewModel(IAboutView view) : base(view)
     {
         ShowWebsiteCommand = new DelegateCommand(ShowWebsite);

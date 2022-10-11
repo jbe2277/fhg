@@ -1,12 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using Waf.FileHashGenerator.Applications.Views;
-using System.ComponentModel.Composition;
 
 namespace Waf.FileHashGenerator.Presentation.Views;
 
-[Export, Export(typeof(IShellView))]
-public partial class ShellWindow : Window, IShellView
+public partial class ShellWindow : IShellView
 {
     public ShellWindow()
     {

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Waf.Applications;
+﻿using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using System.Windows.Input;
 using Waf.FileHashGenerator.Applications.Properties;
@@ -7,7 +6,6 @@ using Waf.FileHashGenerator.Applications.Views;
 
 namespace Waf.FileHashGenerator.Applications.ViewModels;
 
-[Export]
 public class ShellViewModel : ViewModel<IShellView>
 {
     private readonly AppSettings settings;
@@ -18,7 +16,6 @@ public class ShellViewModel : ViewModel<IShellView>
     private bool isHexadecimalFormatting;
     private bool isBase64Formatting;
 
-    [ImportingConstructor]
     public ShellViewModel(IShellView view, ISettingsService settingsService) : base(view)
     {
         SelectSha512Command = new DelegateCommand(() => HashMode = HashMode.Sha512);

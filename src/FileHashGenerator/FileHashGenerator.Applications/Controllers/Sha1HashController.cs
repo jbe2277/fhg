@@ -1,14 +1,11 @@
-﻿using System.ComponentModel.Composition;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Waf.Applications.Services;
 using Waf.FileHashGenerator.Applications.Services;
 
 namespace Waf.FileHashGenerator.Applications.Controllers;
 
-[Export, PartCreationPolicy(CreationPolicy.NonShared)]
 internal class Sha1HashController : HashController
 {
-    [ImportingConstructor]
     public Sha1HashController(IMessageService messageService, IShellService shellService) : base(messageService, shellService)
     {
     }

@@ -1,17 +1,14 @@
-﻿using System.ComponentModel.Composition;
-using System.Windows.Shell;
+﻿using System.Windows.Shell;
 using Waf.FileHashGenerator.Applications.Services;
 using Waf.FileHashGenerator.Presentation.Views;
 
 namespace Waf.FileHashGenerator.Presentation.Services;
 
-[Export(typeof(IShellService))]
 public class ShellService : IShellService
 {
     private readonly Lazy<ShellWindow> shellView;
     private readonly Dictionary<object, double> progressReports;
 
-    [ImportingConstructor]
     public ShellService(Lazy<ShellWindow> shellView)
     {
         this.shellView = shellView;

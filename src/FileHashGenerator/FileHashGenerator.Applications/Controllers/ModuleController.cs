@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Waf.Applications;
 using System.Waf.Applications.Services;
 using Waf.FileHashGenerator.Applications.Properties;
@@ -9,7 +8,6 @@ using Waf.FileHashGenerator.Domain;
 
 namespace Waf.FileHashGenerator.Applications.Controllers;
 
-[Export(typeof(IModuleController)), Export]
 internal class ModuleController : IModuleController
 {
     private readonly IMessageService messageService;
@@ -17,13 +15,13 @@ internal class ModuleController : IModuleController
     private readonly ISystemService systemService;
     private readonly HexadecimalFormatter hexadecimalFormatter;
     private readonly Base64Formatter base64Formatter;
-    private readonly ExportFactory<Sha512HashController> sha512HashControllerFactory;
-    private readonly ExportFactory<Sha256HashController> sha256HashControllerFactory;
-    private readonly ExportFactory<Sha1HashController> sha1HashControllerFactory;
-    private readonly ExportFactory<MD5HashController> md5HashControllerFactory;
+    private readonly Func<Sha512HashController> sha512HashControllerFactory;
+    private readonly Func<Sha256HashController> sha256HashControllerFactory;
+    private readonly Func<Sha1HashController> sha1HashControllerFactory;
+    private readonly Func<MD5HashController> md5HashControllerFactory;
     private readonly Lazy<ShellViewModel> shellViewModel;
     private readonly Lazy<FileHashListViewModel> fileHashListViewModel;
-    private readonly ExportFactory<AboutViewModel> aboutViewModelFactory;
+    private readonly Func<AboutViewModel> aboutViewModelFactory;
     private readonly DelegateCommand openCommand;
     private readonly DelegateCommand closeCommand;
     private readonly DelegateCommand aboutCommand;
@@ -31,11 +29,10 @@ internal class ModuleController : IModuleController
     private IHashFormatter hashFormatter;
     private HashController? hashController;
 
-    [ImportingConstructor]
     public ModuleController(IMessageService messageService, IFileDialogService fileDialogService, ISettingsService settingsService, ISystemService systemService,
-        ExportFactory<Sha512HashController> sha512HashControllerFactory, ExportFactory<Sha256HashController> sha256HashControllerFactory,
-        ExportFactory<Sha1HashController> sha1HashControllerFactory, ExportFactory<MD5HashController> md5HashControllerFactory,
-        Lazy<ShellViewModel> shellViewModel, Lazy<FileHashListViewModel> fileHashListViewModel, ExportFactory<AboutViewModel> aboutViewModelFactory)
+        Func<Sha512HashController> sha512HashControllerFactory, Func<Sha256HashController> sha256HashControllerFactory,
+        Func<Sha1HashController> sha1HashControllerFactory, Func<MD5HashController> md5HashControllerFactory,
+        Lazy<ShellViewModel> shellViewModel, Lazy<FileHashListViewModel> fileHashListViewModel, Func<AboutViewModel> aboutViewModelFactory)
     {
         this.messageService = messageService;
         this.fileDialogService = fileDialogService;
@@ -140,16 +137,16 @@ internal class ModuleController : IModuleController
         switch (ShellViewModel.HashMode)
         {
             case HashMode.Sha512:
-                UpdateHashModeCore(sha512HashControllerFactory.CreateExport().Value, Resources.Sha512);
+                UpdateHashModeCore(sha512HashControllerFactory(), Resources.Sha512);
                 break;
             case HashMode.Sha256:
-                UpdateHashModeCore(sha256HashControllerFactory.CreateExport().Value, Resources.Sha256);
+                UpdateHashModeCore(sha256HashControllerFactory(), Resources.Sha256);
                 break;
             case HashMode.Sha1:
-                UpdateHashModeCore(sha1HashControllerFactory.CreateExport().Value, Resources.Sha1);
+                UpdateHashModeCore(sha1HashControllerFactory(), Resources.Sha1);
                 break;
             default:
-                UpdateHashModeCore(md5HashControllerFactory.CreateExport().Value, Resources.MD5);
+                UpdateHashModeCore(md5HashControllerFactory(), Resources.MD5);
                 break;
         }
     }
@@ -186,7 +183,7 @@ internal class ModuleController : IModuleController
 
     private void ShowAboutView()
     {
-        var aboutViewModel = aboutViewModelFactory.CreateExport().Value;
+        var aboutViewModel = aboutViewModelFactory();
         aboutViewModel.ShowDialog(ShellViewModel.View);
     }
 }

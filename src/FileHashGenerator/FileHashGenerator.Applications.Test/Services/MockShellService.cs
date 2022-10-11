@@ -1,13 +1,10 @@
-﻿using System.ComponentModel.Composition;
-using Test.FileHashGenerator.Applications.Views;
+﻿using Test.FileHashGenerator.Applications.Views;
 using Waf.FileHashGenerator.Applications.Services;
 
 namespace Test.FileHashGenerator.Applications.Services;
 
-[Export, Export(typeof(IShellService))]
 public class MockShellService : IShellService
 {
-    [ImportingConstructor]
     public MockShellService(MockShellView shellView)
     {
         ShellView = shellView;

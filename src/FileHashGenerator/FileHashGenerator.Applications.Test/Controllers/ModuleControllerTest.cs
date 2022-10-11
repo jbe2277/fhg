@@ -16,12 +16,12 @@ public class ModuleControllerTest : TestClassBase
     [TestMethod]
     public void ControllerLifecycle()
     {
-        var controller = Container.GetExportedValue<ModuleController>();
+        var controller = Get<ModuleController>();
         controller.Initialize();
         controller.Run();
 
-        var shellView = Container.GetExportedValue<MockShellView>();
-        var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+        var shellView = Get<MockShellView>();
+        var shellViewModel = Get<ShellViewModel>();
 
         // Show the about view
         bool aboutViewIsVisible = false;
@@ -41,18 +41,18 @@ public class ModuleControllerTest : TestClassBase
     [TestMethod]
     public void OpenEmptyFile()
     {
-        var controller = Container.GetExportedValue<ModuleController>();
+        var controller = Get<ModuleController>();
         controller.Initialize();
         controller.Run();
 
         // Open file via OpenFileDialog
-        var fileDialogService = Container.GetExportedValue<MockFileDialogService>();
+        var fileDialogService = Get<MockFileDialogService>();
         fileDialogService.Result = new FileDialogResult(@"Files\EmptyFile.txt", new FileType(Resources.AllFiles, ".*"));
 
-        var shellViewModel = Container.GetExportedValue<ShellViewModel>();
+        var shellViewModel = Get<ShellViewModel>();
         shellViewModel.OpenCommand.Execute(null);
 
-        var fileHashListViewModel = Container.GetExportedValue<FileHashListViewModel>();
+        var fileHashListViewModel = Get<FileHashListViewModel>();
         var fileHashItem = fileHashListViewModel.FileHashItems.Single();
 
         shellViewModel.HashMode = HashMode.Sha512;
@@ -94,12 +94,12 @@ public class ModuleControllerTest : TestClassBase
     [TestMethod]
     public void OpenMultipleFiles()
     {
-        var controller = Container.GetExportedValue<ModuleController>();
+        var controller = Get<ModuleController>();
         controller.Initialize();
         controller.Run();
 
         // Open files via drag and drop.
-        var fileHashListViewModel = Container.GetExportedValue<FileHashListViewModel>();
+        var fileHashListViewModel = Get<FileHashListViewModel>();
         fileHashListViewModel.OpenFilesAction(new[] { @"Files\EmptyFile.txt", @"Files\ReferenceFile.txt" });
         Assert.AreEqual(2, fileHashListViewModel.FileHashItems.Count);
         var emptyFileHash = fileHashListViewModel.FileHashItems[0];
@@ -120,12 +120,12 @@ public class ModuleControllerTest : TestClassBase
     [TestMethod]
     public void OpenNotExistingFiles()
     {
-        var controller = Container.GetExportedValue<ModuleController>();
+        var controller = Get<ModuleController>();
         controller.Initialize();
 
-        var messageService = Container.GetExportedValue<MockMessageService>();
-        var fileHashListViewModel = Container.GetExportedValue<FileHashListViewModel>();
-        var systemService = Container.GetExportedValue<MockSystemService>();
+        var messageService = Get<MockMessageService>();
+        var fileHashListViewModel = Get<FileHashListViewModel>();
+        var systemService = Get<MockSystemService>();
         
         // Open files via command line parameters
         systemService.DocumentFileNames = new[] { "NotExistingFile1", "NotExistingFile2" };
