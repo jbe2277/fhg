@@ -9,6 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileHashGenerator.Domain", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileHashGenerator.Applications", "FileHashGenerator.Applications\FileHashGenerator.Applications.csproj", "{42D3E446-8FD6-4277-86AF-7AF8D699E922}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileHashGenerator.Domain.Test", "FileHashGenerator.Domain.Test\FileHashGenerator.Domain.Test.csproj", "{30639A9E-4C68-44C1-9870-3663D4B11319}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileHashGenerator.Applications.Test", "FileHashGenerator.Applications.Test\FileHashGenerator.Applications.Test.csproj", "{1179F4F7-DAC8-43D1-B03C-B72802FBCD53}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +65,30 @@ Global
 		{42D3E446-8FD6-4277-86AF-7AF8D699E922}.Release|arm64.Build.0 = Release|Any CPU
 		{42D3E446-8FD6-4277-86AF-7AF8D699E922}.Release|x64.ActiveCfg = Release|Any CPU
 		{42D3E446-8FD6-4277-86AF-7AF8D699E922}.Release|x64.Build.0 = Release|Any CPU
+		{30639A9E-4C68-44C1-9870-3663D4B11319}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30639A9E-4C68-44C1-9870-3663D4B11319}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30639A9E-4C68-44C1-9870-3663D4B11319}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{30639A9E-4C68-44C1-9870-3663D4B11319}.Debug|arm64.Build.0 = Debug|Any CPU
+		{30639A9E-4C68-44C1-9870-3663D4B11319}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{30639A9E-4C68-44C1-9870-3663D4B11319}.Debug|x64.Build.0 = Debug|Any CPU
+		{30639A9E-4C68-44C1-9870-3663D4B11319}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30639A9E-4C68-44C1-9870-3663D4B11319}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30639A9E-4C68-44C1-9870-3663D4B11319}.Release|arm64.ActiveCfg = Release|Any CPU
+		{30639A9E-4C68-44C1-9870-3663D4B11319}.Release|arm64.Build.0 = Release|Any CPU
+		{30639A9E-4C68-44C1-9870-3663D4B11319}.Release|x64.ActiveCfg = Release|Any CPU
+		{30639A9E-4C68-44C1-9870-3663D4B11319}.Release|x64.Build.0 = Release|Any CPU
+		{1179F4F7-DAC8-43D1-B03C-B72802FBCD53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1179F4F7-DAC8-43D1-B03C-B72802FBCD53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1179F4F7-DAC8-43D1-B03C-B72802FBCD53}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{1179F4F7-DAC8-43D1-B03C-B72802FBCD53}.Debug|arm64.Build.0 = Debug|Any CPU
+		{1179F4F7-DAC8-43D1-B03C-B72802FBCD53}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1179F4F7-DAC8-43D1-B03C-B72802FBCD53}.Debug|x64.Build.0 = Debug|Any CPU
+		{1179F4F7-DAC8-43D1-B03C-B72802FBCD53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1179F4F7-DAC8-43D1-B03C-B72802FBCD53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1179F4F7-DAC8-43D1-B03C-B72802FBCD53}.Release|arm64.ActiveCfg = Release|Any CPU
+		{1179F4F7-DAC8-43D1-B03C-B72802FBCD53}.Release|arm64.Build.0 = Release|Any CPU
+		{1179F4F7-DAC8-43D1-B03C-B72802FBCD53}.Release|x64.ActiveCfg = Release|Any CPU
+		{1179F4F7-DAC8-43D1-B03C-B72802FBCD53}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
