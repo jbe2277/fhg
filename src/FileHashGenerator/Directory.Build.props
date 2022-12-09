@@ -1,6 +1,10 @@
 ﻿<Project>
   <PropertyGroup>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Company>Waf</Company>
+    <Product>Waf File Hash Generator</Product>
+    <Copyright>Copyright © 2016-2022 jbe2277</Copyright>
+    <Version>6.0.0.100</Version>
+
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AnalysisLevel>latest-all</AnalysisLevel>
@@ -25,9 +29,5 @@
     <Using Include="System.ComponentModel" />
     <Using Include="System.Diagnostics.CodeAnalysis" />
     <Using Include="System.Waf.Foundation" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)/SharedAssemblyInfo.cs" Link="Properties/SharedAssemblyInfo.cs" />
   </ItemGroup>
 </Project>

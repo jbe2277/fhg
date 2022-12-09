@@ -7,39 +7,11 @@ namespace Waf.FileHashGenerator.Presentation.Services;
 public class ShellService : IShellService
 {
     private readonly Lazy<ShellWindow> shellView;
-    private readonly Dictionary<object, double> progressReports;
 
     public ShellService(Lazy<ShellWindow> shellView)
     {
         this.shellView = shellView;
-        progressReports = new Dictionary<object, double>();
     }
     
     public object ShellView => shellView.Value;
-
-    public void UpdateProgress(object source, double progress)
-    {
-        progressReports[source] = progress;
-        UpdateTaskbarItem();
-    }
-
-    public void RemoveProgress(object source)
-    {
-        progressReports.Remove(source);
-        UpdateTaskbarItem();
-    }
-
-    private void UpdateTaskbarItem()
-    {
-        if (progressReports.Any())
-        {
-            shellView.Value.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Normal;
-            double value = progressReports.Values.Sum() / progressReports.Count;
-            shellView.Value.TaskbarItemInfo.ProgressValue = value;
-        }
-        else
-        {
-            shellView.Value.TaskbarItemInfo.ProgressState = TaskbarItemProgressState.None;
-        }
-    }
 }

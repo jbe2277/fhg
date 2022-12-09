@@ -21,10 +21,8 @@ internal class ModuleController : IModuleController
     private readonly Func<MD5HashController> md5HashControllerFactory;
     private readonly Lazy<ShellViewModel> shellViewModel;
     private readonly Lazy<FileHashListViewModel> fileHashListViewModel;
-    private readonly Func<AboutViewModel> aboutViewModelFactory;
     private readonly DelegateCommand openCommand;
     private readonly DelegateCommand closeCommand;
-    private readonly DelegateCommand aboutCommand;
     private readonly FileHashRoot root;
     private IHashFormatter hashFormatter;
     private HashController? hashController;
@@ -32,7 +30,7 @@ internal class ModuleController : IModuleController
     public ModuleController(IMessageService messageService, IFileDialogService fileDialogService, ISettingsService settingsService, ISystemService systemService,
         Func<Sha512HashController> sha512HashControllerFactory, Func<Sha256HashController> sha256HashControllerFactory,
         Func<Sha1HashController> sha1HashControllerFactory, Func<MD5HashController> md5HashControllerFactory,
-        Lazy<ShellViewModel> shellViewModel, Lazy<FileHashListViewModel> fileHashListViewModel, Func<AboutViewModel> aboutViewModelFactory)
+        Lazy<ShellViewModel> shellViewModel, Lazy<FileHashListViewModel> fileHashListViewModel)
     {
         this.messageService = messageService;
         this.fileDialogService = fileDialogService;
@@ -45,12 +43,10 @@ internal class ModuleController : IModuleController
         this.md5HashControllerFactory = md5HashControllerFactory;
         this.shellViewModel = shellViewModel;
         this.fileHashListViewModel = fileHashListViewModel;
-        this.aboutViewModelFactory = aboutViewModelFactory;
 
         settingsService.ErrorOccurred += (sender, e) => Trace.TraceError("Error in SettingsService: {0}", e.Error);
         openCommand = new DelegateCommand(OpenFile);
         closeCommand = new DelegateCommand(CloseFile);
-        aboutCommand = new DelegateCommand(ShowAboutView);
 
         root = new FileHashRoot();
     }
@@ -75,11 +71,10 @@ internal class ModuleController : IModuleController
 
     public void Initialize()
     {
-        FileHashListViewModel.FileHashItems = root.FileHashItems;
+        FileHashListViewModel.SetFileHashItems(root.FileHashItems);
         FileHashListViewModel.OpenFilesAction = OpenCore;
         FileHashListViewModel.CloseCommand = closeCommand;
         ShellViewModel.OpenCommand = openCommand;
-        ShellViewModel.AboutCommand = aboutCommand;
         ShellViewModel.ContentView = FileHashListViewModel.View;
         ShellViewModel.HashMode = HashMode.Sha1;
         ShellViewModel.PropertyChanged += ShellViewModelPropertyChanged;
@@ -173,17 +168,11 @@ internal class ModuleController : IModuleController
         {
             UpdateHashMode();
         }
-        else if (e.PropertyName == nameof(ShellViewModel.IsHexadecimalFormatting) || e.PropertyName == nameof(ShellViewModel.IsBase64Formatting))
+        else if (e.PropertyName == nameof(ShellViewModel.HashFormat))
         {
             UpdateFormatter();
         }
     }
 
-    private void UpdateFormatter() => HashFormatter = ShellViewModel.IsHexadecimalFormatting ? hexadecimalFormatter : base64Formatter;
-
-    private void ShowAboutView()
-    {
-        var aboutViewModel = aboutViewModelFactory();
-        aboutViewModel.ShowDialog(ShellViewModel.View);
-    }
+    private void UpdateFormatter() => HashFormatter = ShellViewModel.HashFormat == HashFormat.Hexadecimal ? hexadecimalFormatter : base64Formatter;
 }

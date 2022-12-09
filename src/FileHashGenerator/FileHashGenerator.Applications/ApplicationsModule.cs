@@ -14,7 +14,6 @@ public static class ApplicationsModule
         .AddFactory<Sha1HashController>()
         .AddFactory<Sha256HashController>()
         .AddFactory<Sha512HashController>()
-        .AddFactory<AboutViewModel>()
         .AddSingleton<FileHashListViewModel>()
         .AddSingleton<ShellViewModel>();
 }

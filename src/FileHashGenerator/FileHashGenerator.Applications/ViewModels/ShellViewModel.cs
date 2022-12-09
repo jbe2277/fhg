@@ -1,42 +1,27 @@
-﻿using System.Waf.Applications;
-using System.Waf.Applications.Services;
+﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Waf.Applications;
 using System.Windows.Input;
-using Waf.FileHashGenerator.Applications.Properties;
 using Waf.FileHashGenerator.Applications.Views;
 
 namespace Waf.FileHashGenerator.Applications.ViewModels;
 
 public class ShellViewModel : ViewModel<IShellView>
 {
-    private readonly AppSettings settings;
     private ICommand openCommand = DelegateCommand.DisabledCommand;
-    private ICommand aboutCommand = DelegateCommand.DisabledCommand;
     private object contentView = null!;
     private HashMode hashMode;
-    private bool isHexadecimalFormatting;
-    private bool isBase64Formatting;
+    private HashFormat hashFormat;
 
-    public ShellViewModel(IShellView view, ISettingsService settingsService) : base(view)
+    public ShellViewModel(IShellView view) : base(view)
     {
         SelectSha512Command = new DelegateCommand(() => HashMode = HashMode.Sha512);
         SelectSha256Command = new DelegateCommand(() => HashMode = HashMode.Sha256);
         SelectSha1Command = new DelegateCommand(() => HashMode = HashMode.Sha1);
         SelectMD5Command = new DelegateCommand(() => HashMode = HashMode.MD5);
-        isHexadecimalFormatting = true;
-        settings = settingsService.Get<AppSettings>();
-        view.Closed += ViewClosed;
-
-        // Restore the window size when the values are valid.
-        if (settings.Left >= 0 && settings.Top >= 0 && settings.Width > 0 && settings.Height > 0
-            && settings.Left + settings.Width <= view.VirtualScreenWidth
-            && settings.Top + settings.Height <= view.VirtualScreenHeight)
-        {
-            ViewCore.Left = settings.Left;
-            ViewCore.Top = settings.Top;
-            ViewCore.Height = settings.Height;
-            ViewCore.Width = settings.Width;
-        }
-        ViewCore.IsMaximized = settings.IsMaximized;
+        SelectHexFormatCommand = new DelegateCommand(() => HashFormat = HashFormat.Hexadecimal);
+        SelectBase64FormatCommand = new DelegateCommand(() => HashFormat = HashFormat.Base64);
+        ShowWebsiteCommand = new DelegateCommand(ShowWebsite);
     }
 
     public string Title => ApplicationInfo.ProductName;
@@ -49,44 +34,42 @@ public class ShellViewModel : ViewModel<IShellView>
 
     public ICommand SelectMD5Command { get; }
 
-    public ICommand OpenCommand { get => openCommand; set => SetProperty(ref openCommand, value); }
+    public ICommand SelectHexFormatCommand { get; }
 
-    public ICommand AboutCommand { get => aboutCommand; set => SetProperty(ref aboutCommand, value); }
+    public ICommand SelectBase64FormatCommand { get; }
+
+    public ICommand OpenCommand { get => openCommand; set => SetProperty(ref openCommand, value); }
 
     public object ContentView { get => contentView; set => SetProperty(ref contentView, value); }
 
     public HashMode HashMode { get => hashMode; set => SetProperty(ref hashMode, value); }
 
-    public bool IsHexadecimalFormatting
+    public HashFormat HashFormat { get => hashFormat; set => SetProperty(ref hashFormat, value); }
+
+    public ICommand ShowWebsiteCommand { get; }
+
+    public string ProductName => ApplicationInfo.ProductName;
+
+    public string Version => ApplicationInfo.Version;
+
+    public string OSVersion => Environment.OSVersion.ToString();
+
+    public string NetVersion => Environment.Version.ToString();
+
+    public Architecture ProcessArchitecture => RuntimeInformation.ProcessArchitecture;
+
+    public void Show() => ViewCore.Activate();
+
+    private static void ShowWebsite(object? parameter)
     {
-        get => isHexadecimalFormatting;
-        set
+        string url = (string)parameter!;
+        try
         {
-            if (!SetProperty(ref isHexadecimalFormatting, value)) return;
-            IsBase64Formatting = !value;
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
         }
-    }
-
-    public bool IsBase64Formatting
-    {
-        get => isBase64Formatting;
-        set
+        catch (Exception e)
         {
-            if (!SetProperty(ref isBase64Formatting, value)) return;
-            IsHexadecimalFormatting = !value;
+            Trace.TraceError("An exception occured when trying to show the url '{0}'. Exception: {1}", url, e);
         }
-    }
-
-    public void Show() => ViewCore.Show();
-
-    public void Close() => ViewCore.Close();
-
-    private void ViewClosed(object? sender, EventArgs e)
-    {
-        settings.Left = ViewCore.Left;
-        settings.Top = ViewCore.Top;
-        settings.Height = ViewCore.Height;
-        settings.Width = ViewCore.Width;
-        settings.IsMaximized = ViewCore.IsMaximized;
     }
 }
