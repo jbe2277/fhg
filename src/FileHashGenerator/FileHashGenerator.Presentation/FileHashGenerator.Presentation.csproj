@@ -6,8 +6,8 @@
     <RootNamespace>Waf.FileHashGenerator.Presentation</RootNamespace>
     <AssemblyName>FileHashGenerator</AssemblyName>
     <ApplicationManifest>App.manifest</ApplicationManifest>
-    <Platforms>x86;x64;arm64</Platforms>
-    <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+    <Platforms>x64;arm64</Platforms>
+    <RuntimeIdentifiers>win10-x64;win10-arm64</RuntimeIdentifiers>
     <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
@@ -38,14 +38,6 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Views\FileHashListView.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Views\FileHashListView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
 
   <!-- 
