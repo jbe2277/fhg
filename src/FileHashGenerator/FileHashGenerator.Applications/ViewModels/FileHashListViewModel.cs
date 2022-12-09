@@ -8,7 +8,6 @@ namespace Waf.FileHashGenerator.Applications.ViewModels;
 public class FileHashListViewModel : ViewModel<IFileHashListView>
 {
     private string hashHeader = "";
-    private ICommand closeCommand = DelegateCommand.DisabledCommand;
 
     public FileHashListViewModel(IFileHashListView view) : base(view)
     {
@@ -20,7 +19,7 @@ public class FileHashListViewModel : ViewModel<IFileHashListView>
 
     public Action<IReadOnlyList<string>> OpenFilesAction { get; set; } = null!;
 
-    public ICommand CloseCommand { get => closeCommand; set => SetProperty(ref closeCommand, value); }
+    public ICommand CloseCommand { get; set; } = DelegateCommand.DisabledCommand;
 
     public void SetFileHashItems(IReadOnlyList<FileHashItem> list)
     {

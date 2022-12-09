@@ -8,7 +8,6 @@ namespace Waf.FileHashGenerator.Applications.ViewModels;
 
 public class ShellViewModel : ViewModel<IShellView>
 {
-    private ICommand openCommand = DelegateCommand.DisabledCommand;
     private object contentView = null!;
     private HashMode hashMode;
     private HashFormat hashFormat;
@@ -38,7 +37,7 @@ public class ShellViewModel : ViewModel<IShellView>
 
     public ICommand SelectBase64FormatCommand { get; }
 
-    public ICommand OpenCommand { get => openCommand; set => SetProperty(ref openCommand, value); }
+    public ICommand OpenCommand { get; set; } = DelegateCommand.DisabledCommand;
 
     public object ContentView { get => contentView; set => SetProperty(ref contentView, value); }
 
