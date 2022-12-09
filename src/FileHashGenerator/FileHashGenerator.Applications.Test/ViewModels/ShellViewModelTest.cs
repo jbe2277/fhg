@@ -14,10 +14,6 @@ public class ShellViewModelTest : TestClassBase
     {
         var viewModel = Get<ShellViewModel>();
 
-        var openCommand = new DelegateCommand(() => { });
-        AssertHelper.PropertyChangedEvent(viewModel, x => x.OpenCommand, () => viewModel.OpenCommand = openCommand);
-        Assert.AreEqual(openCommand, viewModel.OpenCommand);
-
         AssertHelper.PropertyChangedEvent(viewModel, x => x.HashMode, () => viewModel.HashMode = HashMode.MD5);
         Assert.AreEqual(HashMode.MD5, viewModel.HashMode);
 

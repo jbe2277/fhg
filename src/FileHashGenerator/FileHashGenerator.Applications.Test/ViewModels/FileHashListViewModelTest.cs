@@ -1,5 +1,4 @@
-﻿using System.Waf.Applications;
-using System.Waf.UnitTesting;
+﻿using System.Waf.UnitTesting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.FileHashGenerator.Applications.ViewModels;
 
@@ -15,9 +14,5 @@ public class FileHashListViewModelTest : TestClassBase
 
         AssertHelper.PropertyChangedEvent(viewModel, x => x.HashHeader, () => viewModel.HashHeader = "SHA1");
         Assert.AreEqual("SHA1", viewModel.HashHeader);
-
-        var closeCommand = new DelegateCommand(() => { });
-        AssertHelper.PropertyChangedEvent(viewModel, x => x.CloseCommand, () => viewModel.CloseCommand = closeCommand);
-        Assert.AreEqual(closeCommand, viewModel.CloseCommand);
     }
 }
