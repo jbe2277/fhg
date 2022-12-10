@@ -9,7 +9,9 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Build
-      run: dotnet build ./src/FileHashGenerator/FileHashGenerator.sln -c Release
+    - name: Build x64
+      run: dotnet build ./src/FileHashGenerator/FileHashGenerator.Presentation/ -c Release -r win10-x64 --no-self-contained
+    - name: Build arm64
+      run: dotnet build ./src/FileHashGenerator/FileHashGenerator.Presentation/ -c Release -r win10-arm64 --no-self-contained
     - name: Test
       run: dotnet test ./src/FileHashGenerator/FileHashGenerator.sln -c Release --no-build
