@@ -5,6 +5,7 @@
     <AssemblyName>Test.FileHashGenerator.Presentation</AssemblyName>
     <Platforms>x64;arm64</Platforms>
     <RuntimeIdentifiers>win10-x64;win10-arm64</RuntimeIdentifiers>
+    <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
 
   <ItemGroup>
