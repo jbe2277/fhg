@@ -5,9 +5,9 @@ using Waf.FileHashGenerator.Presentation.Properties;
 
 namespace Waf.FileHashGenerator.Presentation.Views;
 
-internal static class ViewConvert
+public static class ViewConvert
 {
-    public static string Format(string format, object value) => string.Format(CultureInfo.CurrentCulture, format, value);
+    public static string Format(string format, object? value) => string.Format(CultureInfo.CurrentCulture, format, value);
 
     public static Visibility AnyToVisibility(int count) => count > 0 ? Visibility.Visible : Visibility.Collapsed;
 

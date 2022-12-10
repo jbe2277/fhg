@@ -1,5 +1,4 @@
-﻿using System.Windows.Shell;
-using Waf.FileHashGenerator.Applications.Services;
+﻿using Waf.FileHashGenerator.Applications.Services;
 using Waf.FileHashGenerator.Presentation.Views;
 
 namespace Waf.FileHashGenerator.Presentation.Services;
