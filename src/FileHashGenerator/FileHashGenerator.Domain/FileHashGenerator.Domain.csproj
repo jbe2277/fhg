@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <RootNamespace>Waf.FileHashGenerator.Domain</RootNamespace>
     <AssemblyName>Waf.FileHashGenerator.Domain</AssemblyName>
   </PropertyGroup>

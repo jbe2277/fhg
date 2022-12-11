@@ -8,3 +8,7 @@ dotnet_diagnostic.CA1031.severity = suggestion
 
 # CA1062: In externally visible method, validate parameter is non-null before using it. If appropriate, throw an ArgumentNullException when the argument is null or add a Code Contract precondition asserting non-null argument.
 dotnet_diagnostic.CA1062.severity = none
+
+
+# IDE0160: Convert to block scoped namespace
+csharp_style_namespace_declarations = file_scoped

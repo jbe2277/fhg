@@ -1,40 +1,24 @@
-﻿using System.Windows;
-using System.Windows.Input;
+﻿using Microsoft.UI.Xaml;
+using Waf.FileHashGenerator.Applications.ViewModels;
 using Waf.FileHashGenerator.Applications.Views;
+using Waf.FileHashGenerator.Presentation.Properties;
 
 namespace Waf.FileHashGenerator.Presentation.Views;
 
-public partial class ShellWindow : IShellView
+public sealed partial class ShellWindow : Window, IShellView
 {
     public ShellWindow()
     {
         InitializeComponent();
     }
 
-    public double VirtualScreenWidth => SystemParameters.VirtualScreenWidth;
+    public ShellViewModel ViewModel => (ShellViewModel)DataContext!;
 
-    public double VirtualScreenHeight => SystemParameters.VirtualScreenHeight;
+    public object? DataContext { get; set; }
 
-    public bool IsMaximized
-    {
-        get => WindowState == WindowState.Maximized;
-        set
-        {
-            if (value)
-            {
-                WindowState = WindowState.Maximized;
-            }
-            else if (WindowState == WindowState.Maximized)
-            {
-                WindowState = WindowState.Normal;
-            }
-        }
-    }
+    public bool IsMode(HashMode actual, HashMode expected) => actual == expected;
 
-    private void ViewPopupOpened(object sender, EventArgs e) => hexadecimalButton.Focus();
+    public string GetFormatText(HashFormat format) => format == HashFormat.Hexadecimal ? Resources.Hexadecimal : Resources.Base64;
 
-    private void ViewPopupKeyUp(object sender, KeyEventArgs e)
-    {
-        if (e.Key == Key.Escape) viewPopup.IsOpen = false;
-    }
+    public string GetDotNetInfo() => $"{ViewModel.NetVersion} ({ViewModel.ProcessArchitecture})";
 }

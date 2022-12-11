@@ -68,7 +68,6 @@ internal abstract class HashController
             {
                 cancellationTokenSources[item].Cancel();
                 cancellationTokenSources.Remove(item);
-                shellService.RemoveProgress(item);
             }
         }
     }
@@ -82,7 +81,6 @@ internal abstract class HashController
         item.IsCaseSensitive = HashFormatter.IsCaseSensitive;
         item.Hash = null;
         item.Progress = 0;
-        shellService.UpdateProgress(item, 0);
 
         try
         {
@@ -98,15 +96,7 @@ internal abstract class HashController
             Trace.TraceError(e.ToString());
             messageService.ShowError(shellService.ShellView, Resources.UnknownComputeHashError, e);
         }
-        finally
-        {
-            shellService.RemoveProgress(item);
-        }
     }
 
-    private void ProgressChanged(FileHashItem item, double progress)
-    {
-        item.Progress = progress;
-        shellService.UpdateProgress(item, progress);
-    }
+    private void ProgressChanged(FileHashItem item, double progress) => item.Progress = progress;
 }

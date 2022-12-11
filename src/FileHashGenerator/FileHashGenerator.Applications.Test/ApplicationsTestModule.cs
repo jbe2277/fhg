@@ -17,7 +17,6 @@ public static class ApplicationsTestModule
 
         .AddSingletonAndSelf<IShellService, MockShellService>()
         .AddSingletonAndSelf<ISystemService, MockSystemService>()
-        .AddTransient<IAboutView, MockAboutView>()
         .AddSingletonAndSelf<IFileHashListView, MockFileHashListView>()
         .AddSingletonAndSelf<IShellView, MockShellView>();
 }

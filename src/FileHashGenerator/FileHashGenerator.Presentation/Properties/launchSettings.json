@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "FileHashGenerator.Presentation (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "FileHashGenerator.Presentation (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

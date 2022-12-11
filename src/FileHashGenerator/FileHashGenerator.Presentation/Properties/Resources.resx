@@ -120,33 +120,19 @@
   <data name="About" xml:space="preserve">
     <value>About</value>
   </data>
-  <data name="AboutMenu" xml:space="preserve">
-    <value>_About</value>
-  </data>
   <data name="AboutToolTip" xml:space="preserve">
     <value>Shows the about dialog.
 
 F1</value>
   </data>
-  <data name="Base64Encoding" xml:space="preserve">
-    <value>Base64 Encoding</value>
+  <data name="Base64" xml:space="preserve">
+    <value>Base64</value>
   </data>
   <data name="CloseFile" xml:space="preserve">
     <value>Close this file.</value>
   </data>
-  <data name="CopyMenu" xml:space="preserve">
-    <value>_Copy</value>
-  </data>
-  <data name="CopyToolTip" xml:space="preserve">
-    <value>Copies the selection and put it on the Clipboard.
-
-Ctrl+C</value>
-  </data>
-  <data name="ExpectedMenu" xml:space="preserve">
-    <value>_Expected</value>
-  </data>
-  <data name="Formatting" xml:space="preserve">
-    <value>Formatting</value>
+  <data name="Expected" xml:space="preserve">
+    <value>Expected</value>
   </data>
   <data name="GenerateHashInstruction" xml:space="preserve">
     <value>Please open a file or drop files here to generate the {0} hash values.</value>
@@ -172,8 +158,8 @@ Ctrl+C</value>
   <data name="License" xml:space="preserve">
     <value>License</value>
   </data>
-  <data name="MD5Menu" xml:space="preserve">
-    <value>_MD5</value>
+  <data name="MD5" xml:space="preserve">
+    <value>MD5</value>
   </data>
   <data name="MD5ToolTip" xml:space="preserve">
     <value>Selects the MD5 hash generation mode.</value>
@@ -184,8 +170,8 @@ Ctrl+C</value>
   <data name="Ok" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="OpenMenu" xml:space="preserve">
-    <value>_Open</value>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
   </data>
   <data name="OpenToolTip" xml:space="preserve">
     <value>Opens a file to calculate the hash value.
@@ -195,48 +181,29 @@ Ctrl+O</value>
   <data name="OperatingSystem" xml:space="preserve">
     <value>Operating System</value>
   </data>
-  <data name="PasteMenu" xml:space="preserve">
-    <value>_Paste</value>
-  </data>
-  <data name="PasteToolTip" xml:space="preserve">
-    <value>Paste the contents of the Clipboard.
-
-Ctrl+V</value>
-  </data>
   <data name="Product" xml:space="preserve">
     <value>Product</value>
   </data>
-  <data name="Sha1Menu" xml:space="preserve">
-    <value>_SHA1</value>
+  <data name="Sha1" xml:space="preserve">
+    <value>SHA1</value>
   </data>
   <data name="Sha1ToolTip" xml:space="preserve">
     <value>Selects the SHA1 hash generation mode.</value>
   </data>
-  <data name="Sha256Menu" xml:space="preserve">
-    <value>SHA_256</value>
+  <data name="Sha256" xml:space="preserve">
+    <value>SHA256</value>
   </data>
   <data name="Sha256ToolTip" xml:space="preserve">
     <value>Selects the SHA256 hash generation mode.</value>
   </data>
-  <data name="Sha512Menu" xml:space="preserve">
-    <value>SHA_512</value>
+  <data name="Sha512" xml:space="preserve">
+    <value>SHA512</value>
   </data>
   <data name="Sha512ToolTip" xml:space="preserve">
     <value>Selects the SHA512 hash generation mode.</value>
   </data>
-  <data name="UnknownError" xml:space="preserve">
-    <value>Unknown Application Error
-
-{0}</value>
-  </data>
   <data name="Version" xml:space="preserve">
     <value>Version</value>
-  </data>
-  <data name="ViewMenu" xml:space="preserve">
-    <value>_View</value>
-  </data>
-  <data name="ViewToolTip" xml:space="preserve">
-    <value>Shows the view settings.</value>
   </data>
   <data name="Website" xml:space="preserve">
     <value>Website</value>

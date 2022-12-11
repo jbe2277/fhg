@@ -1,78 +1,74 @@
-﻿<Window x:Class="Waf.FileHashGenerator.Presentation.Views.ShellWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:p="clr-namespace:Waf.FileHashGenerator.Presentation.Properties"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        xmlns:dd="clr-namespace:Waf.FileHashGenerator.Presentation.DesignData"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
-        mc:Ignorable="d" Title="{Binding Title}" Icon="{StaticResource FileHashGeneratorIcon}" MinWidth="200" MinHeight="120" Width="640" Height="440"
-        d:DataContext="{d:DesignInstance dd:SampleShellViewModel, IsDesignTimeCreatable=True}">
-    
-    <Window.TaskbarItemInfo>
-        <TaskbarItemInfo/>
-    </Window.TaskbarItemInfo>
-    
-    <Window.InputBindings>
-        <KeyBinding Command="{Binding OpenCommand}" Key="O" Modifiers="Ctrl"/>
-        <KeyBinding Command="{Binding AboutCommand}" Key="F1"/>
-    </Window.InputBindings>
-    
-    <DockPanel>
-        <ToolBar DockPanel.Dock="Top">
-            <ToolBar.Resources>
-                <Style x:Key="{x:Static ToolBar.ButtonStyleKey}" TargetType="Button">
-                    <Setter Property="Height" Value="38"/>
-                    <Setter Property="MinWidth" Value="55"/>
-                    <Setter Property="Padding" Value="5,0,5,0"/>
-                </Style>
-                <Style x:Key="{x:Static ToolBar.ToggleButtonStyleKey}" TargetType="ToggleButton">
-                    <Setter Property="Height" Value="38"/>
-                    <Setter Property="MinWidth" Value="55"/>
-                    <Setter Property="Padding" Value="5,0,5,0"/>
-                </Style>
-            </ToolBar.Resources>
+﻿<Window
+    x:Class="Waf.FileHashGenerator.Presentation.Views.ShellWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p="using:Waf.FileHashGenerator.Presentation.Properties"
+    xmlns:vm="using:Waf.FileHashGenerator.Applications.ViewModels"
+    mc:Ignorable="d" Title="{x:Bind ViewModel.Title}">
 
-            <Button Command="{Binding OpenCommand}" ToolTip="{x:Static p:Resources.OpenToolTip}">
-                <AccessText Text="{x:Static p:Resources.OpenMenu}"/>
-            </Button>
-            <Separator/>
-            <Button Command="{Binding SelectSha512Command}" ToolTip="{x:Static p:Resources.Sha512ToolTip}" FontWeight="{Binding HashMode, Converter={StaticResource EnumToFontWeightConverter}, ConverterParameter=Sha512}">
-                <AccessText Text="{x:Static p:Resources.Sha512Menu}"/>
-            </Button>
-            <Button Command="{Binding SelectSha256Command}" ToolTip="{x:Static p:Resources.Sha256ToolTip}" FontWeight="{Binding HashMode, Converter={StaticResource EnumToFontWeightConverter}, ConverterParameter=Sha256}">
-                <AccessText Text="{x:Static p:Resources.Sha256Menu}"/>
-            </Button>
-            <Button Command="{Binding SelectSha1Command}" ToolTip="{x:Static p:Resources.Sha1ToolTip}" FontWeight="{Binding HashMode, Converter={StaticResource EnumToFontWeightConverter}, ConverterParameter=Sha1}">
-                <AccessText Text="{x:Static p:Resources.Sha1Menu}"/>
-            </Button>
-            <Button Command="{Binding SelectMD5Command}" ToolTip="{x:Static p:Resources.MD5ToolTip}" FontWeight="{Binding HashMode, Converter={StaticResource EnumToFontWeightConverter}, ConverterParameter=MD5}">
-                <AccessText Text="{x:Static p:Resources.MD5Menu}"/>
-            </Button>
-            <Separator/>
-            <Button Command="ApplicationCommands.Copy" ToolTip="{x:Static p:Resources.CopyToolTip}">
-                <AccessText Text="{x:Static p:Resources.CopyMenu}"/>
-            </Button>
-            <Button Command="ApplicationCommands.Paste" ToolTip="{x:Static p:Resources.PasteToolTip}">
-                <AccessText Text="{x:Static p:Resources.PasteMenu}"/>
-            </Button>
-            <ToggleButton x:Name="viewButton" ToolTip="{x:Static p:Resources.ViewToolTip}">
-                <AccessText Text="{x:Static p:Resources.ViewMenu}"/>
-            </ToggleButton>
-            <Button Command="{Binding AboutCommand}" ToolTip="{x:Static p:Resources.AboutToolTip}">
-                <AccessText Text="{x:Static p:Resources.AboutMenu}"/>
-            </Button>
-        </ToolBar>
+    <Grid RowDefinitions="Auto, *">
+        <CommandBar HorizontalAlignment="Left" DefaultLabelPosition="Right">
+            <AppBarButton Command="{x:Bind ViewModel.OpenCommand}" Icon="OpenFile" Label="{x:Bind p:Resources.Open}" ToolTipService.ToolTip="{x:Bind p:Resources.OpenToolTip}">
+                <AppBarButton.KeyboardAccelerators>
+                    <KeyboardAccelerator Modifiers="Control" Key="O"/>
+                </AppBarButton.KeyboardAccelerators>
+            </AppBarButton>
+            <AppBarSeparator/>
+            <AppBarToggleButton Command="{x:Bind ViewModel.SelectSha512Command}" IsChecked="{x:Bind IsMode(ViewModel.HashMode, vm:HashMode.Sha512), Mode=OneWay}" 
+                                Label="{x:Bind p:Resources.Sha512}" ToolTipService.ToolTip="{x:Bind p:Resources.Sha512ToolTip}"/>
+            <AppBarToggleButton Command="{x:Bind ViewModel.SelectSha256Command}" IsChecked="{x:Bind IsMode(ViewModel.HashMode, vm:HashMode.Sha256), Mode=OneWay}" 
+                                Label="{x:Bind p:Resources.Sha256}" ToolTipService.ToolTip="{x:Bind p:Resources.Sha256ToolTip}"/>
+            <AppBarToggleButton Command="{x:Bind ViewModel.SelectSha1Command}" IsChecked="{x:Bind IsMode(ViewModel.HashMode, vm:HashMode.Sha1), Mode=OneWay}" 
+                                Label="{x:Bind p:Resources.Sha1}" ToolTipService.ToolTip="{x:Bind p:Resources.Sha1ToolTip}"/>
+            <AppBarToggleButton Command="{x:Bind ViewModel.SelectMD5Command}" IsChecked="{x:Bind IsMode(ViewModel.HashMode, vm:HashMode.MD5), Mode=OneWay}" 
+                                Label="{x:Bind p:Resources.MD5}" ToolTipService.ToolTip="{x:Bind p:Resources.MD5ToolTip}"/>
+            <AppBarSeparator/>
+            <AppBarButton Icon="View" Label="{x:Bind GetFormatText(ViewModel.HashFormat), Mode=OneWay}">
+                <AppBarButton.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Command="{x:Bind ViewModel.SelectHexFormatCommand}" Text="{x:Bind p:Resources.Hexadecimal}"/>
+                        <MenuFlyoutItem Command="{x:Bind ViewModel.SelectBase64FormatCommand}" Text="{x:Bind p:Resources.Base64}"/>
+                    </MenuFlyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
+            <AppBarButton Icon="Help" Label="{x:Bind p:Resources.About}" ToolTipService.ToolTip="{x:Bind p:Resources.AboutToolTip}">
+                <AppBarButton.Flyout>
+                    <Flyout>
+                        <Grid ColumnDefinitions="Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="10" RowSpacing="5">
+                            <Grid.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Padding" Value="5"/>
+                                </Style>
+                                <Style TargetType="HyperlinkButton">
+                                    <Setter Property="Padding" Value="5"/>
+                                </Style>
+                            </Grid.Resources>
+                            
+                            <TextBlock Grid.Column="0" Grid.Row="0" Text="{x:Bind p:Resources.Product}" />
+                            <TextBlock Grid.Column="1" Grid.Row="0" Text="{x:Bind ViewModel.ProductName}"/>
 
-        <Popup x:Name="viewPopup" IsOpen="{Binding IsChecked, ElementName=viewButton}" PlacementTarget="{Binding ElementName=viewButton}" Placement="Bottom" StaysOpen="False" Opened="ViewPopupOpened" KeyUp="ViewPopupKeyUp">
-            <Border Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
-                <StackPanel Width="200" Margin="0,0,11,11">
-                    <Label Content="{x:Static p:Resources.Formatting}" Margin="6,11,0,0"/>
-                    <RadioButton x:Name="hexadecimalButton" IsChecked="{Binding IsHexadecimalFormatting}" Content="{x:Static p:Resources.Hexadecimal}"/>
-                    <RadioButton IsChecked="{Binding IsBase64Formatting}" Content="{x:Static p:Resources.Base64Encoding}"/>
-                </StackPanel>
-            </Border>
-        </Popup>
+                            <TextBlock Grid.Column="0" Grid.Row="1" Text="{x:Bind p:Resources.Version}" />
+                            <TextBlock Grid.Column="1" Grid.Row="1" Text="{x:Bind ViewModel.Version}" />
 
-        <ContentPresenter Content="{Binding ContentView}"/>
-    </DockPanel>
+                            <TextBlock Grid.Column="0" Text="{x:Bind p:Resources.License}" Grid.Row="2"/>
+                            <HyperlinkButton Grid.Column="1" Grid.Row="2" Command="{x:Bind ViewModel.ShowWebsiteCommand}" CommandParameter="https://github.com/jbe2277/fhg/blob/master/LICENSE" Content="MIT License"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="3" Text="{x:Bind p:Resources.Website}" />
+                            <HyperlinkButton Grid.Column="1" Grid.Row="3" Command="{x:Bind ViewModel.ShowWebsiteCommand}" CommandParameter="https://jbe2277.github.io/fhg" Content="https://jbe2277.github.io/fhg"/>
+
+                            <TextBlock Grid.Column="0" Grid.Row="4" Text="{x:Bind p:Resources.OperatingSystem}" />
+                            <TextBlock Grid.Column="1" Grid.Row="4" Text="{x:Bind ViewModel.OSVersion}" />
+
+                            <TextBlock Grid.Column="0" Grid.Row="5" Text="{x:Bind p:Resources.NetFramework}" />
+                            <TextBlock Grid.Column="1" Grid.Row="5" Text="{x:Bind GetDotNetInfo()}"/>
+                        </Grid>
+                    </Flyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
+        </CommandBar>
+
+        <ContentPresenter Grid.Row="1" Content="{x:Bind ViewModel.ContentView}"/>
+    </Grid>
 </Window>

@@ -1,34 +1,30 @@
-﻿<UserControl x:Class="Waf.FileHashGenerator.Presentation.Views.FileHashListView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:p="clr-namespace:Waf.FileHashGenerator.Presentation.Properties"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:dd="clr-namespace:Waf.FileHashGenerator.Presentation.DesignData"
-             x:Name="fileHashListView"
-             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="600"
-             d:DataContext="{d:DesignInstance dd:SampleFileHashListViewModel, IsDesignTimeCreatable=True}">
-    <ScrollViewer AllowDrop="True">
-        <Grid>
-            <ItemsControl ItemsSource="{Binding FileHashItems}" Focusable="False">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderThickness="1" Margin="3">
-                            <Border.Style>
-                                <Style TargetType="Border">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsHashValid}" Value="True">
-                                            <Setter Property="BorderBrush" Value="Green"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding IsHashValid}" Value="False">
-                                            <Setter Property="BorderBrush" Value="Red"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                    <Setter Property="BorderBrush" Value="{StaticResource {x:Static SystemColors.ActiveBorderBrushKey}}"/>
-                                </Style>
-                            </Border.Style>
-                            
-                            <Grid Margin="0,0,16,11">
+﻿<UserControl
+    x:Class="Waf.FileHashGenerator.Presentation.Views.FileHashListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:Waf.FileHashGenerator.Applications.ViewModels"
+    xmlns:vw="using:Waf.FileHashGenerator.Presentation.Views"
+    xmlns:p="using:Waf.FileHashGenerator.Presentation.Properties"
+    mc:Ignorable="d">
+
+    <!-- TODO: Use {ThemeResource Colors} to support DarkMode as well -->
+    <Grid AllowDrop="True" Background="White" DragOver="GridDragOver" Drop="GridDrop">
+        <Border Visibility="{x:Bind vw:ViewConvert.IsEmptyToVisibility(ViewModel.FileHashItems.Count), Mode=OneWay}" BorderThickness="1" BorderBrush="LightGray" Margin="10" 
+                HorizontalAlignment="Left" VerticalAlignment="Top">
+            <StackPanel Margin="10,10,10,50" Spacing="11" Width="650">
+                <TextBlock Text="{x:Bind vw:ViewConvert.Format(p:Resources.HashModeHeader, ViewModel.HashHeader), Mode=OneWay}" FontWeight="SemiBold"/>
+                <TextBlock Text="{x:Bind vw:ViewConvert.Format(p:Resources.GenerateHashInstruction, ViewModel.HashHeader), Mode=OneWay}" TextWrapping="Wrap"/>
+            </StackPanel>
+        </Border>
+        
+        <ScrollViewer Visibility="{x:Bind vw:ViewConvert.AnyToVisibility(ViewModel.FileHashItems.Count), Mode=OneWay}">
+            <ItemsRepeater x:Name="fileHashListView" ItemsSource="{x:Bind ViewModel.FileHashItems, Mode=OneWay}" Margin="5">
+                <ItemsRepeater.ItemTemplate>
+                    <DataTemplate x:DataType="vm:FileHashItemModel">
+                        <Border BorderThickness="1" BorderBrush="LightGray" Margin="5" HorizontalAlignment="Left">
+                            <Grid ColumnSpacing="11" RowSpacing="11" HorizontalAlignment="Left" Margin="10" Width="650">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition/>
@@ -41,73 +37,28 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
-                                <Label Content="{Binding FileName, Converter={StaticResource FileNameConverter}}" FontWeight="SemiBold" Grid.ColumnSpan="2"/>
-                                <Button Command="{Binding DataContext.CloseCommand, ElementName=fileHashListView}" CommandParameter="{Binding}" 
-                                        Content="{StaticResource CloseSmallImage}" ToolTip="{x:Static p:Resources.CloseFile}" Grid.Column="1" HorizontalAlignment="Right" Padding="5"
-                                        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"/>
+                                <TextBlock Grid.ColumnSpan="2" Grid.Row="0" Text="{x:Bind vw:ViewConvert.GetFileName(Item.FileName)}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" HorizontalAlignment="Stretch"/>
+                                <Button Grid.Column="2" Grid.RowSpan="2" Command="{x:Bind Context.CloseCommand}" CommandParameter="{x:Bind Item}" Content="X" VerticalAlignment="Top" HorizontalAlignment="Right"/>
 
-                                <Label Grid.ColumnSpan="2" Grid.Row="1"  Margin="11,0,0,11">
-                                    <TextBlock Text="{Binding FileName, Converter={StaticResource DirectoryNameConverter}}" TextTrimming="CharacterEllipsis" />
-                                </Label>
+                                <TextBlock Grid.ColumnSpan="2" Grid.Row="1" Text="{x:Bind vw:ViewConvert.GetDirectoryName(Item.FileName)}" TextTrimming="CharacterEllipsis" HorizontalAlignment="Stretch"/>
 
-                                <Label Content="{Binding DataContext.HashHeader, ElementName=fileHashListView}" ContentStringFormat="{x:Static p:Resources.HashHeader}" Grid.Row="2"/>
-                                <TextBox Text="{Binding Hash}" IsReadOnly="True" Grid.Column="1" Grid.Row="2">
-                                    <TextBox.Style>
-                                        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Hash}" Value="{x:Null}">
-                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBox.Style>
-                                </TextBox>
-                                <ProgressBar Value="{Binding Progress}" Maximum="1" Grid.Column="1" Grid.Row="2">
-                                    <ProgressBar.Style>
-                                        <Style TargetType="ProgressBar" BasedOn="{StaticResource {x:Type ProgressBar}}">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Hash}" Value="{x:Null}">
-                                                    <Setter Property="Visibility" Value="Visible"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </ProgressBar.Style>
-                                </ProgressBar>
+                                <TextBlock Grid.Row="2" Text="{x:Bind Context.HashHeader, Mode=OneWay}" VerticalAlignment="Center"/>
+                                <ProgressBar Grid.Column="1" Grid.Row="2" Value="{x:Bind Item.Progress, Mode=OneWay}" Maximum="1" Width="200" Height="10" HorizontalAlignment="Left"
+                                             Visibility="{x:Bind vw:ViewConvert.NullIsVisible(Item.Hash), Mode=OneWay}"/>
+                                <TextBox Grid.Column="1" Grid.Row="2" Text="{x:Bind Item.Hash, Mode=OneWay}" IsReadOnly="True" HorizontalAlignment="Stretch"
+                                         Opacity="{x:Bind vw:ViewConvert.NullIsOpacityZero(Item.Hash), Mode=OneWay}"/>
 
-                                <Label Content="{x:Static p:Resources.ExpectedMenu}" Target="{Binding ElementName=expectedHashBox}" Grid.Row="3"/>
-                                <TextBox x:Name="expectedHashBox" Text="{Binding ExpectedHash, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Grid.Row="3"/>
+                                <TextBlock Grid.Row="3" Text="{x:Bind p:Resources.Expected}" VerticalAlignment="Center"/>
+                                <TextBox Grid.Column="1" Grid.Row="3" Text="{x:Bind Item.ExpectedHash, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch"/>
 
-                                <Image Source="{Binding IsHashValid, Converter={StaticResource IsHashValidToImageSourceConverter}}" Stretch="None" Margin="16,11,0,0" HorizontalAlignment="Left" Grid.Row="4"/>
-                                <Label Padding="0,5" Grid.Column="1" Grid.Row="4">
-                                    <TextBlock Text="{Binding IsHashValid, Converter={StaticResource IsHashValidToTextConverter}}" TextWrapping="Wrap" />
-                                </Label>
+                                <!-- TODO: BUG: x:Bind seems not to update when bool? changes from true/false to null. -->
+                                <InfoBar Grid.ColumnSpan="2" Grid.Row="4" IsOpen="True" IsClosable="False" Severity="{x:Bind vw:ViewConvert.BoolToSeverity(Item.IsHashValid), Mode=OneWay}" 
+                                         Message="{x:Bind vw:ViewConvert.IsHashValidToText(Item.IsHashValid), Mode=OneWay}" />
                             </Grid>
                         </Border>
                     </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-
-            <Border BorderBrush="{StaticResource {x:Static SystemColors.ActiveBorderBrushKey}}" BorderThickness="1" Margin="3"
-                    VerticalAlignment="Top">
-                <Border.Style>
-                    <Style TargetType="Border">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding FileHashItems.Count}" Value="0">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
-
-                <StackPanel Margin="0,0,11,55">
-                    <Label Content="{Binding DataContext.HashHeader, ElementName=fileHashListView}" ContentStringFormat="{x:Static p:Resources.HashModeHeader}" FontWeight="SemiBold"/>
-                    <Label>
-                        <TextBlock Text="{Binding DataContext.HashHeader, ElementName=fileHashListView, StringFormat={x:Static p:Resources.GenerateHashInstruction}}" TextWrapping="Wrap"/>
-                    </Label>
-                </StackPanel>
-            </Border>
-        </Grid>
-    </ScrollViewer>
+                </ItemsRepeater.ItemTemplate>
+            </ItemsRepeater>
+        </ScrollViewer>
+    </Grid>
 </UserControl>
