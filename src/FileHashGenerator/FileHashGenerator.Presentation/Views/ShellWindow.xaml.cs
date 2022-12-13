@@ -10,6 +10,8 @@ public sealed partial class ShellWindow : Window, IShellView
     public ShellWindow()
     {
         InitializeComponent();
+        // TODO: Support to change Theme by user: https://github.com/microsoft/WinUI-Gallery/blob/c93d37823fb333214b948d30451f13cc47b04abe/WinUIGallery/Helper/ThemeHelper.cs
+        //if (Content is FrameworkElement element) element.RequestedTheme = ElementTheme.Dark;
     }
 
     public ShellViewModel ViewModel => (ShellViewModel)DataContext!;

@@ -9,10 +9,9 @@
     xmlns:p="using:Waf.FileHashGenerator.Presentation.Properties"
     mc:Ignorable="d">
 
-    <!-- TODO: Use {ThemeResource Colors} to support DarkMode as well -->
-    <Grid AllowDrop="True" Background="White" DragOver="GridDragOver" Drop="GridDrop">
-        <Border Visibility="{x:Bind vw:ViewConvert.IsEmptyToVisibility(ViewModel.FileHashItems.Count), Mode=OneWay}" BorderThickness="1" BorderBrush="LightGray" Margin="10" 
-                HorizontalAlignment="Left" VerticalAlignment="Top">
+    <Grid AllowDrop="True" DragOver="GridDragOver" Drop="GridDrop" CornerRadius="8,0,0,0" Background="{ThemeResource SystemAltMediumColor}" Margin="6,0,0,0">
+        <Border Visibility="{x:Bind vw:ViewConvert.IsEmptyToVisibility(ViewModel.FileHashItems.Count), Mode=OneWay}" BorderThickness="1" 
+                BorderBrush="{ThemeResource SystemChromeMediumHighColor}" Background="{ThemeResource SystemAltMediumColor}" CornerRadius="8" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top">
             <StackPanel Margin="10,10,10,50" Spacing="11" Width="650">
                 <TextBlock Text="{x:Bind vw:ViewConvert.Format(p:Resources.HashModeHeader, ViewModel.HashHeader), Mode=OneWay}" FontWeight="SemiBold"/>
                 <TextBlock Text="{x:Bind vw:ViewConvert.Format(p:Resources.GenerateHashInstruction, ViewModel.HashHeader), Mode=OneWay}" TextWrapping="Wrap"/>
@@ -23,7 +22,7 @@
             <ItemsRepeater x:Name="fileHashListView" ItemsSource="{x:Bind ViewModel.FileHashItems, Mode=OneWay}" Margin="5">
                 <ItemsRepeater.ItemTemplate>
                     <DataTemplate x:DataType="vm:FileHashItemModel">
-                        <Border BorderThickness="1" BorderBrush="LightGray" Margin="5" HorizontalAlignment="Left">
+                        <Border BorderThickness="1" BorderBrush="{ThemeResource SystemChromeMediumHighColor}" Background="{ThemeResource SystemAltMediumColor}" CornerRadius="8" Margin="5" HorizontalAlignment="Left">
                             <Grid ColumnSpacing="11" RowSpacing="11" HorizontalAlignment="Left" Margin="10" Width="650">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
