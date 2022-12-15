@@ -98,5 +98,5 @@ internal abstract class HashController
         }
     }
 
-    private void ProgressChanged(FileHashItem item, double progress) => item.Progress = progress;
+    private static void ProgressChanged(FileHashItem item, double progress) => item.Progress = progress;
 }
