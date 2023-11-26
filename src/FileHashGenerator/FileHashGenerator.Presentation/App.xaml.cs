@@ -8,7 +8,7 @@ namespace Waf.FileHashGenerator.Presentation;
 
 public partial class App : Application
 {
-    private IEnumerable<IModuleController> moduleControllers = Array.Empty<IModuleController>();
+    private IEnumerable<IModuleController> moduleControllers = [];
 
     public App()
     {

@@ -45,10 +45,9 @@ internal class ModuleController : IModuleController
         this.fileHashListViewModel = fileHashListViewModel;
 
         settingsService.ErrorOccurred += (sender, e) => Trace.TraceError("Error in SettingsService: {0}", e.Error);
-        openCommand = new DelegateCommand(OpenFile);
-        closeCommand = new DelegateCommand(CloseFile);
-
-        root = new FileHashRoot();
+        openCommand = new(OpenFile);
+        closeCommand = new(CloseFile);
+        root = new();
     }
 
     private ShellViewModel ShellViewModel => shellViewModel.Value;

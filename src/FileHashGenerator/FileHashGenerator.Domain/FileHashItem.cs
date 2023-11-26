@@ -1,20 +1,15 @@
 ﻿namespace Waf.FileHashGenerator.Domain;
 
-public class FileHashItem : Model
+public class FileHashItem(string fileName) : Model
 {
-    private byte[] hashBytes = Array.Empty<byte>();
+    private byte[] hashBytes = [];
     private string? hash;
     private string? expectedHash;
     private bool isCaseSensitive;
     private double progress;
     private bool? isHashValid;
 
-    public FileHashItem(string fileName)
-    {
-        FileName = fileName;
-    }
-
-    public string FileName { get; }
+    public string FileName { get; } = fileName;
 
     public byte[] HashBytes { get => hashBytes; set => SetProperty(ref hashBytes, value); }
 

@@ -6,20 +6,11 @@ using Waf.FileHashGenerator.Domain;
 
 namespace Waf.FileHashGenerator.Applications.Controllers;
 
-internal abstract class HashController
+internal abstract class HashController(IMessageService messageService, IShellService shellService)
 {
-    private readonly IMessageService messageService;
-    private readonly IShellService shellService;
-    private readonly Dictionary<FileHashItem, CancellationTokenSource> cancellationTokenSources;
+    private readonly Dictionary<FileHashItem, CancellationTokenSource> cancellationTokenSources = [];
     private IHashFormatter hashFormatter = null!;
     private IWeakEventProxy? fileHashItemsCollectionChangedProxy;
-
-    public HashController(IMessageService messageService, IShellService shellService)
-    {
-        this.messageService = messageService;
-        this.shellService = shellService;
-        cancellationTokenSources = new Dictionary<FileHashItem, CancellationTokenSource>();
-    }
 
     public FileHashRoot Root { get; set; } = null!;
 
@@ -44,7 +35,7 @@ internal abstract class HashController
     public void Initialize()
     {
         foreach (var item in Root.FileHashItems) ComputeHash(item);
-        fileHashItemsCollectionChangedProxy = WeakEvent.CollectionChanged.Add((INotifyCollectionChanged)Root.FileHashItems, FileHashItemsCollectionChanged);
+        fileHashItemsCollectionChangedProxy = WeakEvent.CollectionChanged.Add(Root.FileHashItems, FileHashItemsCollectionChanged);
     }
 
     public void Shutdown()
