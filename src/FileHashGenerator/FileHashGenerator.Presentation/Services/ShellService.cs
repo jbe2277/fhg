@@ -3,14 +3,9 @@ using Waf.FileHashGenerator.Presentation.Views;
 
 namespace Waf.FileHashGenerator.Presentation.Services;
 
-public class ShellService : IShellService
+public class ShellService(Lazy<ShellWindow> shellView) : IShellService
 {
-    private readonly Lazy<ShellWindow> shellView;
+    private readonly Lazy<ShellWindow> shellView = shellView;
 
-    public ShellService(Lazy<ShellWindow> shellView)
-    {
-        this.shellView = shellView;
-    }
-    
     public object ShellView => shellView.Value;
 }

@@ -20,8 +20,8 @@ public class ModuleControllerTest : TestClassBase
         controller.Initialize();
         controller.Run();
 
-        var shellView = Get<MockShellView>();
-        var shellViewModel = Get<ShellViewModel>();
+        _ = Get<MockShellView>();
+        _ = Get<ShellViewModel>();
 
         controller.Shutdown();
     }
@@ -35,7 +35,7 @@ public class ModuleControllerTest : TestClassBase
 
         // Open file via OpenFileDialog
         var fileDialogService = Get<MockFileDialogService>();
-        fileDialogService.Result = new FileDialogResult(@"Files\EmptyFile.txt", new FileType(Resources.AllFiles, ".*"));
+        fileDialogService.Result = new(@"Files\EmptyFile.txt", new FileType(Resources.AllFiles, ".*"));
 
         var shellViewModel = Get<ShellViewModel>();
         shellViewModel.OpenCommand.Execute(null);
@@ -88,7 +88,7 @@ public class ModuleControllerTest : TestClassBase
 
         // Open files via drag and drop.
         var fileHashListViewModel = Get<FileHashListViewModel>();
-        fileHashListViewModel.OpenFilesAction(new[] { @"Files\EmptyFile.txt", @"Files\ReferenceFile.txt" });
+        fileHashListViewModel.OpenFilesAction([ @"Files\EmptyFile.txt", @"Files\ReferenceFile.txt" ]);
         Assert.AreEqual(2, fileHashListViewModel.FileHashItems.Count);
         var emptyFileHash = fileHashListViewModel.FileHashItems[0];
         var referenceFileHash = fileHashListViewModel.FileHashItems[^1];
@@ -116,7 +116,7 @@ public class ModuleControllerTest : TestClassBase
         var systemService = Get<MockSystemService>();
         
         // Open files via command line parameters
-        systemService.DocumentFileNames = new[] { "NotExistingFile1", "NotExistingFile2" };
+        systemService.DocumentFileNames = [ "NotExistingFile1", "NotExistingFile2" ];
         bool errorShown = false;
         messageService.ShowErrorStub = (owner, msg) => 
         { 
