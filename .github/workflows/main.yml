@@ -10,8 +10,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build x64
-      run: dotnet build ./src/FileHashGenerator/FileHashGenerator.Presentation/ -c Release -r win10-x64 --no-self-contained
+      run: dotnet build ./src/FileHashGenerator/FileHashGenerator.Presentation/ -c Release -r win-x64 --no-self-contained
     - name: Build arm64
-      run: dotnet build ./src/FileHashGenerator/FileHashGenerator.Presentation/ -c Release -r win10-arm64 --no-self-contained
+      run: dotnet build ./src/FileHashGenerator/FileHashGenerator.Presentation/ -c Release -r win-arm64 --no-self-contained
     - name: Test
       run: dotnet test ./src/FileHashGenerator/FileHashGenerator.sln -c Release
