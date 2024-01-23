@@ -8,7 +8,7 @@
     xmlns:vm="using:Waf.FileHashGenerator.Applications.ViewModels"
     mc:Ignorable="d" Title="{x:Bind ViewModel.Title}">
 
-    <Grid RowDefinitions="Auto, *" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid RowDefinitions="Auto,*" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <CommandBar HorizontalAlignment="Left" DefaultLabelPosition="Right">
             <AppBarButton Command="{x:Bind ViewModel.OpenCommand}" Icon="OpenFile" Label="{x:Bind p:Resources.Open}" ToolTipService.ToolTip="{x:Bind p:Resources.OpenToolTip}">
                 <AppBarButton.KeyboardAccelerators>

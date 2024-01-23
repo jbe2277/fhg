@@ -23,19 +23,7 @@
                 <ItemsRepeater.ItemTemplate>
                     <DataTemplate x:DataType="vm:FileHashItemModel">
                         <Border BorderThickness="1" BorderBrush="{ThemeResource SystemChromeMediumHighColor}" Background="{ThemeResource SystemAltMediumColor}" CornerRadius="8" Margin="5" HorizontalAlignment="Left">
-                            <Grid ColumnSpacing="11" RowSpacing="11" HorizontalAlignment="Left" Margin="10" Width="650">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-
+                            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnSpacing="11" RowSpacing="11" HorizontalAlignment="Left" Margin="10" Width="650">
                                 <TextBlock Grid.ColumnSpan="2" Grid.Row="0" Text="{x:Bind vw:ViewConvert.GetFileName(Item.FileName)}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" HorizontalAlignment="Stretch"/>
                                 <Button Grid.Column="2" Grid.RowSpan="2" Command="{x:Bind Context.CloseCommand}" CommandParameter="{x:Bind Item}" Content="X" VerticalAlignment="Top" HorizontalAlignment="Right"/>
 
