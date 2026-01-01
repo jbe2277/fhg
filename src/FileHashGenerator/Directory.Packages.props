@@ -10,7 +10,7 @@
     <PackageVersion Include="System.Waf.Core" Version="8.1.0" />
     <PackageVersion Include="System.Waf.Wpf" Version="8.1.0" />
     <!-- Unit tests -->
-    <PackageVersion Include="MSTest" Version="4.0.2" />
+    <PackageVersion Include="MSTest" Version="3.9.2" />
     <PackageVersion Include="System.Waf.UnitTesting.Core" Version="8.1.0" />
     <PackageVersion Include="System.Waf.UnitTesting.Wpf" Version="8.1.0" />
   </ItemGroup>
