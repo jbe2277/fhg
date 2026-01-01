@@ -14,4 +14,4 @@ jobs:
     - name: Build arm64
       run: dotnet build ./src/FileHashGenerator/FileHashGenerator.Presentation/ -c Release --no-self-contained  /p:Platform=arm64
     - name: Test
-      run: dotnet test ./src/FileHashGenerator/FileHashGenerator.slnx -c Release
+      run: dotnet test ./src/FileHashGenerator/FileHashGenerator.sln -c Release
