@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <RootNamespace>Waf.FileHashGenerator.Applications</RootNamespace>
     <AssemblyName>Waf.FileHashGenerator.Applications</AssemblyName>
   </PropertyGroup>
