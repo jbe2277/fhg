@@ -9,6 +9,9 @@ dotnet_diagnostic.CA1031.severity = suggestion
 # CA1062: In externally visible method, validate parameter is non-null before using it. If appropriate, throw an ArgumentNullException when the argument is null or add a Code Contract precondition asserting non-null argument.
 dotnet_diagnostic.CA1062.severity = none
 
+# CA1515: Consider making public types internal
+dotnet_diagnostic.CA1515.severity = none
+
 # CA1859: Use concrete types when possible for improved performance
 dotnet_diagnostic.CA1859.severity = none
 
