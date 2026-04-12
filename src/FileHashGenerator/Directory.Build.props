@@ -11,18 +11,6 @@
     <AnalysisLevel>latest-all</AnalysisLevel>
   </PropertyGroup>
 
-  <Choose>
-    <When Condition="$(MSBuildProjectName.EndsWith('Test'))">
-      <PropertyGroup>
-        <IsPackable>false</IsPackable>
-        <RunSettingsFilePath>$(MSBuildThisFileDirectory)CodeCoverage.runsettings</RunSettingsFilePath>
-      </PropertyGroup>
-      <ItemGroup>
-        <PackageReference Include="MSTest" />
-      </ItemGroup>
-    </When>
-  </Choose>
-
   <ItemGroup>
     <Using Include="System.Collections.ObjectModel" />
     <Using Include="System.Collections.Specialized" />

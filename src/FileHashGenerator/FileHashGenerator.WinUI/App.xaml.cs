@@ -3,8 +3,9 @@ using System.Waf.Applications;
 using Microsoft.Extensions.DependencyInjection;
 using Waf.FileHashGenerator.Applications;
 using Waf.FileHashGenerator.Applications.Services;
+using Waf.FileHashGenerator.Presentation;
 
-namespace Waf.FileHashGenerator.Presentation;
+namespace Waf.FileHashGenerator.WinUI;
 
 public partial class App : Application
 {
