@@ -8,10 +8,24 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v6
-    - name: Build x64
+    - name: 🔖 Check-out
+      uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+
+    - name: ⚙️ Setup .NET
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: '10'
+
+    - name: 🛠️ Build x64
       run: dotnet build ./src/FileHashGenerator/FileHashGenerator.Presentation/ -c Release --no-self-contained /p:Platform=x64
-    - name: Build arm64
+
+    - name: 🛠️ Build arm64
       run: dotnet build ./src/FileHashGenerator/FileHashGenerator.Presentation/ -c Release --no-self-contained  /p:Platform=arm64
-    - name: Test
-      run: dotnet test ./src/FileHashGenerator/FileHashGenerator.slnx -c Release
+
+    - name: 🕵️ Test
+      run: |
+        echo "## 🕵️ Test Results" >> $Env:GITHUB_STEP_SUMMARY
+        cd ./src/FileHashGenerator
+        dotnet test --solution ./FileHashGenerator.slnx --coverage
