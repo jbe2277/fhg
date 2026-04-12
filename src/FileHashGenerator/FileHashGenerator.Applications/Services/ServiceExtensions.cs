@@ -4,14 +4,15 @@ namespace Waf.FileHashGenerator.Applications.Services;
 
 public static class ServiceExtensions
 {
-    public static IServiceCollection AddSingletonAndSelf<TService, TImplementation>(this IServiceCollection services)
+    public static IServiceCollection AddSingletonAndSelf<TService, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TImplementation>(
+            this IServiceCollection services)
         where TService : class
         where TImplementation : class, TService
     {
         return services.AddSingleton<TImplementation>().AddSingleton<TService, TImplementation>(x => x.GetRequiredService<TImplementation>());
     }
 
-    public static IServiceCollection AddFactory<TService>(this IServiceCollection services) where TService : class
+    public static IServiceCollection AddFactory<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TService>(this IServiceCollection services) where TService : class
     {
         return services.AddTransient<TService>().AddSingleton<Func<TService>>(x => () => x.GetRequiredService<TService>());
     }
