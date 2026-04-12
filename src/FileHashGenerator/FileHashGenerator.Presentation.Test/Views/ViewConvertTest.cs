@@ -1,6 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.FileHashGenerator.Presentation.Properties;
 using Waf.FileHashGenerator.Presentation.Views;
 

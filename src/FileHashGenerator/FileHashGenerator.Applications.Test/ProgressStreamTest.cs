@@ -1,5 +1,4 @@
 ﻿using System.Waf.UnitTesting;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Waf.FileHashGenerator.Applications;
 
 namespace Test.FileHashGenerator.Applications;

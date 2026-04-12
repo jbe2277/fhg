@@ -1,22 +1,14 @@
 ﻿namespace Waf.FileHashGenerator.Applications;
 
-public sealed class ProgressStream : Stream
+public sealed class ProgressStream(Stream stream, CancellationToken cancellationToken, IProgress<double> progressCallback) : Stream
 {
     private const int numberOfCallbacks = 1000;
 
-    private readonly Stream stream;
-    private readonly CancellationToken cancellationToken;
-    private readonly IProgress<double> progressCallback;
+    private readonly Stream stream = stream ?? throw new ArgumentNullException(nameof(stream));
+    private readonly CancellationToken cancellationToken = cancellationToken;
+    private readonly IProgress<double> progressCallback = progressCallback ?? throw new ArgumentNullException(nameof(progressCallback));
     private int nextCallback;
-    private int nextCallbackReset;
-
-    public ProgressStream(Stream stream, CancellationToken cancellationToken, IProgress<double> progressCallback)
-    {
-        this.stream = stream ?? throw new ArgumentNullException(nameof(stream));
-        this.cancellationToken = cancellationToken;
-        this.progressCallback = progressCallback ?? throw new ArgumentNullException(nameof(progressCallback));
-        nextCallbackReset = -1;
-    }
+    private int nextCallbackReset = -1;
 
     public override bool CanRead => stream.CanRead;
 

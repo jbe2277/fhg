@@ -9,18 +9,17 @@ namespace Waf.FileHashGenerator.Applications.Controllers;
 internal abstract class HashController(IMessageService messageService, IShellService shellService)
 {
     private readonly Dictionary<FileHashItem, CancellationTokenSource> cancellationTokenSources = [];
-    private IHashFormatter hashFormatter = null!;
     private IWeakEventProxy? fileHashItemsCollectionChangedProxy;
 
     public FileHashRoot Root { get; set; } = null!;
 
     internal IHashFormatter HashFormatter 
     {
-        get => hashFormatter;
+        get;
         set 
         {
-            if (hashFormatter == value) return;
-            hashFormatter = value;
+            if (field == value) return;
+            field = value;
             if (Root != null)
             {
                 foreach (var item in Root.FileHashItems)
@@ -30,7 +29,7 @@ internal abstract class HashController(IMessageService messageService, IShellSer
                 }
             }
         }
-    }
+    } = null!;
 
     public void Initialize()
     {

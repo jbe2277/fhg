@@ -7,11 +7,9 @@ namespace Waf.FileHashGenerator.Applications.ViewModels;
 
 public class FileHashListViewModel(IFileHashListView view) : ViewModel<IFileHashListView>(view)
 {
-    private string hashHeader = "";
-
     public IReadOnlyObservableList<FileHashItemModel> FileHashItems { get; private set; } = null!;
 
-    public string HashHeader { get => hashHeader; set => SetProperty(ref hashHeader, value); }
+    public string HashHeader { get; set => SetProperty(ref field, value); } = "";
 
     public Action<IReadOnlyList<string>> OpenFilesAction { get; set; } = null!;
 

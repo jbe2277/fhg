@@ -1,5 +1,4 @@
 ﻿using System.Waf.Applications.Services;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Test.FileHashGenerator.Applications.Services;
 using Test.FileHashGenerator.Applications.Views;
 using Waf.FileHashGenerator.Applications.Controllers;
@@ -88,8 +87,8 @@ public class ModuleControllerTest : TestClassBase
 
         // Open files via drag and drop.
         var fileHashListViewModel = Get<FileHashListViewModel>();
-        fileHashListViewModel.OpenFilesAction([ @"Files\EmptyFile.txt", @"Files\ReferenceFile.txt" ]);
-        Assert.AreEqual(2, fileHashListViewModel.FileHashItems.Count);
+        fileHashListViewModel.OpenFilesAction([@"Files\EmptyFile.txt", @"Files\ReferenceFile.txt"]);
+        Assert.HasCount(2, fileHashListViewModel.FileHashItems);
         var emptyFileHash = fileHashListViewModel.FileHashItems[0];
         var referenceFileHash = fileHashListViewModel.FileHashItems[^1];
 

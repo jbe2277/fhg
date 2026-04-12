@@ -8,10 +8,6 @@ namespace Waf.FileHashGenerator.Applications.ViewModels;
 
 public class ShellViewModel : ViewModel<IShellView>
 {
-    private object contentView = null!;
-    private HashMode hashMode;
-    private HashFormat hashFormat;
-
     public ShellViewModel(IShellView view) : base(view)
     {
         SelectSha512Command = new DelegateCommand(() => HashMode = HashMode.Sha512);
@@ -39,11 +35,11 @@ public class ShellViewModel : ViewModel<IShellView>
 
     public ICommand OpenCommand { get; set; } = DelegateCommand.DisabledCommand;
 
-    public object ContentView { get => contentView; set => SetProperty(ref contentView, value); }
+    public object ContentView { get; set => SetProperty(ref field, value); } = null!;
 
-    public HashMode HashMode { get => hashMode; set => SetProperty(ref hashMode, value); }
+    public HashMode HashMode { get; set => SetProperty(ref field, value); }
 
-    public HashFormat HashFormat { get => hashFormat; set => SetProperty(ref hashFormat, value); }
+    public HashFormat HashFormat { get; set => SetProperty(ref field, value); }
 
     public ICommand ShowWebsiteCommand { get; }
 

@@ -2,50 +2,43 @@
 
 public class FileHashItem(string fileName) : Model
 {
-    private byte[] hashBytes = [];
-    private string? hash;
-    private string? expectedHash;
-    private bool isCaseSensitive;
-    private double progress;
-    private bool? isHashValid;
-
     public string FileName { get; } = fileName;
 
-    public byte[] HashBytes { get => hashBytes; set => SetProperty(ref hashBytes, value); }
+    public byte[] HashBytes { get; set => SetProperty(ref field, value); } = [];
 
     public string? Hash
     {
-        get => hash;
+        get;
         set
         {
-            if (!SetProperty(ref hash, value)) return;
+            if (!SetProperty(ref field, value)) return;
             UpdateIsHashValid();
         }
     }
 
     public string? ExpectedHash
     {
-        get => expectedHash;
+        get;
         set
         {
-            if (!SetProperty(ref expectedHash, value)) return;
+            if (!SetProperty(ref field, value)) return;
             UpdateIsHashValid();
         }
     }
 
     public bool IsCaseSensitive 
     { 
-        get => isCaseSensitive;
+        get;
         set 
         {
-            if (!SetProperty(ref isCaseSensitive, value)) return;
+            if (!SetProperty(ref field, value)) return;
             UpdateIsHashValid();
         }
     }
 
-    public double Progress { get => progress; set => SetProperty(ref progress, value); }
+    public double Progress { get; set => SetProperty(ref field, value); }
 
-    public bool? IsHashValid { get => isHashValid; private set => SetProperty(ref isHashValid, value); }
+    public bool? IsHashValid { get; private set => SetProperty(ref field, value); }
 
     private void UpdateIsHashValid()
     {

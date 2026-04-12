@@ -1,8 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Waf.FileHashGenerator.Applications.ViewModels;
-using System.Waf.Applications;
+﻿using Waf.FileHashGenerator.Applications.ViewModels;
 using System.Waf.UnitTesting;
-using System.Waf.Applications.Services;
 
 namespace Test.FileHashGenerator.Applications.ViewModels;
 

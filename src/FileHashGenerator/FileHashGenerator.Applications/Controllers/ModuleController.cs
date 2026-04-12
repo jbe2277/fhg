@@ -24,7 +24,6 @@ internal class ModuleController : IModuleController
     private readonly DelegateCommand openCommand;
     private readonly DelegateCommand closeCommand;
     private readonly FileHashRoot root;
-    private IHashFormatter hashFormatter;
     private HashController? hashController;
 
     public ModuleController(IMessageService messageService, IFileDialogService fileDialogService, ISettingsService settingsService, ISystemService systemService,
@@ -35,7 +34,7 @@ internal class ModuleController : IModuleController
         this.messageService = messageService;
         this.fileDialogService = fileDialogService;
         this.systemService = systemService;
-        hashFormatter = hexadecimalFormatter = new HexadecimalFormatter();
+        HashFormatter = hexadecimalFormatter = new HexadecimalFormatter();
         base64Formatter = new Base64Formatter();
         this.sha512HashControllerFactory = sha512HashControllerFactory;
         this.sha256HashControllerFactory = sha256HashControllerFactory;
@@ -56,15 +55,12 @@ internal class ModuleController : IModuleController
 
     private IHashFormatter HashFormatter
     {
-        get => hashFormatter;
+        get;
         set
         {
-            if (hashFormatter == value) return;
-            hashFormatter = value;
-            if (hashController != null)
-            {
-                hashController.HashFormatter = value;
-            }
+            if (field == value) return;
+            field = value;
+            hashController?.HashFormatter = value;
         }
     }
 
@@ -97,7 +93,7 @@ internal class ModuleController : IModuleController
         var result = fileDialogService.ShowOpenFileDialog(ShellViewModel.View, new FileType(Resources.AllFiles, ".*"));
         if (result.IsValid)
         {
-            OpenCore(new[] { result.FileName! });
+            OpenCore([result.FileName!]);
         }
     }
 

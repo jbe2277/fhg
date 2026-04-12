@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Waf.FileHashGenerator.Domain;
+﻿using Waf.FileHashGenerator.Domain;
 
 namespace Test.FileHashGenerator.Domain;
 

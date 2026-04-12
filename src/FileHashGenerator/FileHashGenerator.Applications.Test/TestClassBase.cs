@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Waf.UnitTesting;
 using Waf.FileHashGenerator.Applications;
 using Waf.FileHashGenerator.Applications.Services;
