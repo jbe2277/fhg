@@ -6,6 +6,7 @@ on:
     - '.github/workflows/**'
 jobs:
   build:
+    name: 🛠️ Build and test
     runs-on: windows-latest
     steps:
     - name: 🔖 Check-out
@@ -19,10 +20,10 @@ jobs:
         dotnet-version: '10'
 
     - name: 🛠️ Build x64
-      run: dotnet build ./src/FileHashGenerator/FileHashGenerator.Presentation/ -c Release --no-self-contained /p:Platform=x64
+      run: dotnet publish ./src/FileHashGenerator/FileHashGenerator.slnx -c Release /p:Platform=x64
 
     - name: 🛠️ Build arm64
-      run: dotnet build ./src/FileHashGenerator/FileHashGenerator.Presentation/ -c Release --no-self-contained  /p:Platform=arm64
+      run: dotnet publish ./src/FileHashGenerator/FileHashGenerator.slnx -c Release /p:Platform=arm64
 
     - name: 🕵️ Test
       run: |
