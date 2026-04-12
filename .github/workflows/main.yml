@@ -27,6 +27,5 @@ jobs:
 
     - name: 🕵️ Test
       run: |
-        echo "## 🕵️ Test Results" >> $Env:GITHUB_STEP_SUMMARY
         cd ./src/FileHashGenerator
         dotnet test --solution ./FileHashGenerator.slnx --coverage
