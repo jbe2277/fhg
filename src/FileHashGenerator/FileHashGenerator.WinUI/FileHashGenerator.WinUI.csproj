@@ -8,7 +8,7 @@
     
     <Platforms>x64;arm64</Platforms>
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
-    <PlatformTarget>$(Platform)</PlatformTarget>
+    <RuntimeIdentifier Condition=" '$(Platform)' == 'ARM64' ">win-arm64</RuntimeIdentifier>
     
     <UseWinUI>true</UseWinUI>
     <WinUISDKReferences>false</WinUISDKReferences>
