@@ -2,9 +2,6 @@
   "profiles": {
     "FileHashGenerator.WinUI (Package)": {
       "commandName": "MsixPackage"
-    },
-    "FileHashGenerator.WinUI (Unpackaged)": {
-      "commandName": "Project"
     }
   }
 }
