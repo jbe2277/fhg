@@ -19,5 +19,6 @@ public static class ServiceExtensions
 
     public static IServiceCollection AddSingletonLazySupport(this IServiceCollection services) => services.AddSingleton(typeof(Lazy<>), typeof(ServiceLazy<>));
 
-    private sealed class ServiceLazy<T>(IServiceProvider provider) : Lazy<T>(provider.GetRequiredService<T>) where T : class { }
+    private sealed class ServiceLazy<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] T>(IServiceProvider provider) 
+        : Lazy<T>(provider.GetRequiredService<T>) where T : class { }
 }
