@@ -11,6 +11,7 @@
 [Rr]elease/
 [Bb]in/
 [Oo]bj/
+[Aa]pp[Pp]ackages/
 
 # Unit test results
 [Tt]est[Rr]esults
@@ -23,3 +24,6 @@ project.lock.json
 
 # Visual Studio Upgrade Log
 UpgradeLog*.htm
+
+# Store Packages
+[Bb]undle[Aa]rtifacts/
