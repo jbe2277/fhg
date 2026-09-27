@@ -42,7 +42,7 @@ jobs:
         name: FileHashGeneratorWindows
         if-no-files-found: error
         path: |
-          ./**/AppPackages/**/*.msix
+          ./**/AppPackages/**/FileHashGenerator*.msix
 
     - name: 🧪 Test
       run: |
