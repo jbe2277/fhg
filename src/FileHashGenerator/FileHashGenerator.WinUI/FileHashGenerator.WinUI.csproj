@@ -50,6 +50,8 @@
   <!-- Publish Properties -->
   <PropertyGroup>
     <SelfContained>true</SelfContained>
+    <WindowsAppSDKSelfContained>True</WindowsAppSDKSelfContained>
+
     <PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">false</PublishReadyToRun>
     <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">true</PublishReadyToRun>
     <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">false</PublishTrimmed>
