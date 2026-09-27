@@ -19,11 +19,30 @@ jobs:
       with:
         dotnet-version: '10'
 
-    - name: 🔨 Build x64
-      run: dotnet publish ./src/FileHashGenerator/FileHashGenerator.slnx -c Release /p:Platform=x64
+    - name: 🔐 Prepare certificate
+      shell: pwsh
+      env:
+        MSStoreLocalCert64: ${{ secrets.MS_STORE_LOCAL_CERT64 }}
+      run: |
+        [IO.File]::WriteAllBytes((Join-Path $pwd "src/FileHashGenerator/FileHashGenerator.WinUI" "MSStoreLocalCert.p12"), [Convert]::FromBase64String($env:MSStoreLocalCert64))
 
-    - name: 🔨 Build arm64
-      run: dotnet publish ./src/FileHashGenerator/FileHashGenerator.slnx -c Release /p:Platform=arm64
+    - name: 📦 Create MSIX x64
+      run: |
+        cd src/FileHashGenerator/FileHashGenerator.WinUI
+        dotnet publish -c Release -p:Platform=x64 -p:RuntimeIdentifier=win-x64 -p:GenerateAppxPackageOnBuild=true -p:AppxPackageSigningEnabled=true -p:PackageCertificateKeyFile=MSStoreLocalCert.p12 -p:AppxPackageDir=AppPackages/x64/
+
+    - name: 📦 Create MSIX arm64
+      run: |
+        cd src/FileHashGenerator/FileHashGenerator.WinUI
+        dotnet publish -c Release -p:Platform=arm64 -p:RuntimeIdentifier=win-arm64 -p:GenerateAppxPackageOnBuild=true -p:AppxPackageSigningEnabled=true -p:PackageCertificateKeyFile=MSStoreLocalCert.p12 -p:AppxPackageDir=AppPackages/arm64/
+
+    - name: 📦 Upload MSIX
+      uses: actions/upload-artifact@v6
+      with:
+        name: FileHashGeneratorWindows
+        if-no-files-found: error
+        path: |
+          ./**/AppPackages/**/FileHashGenerator*.msix
 
     - name: 🧪 Test
       run: |

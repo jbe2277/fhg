@@ -6,14 +6,11 @@
   xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
   IgnorableNamespaces="uap rescap">
 
-  <Identity
-    Name="96f845d8-8d54-4653-beb9-331699f71f84"
-    Publisher="CN=Juergen"
-    Version="1.0.0.0" />
+  <Identity Name="Waf.FileHashGenerator" Publisher="CN=3C8CBF61-934D-4358-AA07-F08013E88454" Version="1.0.0.0" />
 
   <Properties>
-    <DisplayName>FileHashGenerator.WinUI</DisplayName>
-    <PublisherDisplayName>Juergen</PublisherDisplayName>
+    <DisplayName>FileHashGenerator</DisplayName>
+    <PublisherDisplayName>jbe2277</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -26,12 +23,10 @@
   </Resources>
 
   <Applications>
-    <Application Id="App"
-      Executable="$targetnametoken$.exe"
-      EntryPoint="$targetentrypoint$">
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="FileHashGenerator.WinUI"
-        Description="FileHashGenerator.WinUI"
+        DisplayName="FileHashGenerator"
+        Description="FileHashGenerator"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">
